@@ -1,0 +1,94 @@
+{
+  "protocol_id": "EXP-2026-005a",
+  "hypothesis_id": "HYP-2026-005",
+  "timestamp_utc": "2026-09-07T01:00:00Z",
+  "total_runs": 420,
+  "conditions": {
+    "ablation_unconstrained": {
+      "bwt_mean": -0.020800781249999994,
+      "bwt_std": 0.002902693880792792,
+      "ar_mean": 0.978777770536173,
+      "ar_std": 0.0025857990530236364,
+      "d_sep_mean": 0.12740885416666667,
+      "forgetting_mean": 0.020819498697916668,
+      "sample_size": 60
+    },
+    "active_metaplastic_k1": {
+      "bwt_mean": -0.028113606770833337,
+      "bwt_std": 0.008664343438814502,
+      "ar_mean": 0.9713296366256405,
+      "ar_std": 0.00824220788689867,
+      "d_sep_mean": 0.11682942708333334,
+      "forgetting_mean": 0.028232421875000007,
+      "sample_size": 60
+    },
+    "active_metaplastic_k5": {
+      "bwt_mean": -0.01819173177083333,
+      "bwt_std": 0.016475661488002134,
+      "ar_mean": 0.9823121966540551,
+      "ar_std": 0.017499660401457187,
+      "d_sep_mean": 0.104541015625,
+      "forgetting_mean": 0.03276774088541667,
+      "sample_size": 60
+    },
+    "baseline_static": {
+      "bwt_mean": -0.020680338541666673,
+      "bwt_std": 0.011214425209364526,
+      "ar_mean": 0.9790227412351266,
+      "ar_std": 0.011468012878989077,
+      "d_sep_mean": 0.049332682291666666,
+      "forgetting_mean": 0.02234456380208334,
+      "sample_size": 60
+    },
+    "control_joint_training_k0": {
+      "bwt_mean": 8.951822916666851e-6,
+      "bwt_std": 0.0023350525884526206,
+      "ar_mean": 1.0000113904504464,
+      "ar_std": 0.002405211198906086,
+      "d_sep_mean": 0.04205729166666667,
+      "forgetting_mean": 0.0012386067708333329,
+      "sample_size": 60
+    },
+    "control_joint_training_k1": {
+      "bwt_mean": 0.014364420572916656,
+      "bwt_std": 0.008433069725126575,
+      "ar_mean": 1.0150952836706517,
+      "ar_std": 0.009081938525823468,
+      "d_sep_mean": 0.054833984375,
+      "forgetting_mean": 0.0003914388020833354,
+      "sample_size": 60
+    },
+    "control_joint_training_k5": {
+      "bwt_mean": -0.0023388671875000018,
+      "bwt_std": 0.007952605780790874,
+      "ar_mean": 0.9976375770654512,
+      "ar_std": 0.008203799900759227,
+      "d_sep_mean": 0.116357421875,
+      "forgetting_mean": 0.005628255208333334,
+      "sample_size": 60
+    }
+  },
+  "statistical_tests": {
+    "welch_t_test_bwt_k1_vs_ablation": {
+      "t_stat": -6.199073074418859,
+      "p_value": 5.679665340827672e-10,
+      "cohen_d": -1.1317907194940369,
+      "significant": true
+    },
+    "welch_t_test_bwt_k5_vs_ablation": {
+      "t_stat": 1.208029104513097,
+      "p_value": 0.2270360828499244,
+      "cohen_d": 0.2205549302215297,
+      "significant": false
+    }
+  },
+  "gate_verdicts": {
+    "gate_1_bwt": "PASS",
+    "gate_2_ar": "PASS",
+    "gate_3_forgetting": "PASS",
+    "gate_4_separation": "PASS",
+    "gate_5_p_value": "PASS",
+    "gate_6_homeostasis": "PASS"
+  },
+  "overall_verdict": "SUPPORTED"
+}
