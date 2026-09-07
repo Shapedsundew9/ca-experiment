@@ -1,7 +1,7 @@
 ---
 name: 'Spec: Architecture Reviewer'
 description: 'System architecture review specialist with Well-Architected frameworks, design validation, and scalability analysis for AI and distributed systems'
-tools: ['execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
 # Spec: Architecture Reviewer

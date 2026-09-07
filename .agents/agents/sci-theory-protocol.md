@@ -2,6 +2,13 @@
 name: sci-theory-protocol
 description: Theoretical formalizer and protocol designer. Translates conceptual research ideas from the orchestrator into mathematically rigorous, falsifiable hypotheses and concrete experimental specifications.
 subagent: true
+tools:
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # Sci: Theory & Protocol

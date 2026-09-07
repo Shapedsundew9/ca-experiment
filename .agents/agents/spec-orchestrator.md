@@ -3,6 +3,20 @@ name: spec-orchestrator
 description: Human-in-the-loop requirements and architecture orchestrator that drives progressive refinement across product goals, UX, system contracts, and technology realization with explicit user decision gates.
 mainAgent: true
 subagent: true
+tools:
+  - run_command
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
+  - invoke_subagent
+  - manage_subagents
+  - define_subagent
+  - send_message
+  - manage_task
+  - ask_question
 ---
 
 # Spec-Orchestrator

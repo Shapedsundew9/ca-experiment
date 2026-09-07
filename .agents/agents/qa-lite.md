@@ -2,6 +2,12 @@
 name: qa-lite
 description: Lightweight QA subagent for fast sanity checks, diff review, and static acceptance criteria verification.
 subagent: true
+tools:
+  - run_command
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # QA Lite (Sanity Reviewer)

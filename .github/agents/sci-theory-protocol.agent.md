@@ -1,7 +1,7 @@
 ---
 name: 'Sci: Theory & Protocol'
 description: 'Theoretical formalizer and protocol designer. Translates conceptual research ideas from the orchestrator into mathematically rigorous, falsifiable hypotheses and concrete experimental specifications.'
-tools: ['read', 'search', 'edit', 'execute', 'web']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
 # Sci: Theory & Protocol

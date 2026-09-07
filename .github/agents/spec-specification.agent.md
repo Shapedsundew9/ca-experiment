@@ -1,7 +1,7 @@
 ---
 description: 'Author formal requirements in r9ts Markdown interchange format, or update freeform specification documents for new or existing functionality.'
 name: 'Spec: Specification'
-tools: ['execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
 # Spec: Specification

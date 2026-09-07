@@ -1,7 +1,7 @@
 ---
 name: 'Spec: API Architect'
 description: 'Expert API, protocol, and interface contract architect. Designs verifiable OpenAPI/JSON Schemas, protocol boundaries, error taxonomies, and resilience budgets without writing runtime code.'
-tools: ['read', 'agent', 'edit', 'search', 'web', 'todo']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
 # Spec: API Architect

@@ -2,6 +2,15 @@
 name: qa
 description: Meticulous QA subagent for test planning, bug hunting, edge-case analysis, and independent implementation verification.
 subagent: true
+tools:
+  - run_command
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
+  - manage_task
 ---
 
 # Quality Assurance (QA)

@@ -178,7 +178,7 @@ The acceptance criteria were:
 - [criterion 2]
 
 VALIDATE the work by:
-1. Reading the files that were modified/created using view_file
+1. Reading the files that were modified/created
 2. Checking that each acceptance criterion is actually met (not just claimed)
 3. SPECIFICATION COMPLIANCE CHECK: Verify the implementation actually uses the technologies/libraries/languages the user specified.
 4. Performing a static sanity check: check for logic holes, unhandled error cases, debug code, or scope creep.
@@ -203,10 +203,10 @@ The acceptance criteria / requirements were:
 - [criterion 2]
 
 VALIDATE the work thoroughly by:
-1. Reading the files that were modified/created using view_file
+1. Reading the files that were modified/created
 2. Checking that each acceptance criterion is met with empirical proof
 3. SPECIFICATION COMPLIANCE CHECK: Verify the implementation uses specified technologies without substitution
-4. Running relevant test suites and linters via run_command:
+4. Running relevant test suites and linters:
    • Rust: cargo fmt --check, cargo clippy, cargo test
    • Python: .venv/bin/python -m unittest discover -s python/tests -v
 5. Actively probing boundary conditions, negative paths, error handling, and regressions

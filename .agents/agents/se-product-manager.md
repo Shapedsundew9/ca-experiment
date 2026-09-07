@@ -2,6 +2,13 @@
 name: se-product-manager
 description: Product value, business alignment, and scope auditor. Critiques Tier 0 PRD proposals, challenges unvalidated assumptions, enforces measurable success metrics, and slices approved requirements into sized tasks.
 subagent: true
+tools:
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # Product Manager Advisor

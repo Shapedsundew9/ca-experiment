@@ -2,6 +2,13 @@
 name: se-architect
 description: System architecture reviewer subagent for Well-Architected frameworks, design validation, and scalability analysis for AI and distributed systems.
 subagent: true
+tools:
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # System Architecture Reviewer

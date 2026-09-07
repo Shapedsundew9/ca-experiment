@@ -2,6 +2,14 @@
 name: se-security
 description: Security reviewer subagent for OWASP Top 10, Zero Trust, LLM security, and enterprise security auditing.
 subagent: true
+tools:
+  - run_command
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # Security Reviewer

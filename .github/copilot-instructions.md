@@ -62,6 +62,19 @@
 
 ## 3rd Party Packages
 
-- Minimize the number of 3rd party packages used in the project.
-- OSS brings supply chain and security risk. Only use it if there is a significant benefit over implementing the functionality in-house.
-- Only use well-known, widely adopted, consistently maintained packages that have a permissive license to reduce maintenance burden.
+- Agents are explicitly authorized to install any pip packages or Rust crates needed to execute experiments efficiently.
+- Do not spend hours or multiple tool loops implementing ad-hoc workarounds for functionality readily provided by standard libraries.
+- Well-established, high-quality, maintained packages (e.g., `numpy`, `scipy`, `rand`, `serde`) are fully supported.
+- Avoid pulling in obscure, single-maintainer, or redundant packages if the task is trivial in-house.
+- Always declare added dependencies in the appropriate project file:
+  - Python: declare in `python/pyproject.toml` and install into `.venv` (`.venv/bin/pip install <pkg>`).
+  - Rust: declare in `Cargo.toml` or add via `cargo add <crate>`.
+
+## Pre-Flight Sanity Checks
+
+- Before starting an autonomous campaign or multi-cycle workflow, run the universal pre-flight check:
+  `python3 .agents/skills/preflight/scripts/preflight.py`.
+  - Confirms required Python dependencies are present in `.venv` (or install and declare them).
+  - Confirms Rust toolchain is functional (`cargo --version`, `cargo check`).
+  - Confirms subagents have the necessary `tools:` declared in their `.agents/agents/*.md` definitions so they possess write and execution capabilities.
+  - Verifies workspace write access.

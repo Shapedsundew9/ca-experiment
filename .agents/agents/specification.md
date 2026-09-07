@@ -2,6 +2,13 @@
 name: specification
 description: Requirements engineer subagent for authoring formal requirements in r9ts Markdown interchange format (docs/requirements/) and freeform specifications.
 subagent: true
+tools:
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # Specification Agent

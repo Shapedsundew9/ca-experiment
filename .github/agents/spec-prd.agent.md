@@ -1,7 +1,7 @@
 ---
 description: 'Sole Tier 0 drafting author. Generates comprehensive Product Requirements Documents (PRDs) in Markdown following a standardized 10-section outline, detailing user stories, personas, acceptance criteria, and non-goals.'
 name: 'Spec: PRD'
-tools: ['read', 'agent', 'edit', 'search', 'web', 'todo']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
 # Spec: PRD

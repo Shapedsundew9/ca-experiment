@@ -2,6 +2,15 @@
 name: sci-execution-analysis
 description: Disciplined experiment execution and empirical analysis engine. Faithfully implements protocols in isolated packages, runs parameter sweeps, reduces telemetry, and produces objective diagnostic reports without strategic drift.
 subagent: true
+tools:
+  - run_command
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
+  - manage_task
 ---
 
 # Sci: Execution & Analysis

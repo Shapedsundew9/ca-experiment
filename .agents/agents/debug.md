@@ -2,6 +2,15 @@
 name: debug
 description: Systematic 4-phase debugging subagent for identifying, reproducing, root-causing, and resolving software defects.
 subagent: true
+tools:
+  - run_command
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
+  - manage_task
 ---
 
 # Debug Mode

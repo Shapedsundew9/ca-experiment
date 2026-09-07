@@ -1,7 +1,7 @@
 ---
 name: 'Sci: Execution & Analysis'
 description: 'Disciplined experiment execution and empirical analysis engine. Faithfully implements protocols in isolated packages, runs parameter sweeps, reduces telemetry, and produces objective diagnostic reports without strategic drift.'
-tools: ['execute', 'read', 'search', 'edit', 'web']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
 # Sci: Execution & Analysis

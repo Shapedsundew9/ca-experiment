@@ -3,6 +3,20 @@ name: rug-orchestrator
 description: Pure orchestration agent ("Repeat Until Good") that decomposes requests, delegates all work to subagents, validates outcomes, and repeats until complete.
 mainAgent: true
 subagent: true
+tools:
+  - run_command
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
+  - invoke_subagent
+  - manage_subagents
+  - define_subagent
+  - send_message
+  - manage_task
+  - ask_question
 ---
 
 # RUG Orchestrator

@@ -2,6 +2,13 @@
 name: api-architect
 description: API architect subagent for designing verifiable OpenAPI/JSON Schemas, protocol boundaries, error taxonomies, and resilience budgets without writing runtime code.
 subagent: true
+tools:
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # API Architect

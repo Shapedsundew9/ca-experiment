@@ -2,6 +2,14 @@
 name: trajectory-auditor
 description: Postmortem analysis subagent that audits previous conversations for token burn, tool friction, exploration drift, and execution inefficiencies.
 subagent: true
+tools:
+  - run_command
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # Trajectory Auditor (Postmortem Analyst)

@@ -2,6 +2,13 @@
 name: se-ux-designer
 description: UX/UI research specialist subagent for Jobs-to-be-Done (JTBD) analysis, user journey mapping, and flow specifications.
 subagent: true
+tools:
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # UX/UI Designer

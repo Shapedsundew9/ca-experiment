@@ -2,6 +2,15 @@
 name: swe
 description: Senior software engineer subagent for implementation tasks: feature development, debugging, refactoring, and test creation in Rust and Python.
 subagent: true
+tools:
+  - run_command
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
+  - manage_task
 ---
 
 # Senior Software Engineer (SWE)

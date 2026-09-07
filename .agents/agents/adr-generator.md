@@ -2,6 +2,13 @@
 name: adr-generator
 description: Expert agent for evaluating architectural trade-offs, analyzing alternatives, and creating structured Architectural Decision Records (ADRs) in docs/architecture/.
 subagent: true
+tools:
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # ADR Generator Agent

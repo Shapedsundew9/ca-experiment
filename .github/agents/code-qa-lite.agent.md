@@ -1,7 +1,7 @@
 ---
 name: 'Code: QA Lite'
 description: 'Lightweight QA subagent for fast sanity checks, diff review, and static acceptance criteria verification.'
-tools: ['vscode', 'read', 'search']
+tools: ['vscode', 'execute', 'read', 'search', 'web', 'todo']
 ---
 
 # Code: QA Lite

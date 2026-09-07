@@ -2,6 +2,13 @@
 name: prd
 description: Senior product manager subagent for generating comprehensive Product Requirements Documents (PRDs) and extracting formal Tier 0 functional requirements.
 subagent: true
+tools:
+  - write_to_file
+  - replace_file_content
+  - view_file
+  - list_dir
+  - grep_search
+  - find_by_name
 ---
 
 # Product Requirements Document (PRD) Specialist

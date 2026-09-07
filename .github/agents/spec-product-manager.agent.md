@@ -1,7 +1,7 @@
 ---
 name: 'Spec: Product Manager'
 description: 'Product value, business alignment, and scope auditor. Critiques Tier 0 PRD proposals, challenges unvalidated assumptions, enforces measurable success metrics, and slices approved requirements into sized GitHub issues and epics.'
-tools: ['execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
+tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
 # Spec: Product Manager
