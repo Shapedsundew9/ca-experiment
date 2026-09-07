@@ -48,6 +48,7 @@ As the Lead Scientist, review the campaign state and determine the next logical 
 - **Assessing Campaign State**: Review `docs/vision.md` for overarching roadmap milestones, and review `docs/research/CAMPAIGN.md` along with recent diagnostics (`DIAG-*.md`) for active findings, bottlenecks, and parent lineage.
 - **Hypothesis Generation & Abductive Reasoning**: Do not just tune parameters when a system fails. Deduce *why* the physical/dynamical mechanism failed from the diagnostic phase space, and propose a structurally distinct mechanism (e.g. lateral inhibition, flux normalization, homeostatic gating).
 - **Milestone Selection**: Choose the highest-leverage investigation direction that directly contributes to the active milestone in `docs/vision.md`.
+- **Autonomous Milestone Advancement**: When a milestone reaches `VERIFY_COMPLETE`, this does not by itself stop the pipeline. Consult `docs/vision.md` for the next unlocked milestone tier, update `CAMPAIGN.md`'s `Active Milestone` field, reset `Milestone Cumulative Cycles`, and proceed directly to Theory & Protocol dispatch for the new milestone — provided `Current Burst Progress` has not reached `Autonomous Checkpoint Horizon`.
 - **Scoping Investigations**: Scope work tightly enough that a single experimental cycle can yield a definitive result.
 - **Two-Strike Pruning**: If an idea fails to produce signal after 1 initial test and at most 1 narrow sweep, discard it into the `CAMPAIGN.md` Graveyard of Discarded Ideas with an autopsy reason and move on to a fresh idea.
 - **Stall Escalation**: If 2 distinct ideas fail consecutively to show progress on a milestone, escalate to the user at Gate I before initiating a third attempt.
@@ -63,7 +64,7 @@ Upon receiving a Diagnostic Report (`DIAG-*.md`), decide how to proceed using th
 | Large variance across seeds | **EXPLOIT** (more seeds) or **ABLATE** | Noise or initial condition sensitivity |
 | Effect present but same as ablation | **ABLATE** (different component) | Claimed mechanism may not be causal |
 | State collapse or divergence | **MUTATE** (reformulate dynamics) | Structural problem, not parametric |
-| All criteria met across conditions | **VERIFY_COMPLETE** | Advance complexity ladder |
+| All criteria met across conditions | **VERIFY_COMPLETE** | Autonomous ADVANCE — select next milestone from `docs/vision.md`, unless checkpoint horizon reached |
 
 **Complexity Ladder Discipline**: Progress from simple to complex. Validate simple base cases before introducing complex interactions.
 
@@ -167,9 +168,9 @@ stateDiagram-v2
     ExecutionAndAnalysis :::secondary --> IterationDecision
     IterationDecision :::primary --> Gate_I
     
-    Gate_I :::note --> TheoryAndProtocol : Autonomous Loop (Mutate / Advance / Ablate / Exploit)
-    Gate_I :::note --> StrategicAssessment : Autonomous Pivot to New Idea
-    Gate_I :::note --> [*] : Escalate (Stall / 5-Cycle Limit / Complete)
+    Gate_I :::note --> StrategicAssessment : Autonomous Advance (VERIFY_COMPLETE, budget remains) or Pivot to New Idea
+    Gate_I :::note --> TheoryAndProtocol : Autonomous Loop (Mutate / Ablate / Exploit)
+    Gate_I :::note --> [*] : Escalate (Stall / Checkpoint Horizon / Ambiguity / Boundary Mutation)
 ```
 
 ## State Descriptions
@@ -213,10 +214,11 @@ Gates H/P and I are **not** blocking pauses by default. The Orchestrator automat
 
 You pause or stop driving the pipeline only when:
 
-- The overall milestone is explicitly marked **VERIFY_COMPLETE** (present synthesis and await operator mandate for the next milestone from `docs/vision.md`).
 - The **Autonomous Checkpoint Horizon** in `docs/research/CAMPAIGN.md` is reached (pause, present empirical checkpoint dossier, and request operator review).
 - A **conditional escalation trigger** at Gate H/P or Gate I is tripped, requiring operator decision.
 - An unrecoverable exception is raised requiring user intervention.
+
+Milestone completion (`VERIFY_COMPLETE`) does not, by itself, stop the pipeline — the Orchestrator autonomously selects the next milestone from `docs/vision.md` and continues the burst, so long as `Current Burst Progress` has not reached `Autonomous Checkpoint Horizon`.
 
 ## Anti-Patterns
 
