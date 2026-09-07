@@ -80,3 +80,12 @@
 - **Compute Consumed to Date**: < 0.01 Compute-Hours
 - **Remaining Compute Budget**: ~100 Compute-Hours
 - **Autonomous Checkpoint Horizon**: 5 cycles per burst (Current Burst: Cycle 1 of 5 completed)
+
+---
+
+## 6. Architectural Redirection Notice (Post-Milestone 1.2)
+
+- **Decision Record**: `docs/architecture/adr-0001-substrate-connectivity-topology.md` (Accepted, 2026-09-07).
+- **Redirection**: The strict 2D planar, nearest-neighbor-only embedding used through Milestone 1.2 was a self-imposed topology choice, not a substrate requirement, and manufactured the planar wire-crossing/crosstalk problem solved in `EXP-2026-007a`. Future protocol design (starting with Milestone 2.1) may use higher-dimensional embeddings and/or bounded-degree long-range shortcut edges, provided locality and a fixed connection-degree budget are preserved (no unconstrained, zero-cost, all-to-all routing).
+- **Re-Verification Impact**: **None.** Tier 0 and Tier 1 (Milestones 1.1, 1.2) results stand as-is and require no re-proof: the Full Adder composability result was demonstrated under the strictest-case topology (2D planar, nearest-neighbor only) and holds a fortiori under any relaxation of that constraint. No rows in Section 3 or Section 4 above are altered by this decision.
+- **Forward Guidance**: The `HYP-2026-008` protocol for Milestone 2.1 (Bistable Latching) should assume the relaxed topology from ADR-0001 rather than defaulting back to strict 2D planarity, and is not required to reproduce planar-crossing shielding machinery unless a specific hypothesis calls for it.

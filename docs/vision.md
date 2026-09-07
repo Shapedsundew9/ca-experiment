@@ -190,6 +190,7 @@ An XOR gate proves local non-linearity, but scalable computation requires signal
 * **Capability:** Cascade multiple non-linear operations without intermediate signal degradation, including the resolution of non-planar signal crossings (two signal paths crossing without crosstalk).
 * **Evaluation Task:** 1-bit Full Adder (Inputs: $A, B, C_{\text{in}}$; Outputs: $\text{Sum}, C_{\text{out}}$) or 2-bit Multiplier.
 * **Success Metric:** Exact truth-table parity across all $2^n$ combinations, verified at steady-state or a fixed delay window.
+* **Note (post-verification, see `docs/architecture/adr-0001-substrate-connectivity-topology.md`):** The planar wire-crossing sub-problem verified here was an artifact of choosing a strict 2D planar, nearest-neighbor-only embedding, not a requirement of the substrate itself. Future milestones are not required to reproduce this constraint or its shielding machinery.
 
 ### Tier 2: Temporal Dynamics & State Retention (From Static to Sequential Logic)
 
@@ -278,7 +279,7 @@ The final horizon transitions the substrate from synthetic toy tasks to standard
 
 | Tier | Milestone | Core Verification Target | Architectural Hurdle to Solve |
 | --- | --- | --- | --- |
-| **1. Combinational** | 1.1–1.2 | Full Adder / 2-bit Multiplier | Signal attenuation, non-planar wire crossing |
+| **1. Combinational** | 1.1–1.2 | Full Adder / 2-bit Multiplier | Signal attenuation, non-planar wire crossing (retired as mandatory constraint, see ADR-0001) |
 | **2. Sequential** | 2.1–2.2 | D-Latch & Regular Expression DFA | Sustained bistability, clocking/synchronization |
 | **3. Memory** | 3.1–3.2 | Dyck Languages & Associative K-V | Stack allocation, long-range light-cone routing |
 | **4. Statistical** | 4.1–4.2 | Noise-Tolerant Basins & PCFG Perplexity | Continuous/distributed states, probabilistic readout |
@@ -290,5 +291,5 @@ The final horizon transitions the substrate from synthetic toy tasks to standard
 To keep the agent team unconstrained yet focused, establish three operational ground rules:
 
 1. **Black-Box Evaluator Interface:** All milestones must evaluate only the substrate's **Interface Contract** (`encode_input(tokens) -> run_dynamics(substrate) -> decode_output() -> Metric`). Never constrain whether the substrate uses continuous fields, discrete cell states, asynchronous updates, or reservoir readouts.
-2. **The "Speed of Light" Bottleneck:** In standard local CAs, information travels at at most 1 cell per step. Reaching Tier 3 and beyond will require the team to discover mechanisms for rapid non-local communication (e.g., hierarchical grids, small-world connections, fast wave carriers, or multi-scale neighborhoods).
+2. **The "Speed of Light" Bottleneck:** In standard local CAs, information travels at at most 1 cell per step. Reaching Tier 3 and beyond will require the team to discover mechanisms for rapid non-local communication (e.g., hierarchical grids, small-world connections, fast wave carriers, or multi-scale neighborhoods). Per `docs/architecture/adr-0001-substrate-connectivity-topology.md`, strict 2D planar embedding is not required: higher-dimensional lattices and bounded-degree long-range shortcut edges are permitted, provided locality and a fixed connection-degree budget are preserved (no unconstrained, zero-cost, all-to-all routing).
 3. **Automated Promotion Gates:** The agent team should only be permitted to allocate compute to Tier $N+1$ once Tier $N$ benchmarks achieve their quantitative threshold across multiple randomized seeds.

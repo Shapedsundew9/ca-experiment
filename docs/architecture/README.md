@@ -14,7 +14,7 @@ This directory contains Architectural Decision Records (ADRs) authored by [`Spec
 
 | ID | Title | Status | Date | Primary Driver | Superseded By |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| *(None recorded yet)* | | | | | |
+| [ADR-0001](adr-0001-substrate-connectivity-topology.md) | Substrate Connectivity Topology Relaxation | Accepted | 2026-09-07 | Retire self-imposed 2D-planar wire-crossing constraint while preserving locality/decentralization | |
 
 ## Authoring Guidelines
 
