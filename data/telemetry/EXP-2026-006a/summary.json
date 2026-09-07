@@ -1,0 +1,243 @@
+{
+  "protocol_id": "EXP-2026-006a",
+  "hypothesis_id": "HYP-2026-006",
+  "timestamp_utc": "2026-09-07T18:00:00Z",
+  "total_runs": 5400,
+  "distance_sweep": {
+    "d10": {
+      "ablation_fixed_theta": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0,
+        "fidelity_std": 0.0
+      },
+      "ablation_unshielded": {
+        "ber_mean": 0.20212500000000014,
+        "ber_std": 0.0820065136273388,
+        "fidelity_mean": 0.6432735416666675,
+        "fidelity_std": 0.13283009402676002
+      },
+      "active_regenerative": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0,
+        "fidelity_std": 0.0
+      },
+      "baseline_passive": {
+        "ber_mean": 0.14925000000000016,
+        "ber_std": 0.1079208588026703,
+        "fidelity_mean": 0.7353254166666671,
+        "fidelity_std": 0.1862131050531149
+      }
+    },
+    "d20": {
+      "ablation_fixed_theta": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0,
+        "fidelity_std": 0.0
+      },
+      "ablation_unshielded": {
+        "ber_mean": 0.2082916666666666,
+        "ber_std": 0.07666224031187613,
+        "fidelity_mean": 0.6326302083333332,
+        "fidelity_std": 0.12264593566286693
+      },
+      "active_regenerative": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0,
+        "fidelity_std": 0.0
+      },
+      "baseline_passive": {
+        "ber_mean": 0.14925000000000016,
+        "ber_std": 0.1079208588026703,
+        "fidelity_mean": 0.7353254166666671,
+        "fidelity_std": 0.1862131050531149
+      }
+    },
+    "d30": {
+      "ablation_fixed_theta": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0,
+        "fidelity_std": 0.0
+      },
+      "ablation_unshielded": {
+        "ber_mean": 0.21399999999999986,
+        "ber_std": 0.07420333182399226,
+        "fidelity_mean": 0.6232562500000008,
+        "fidelity_std": 0.11758698368279394
+      },
+      "active_regenerative": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0,
+        "fidelity_std": 0.0
+      },
+      "baseline_passive": {
+        "ber_mean": 0.14925000000000016,
+        "ber_std": 0.1079208588026703,
+        "fidelity_mean": 0.7353254166666671,
+        "fidelity_std": 0.1862131050531149
+      }
+    },
+    "d50": {
+      "ablation_fixed_theta": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0,
+        "fidelity_std": 0.0
+      },
+      "ablation_unshielded": {
+        "ber_mean": 0.22950000000000015,
+        "ber_std": 0.07456709797786377,
+        "fidelity_mean": 0.5991841666666672,
+        "fidelity_std": 0.11448621857235577
+      },
+      "active_regenerative": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0,
+        "fidelity_std": 0.0
+      },
+      "baseline_passive": {
+        "ber_mean": 0.14925000000000016,
+        "ber_std": 0.1079208588026703,
+        "fidelity_mean": 0.7353254166666671,
+        "fidelity_std": 0.1862131050531149
+      }
+    }
+  },
+  "noise_sweep": {
+    "eps_0_00": {
+      "ablation_fixed_theta": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0
+      },
+      "ablation_unshielded": {
+        "ber_mean": 0.21399999999999986,
+        "ber_std": 0.07420333182399226,
+        "fidelity_mean": 0.6232562500000008
+      },
+      "active_regenerative": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0
+      },
+      "baseline_passive": {
+        "ber_mean": 0.14925000000000016,
+        "ber_std": 0.1079208588026703,
+        "fidelity_mean": 0.7353254166666671
+      }
+    },
+    "eps_0_01": {
+      "ablation_fixed_theta": {
+        "ber_mean": 0.004645833333333335,
+        "ber_std": 0.005288879976002507,
+        "fidelity_mean": 0.990745208333333
+      },
+      "ablation_unshielded": {
+        "ber_mean": 0.19724999999999998,
+        "ber_std": 0.09314667208767258,
+        "fidelity_mean": 0.6528443750000006
+      },
+      "active_regenerative": {
+        "ber_mean": 0.0,
+        "ber_std": 0.0,
+        "fidelity_mean": 1.0
+      },
+      "baseline_passive": {
+        "ber_mean": 0.14893750000000014,
+        "ber_std": 0.10779915503207921,
+        "fidelity_mean": 0.7358302083333336
+      }
+    },
+    "eps_0_05": {
+      "ablation_fixed_theta": {
+        "ber_mean": 0.022374999999999978,
+        "ber_std": 0.012078394141690223,
+        "fidelity_mean": 0.9558681249999998
+      },
+      "ablation_unshielded": {
+        "ber_mean": 0.1871041666666667,
+        "ber_std": 0.0956424516306518,
+        "fidelity_mean": 0.6693347916666669
+      },
+      "active_regenerative": {
+        "ber_mean": 0.0004583333333333334,
+        "ber_std": 0.0014846318239419038,
+        "fidelity_mean": 0.9990852083333334
+      },
+      "baseline_passive": {
+        "ber_mean": 0.14883333333333346,
+        "ber_std": 0.10750900555074355,
+        "fidelity_mean": 0.7359452083333338
+      }
+    },
+    "eps_0_10": {
+      "ablation_fixed_theta": {
+        "ber_mean": 0.04029166666666665,
+        "ber_std": 0.017076764809487287,
+        "fidelity_mean": 0.9212637499999999
+      },
+      "ablation_unshielded": {
+        "ber_mean": 0.1942291666666666,
+        "ber_std": 0.0920767604470627,
+        "fidelity_mean": 0.6567429166666664
+      },
+      "active_regenerative": {
+        "ber_mean": 0.0009166666666666668,
+        "ber_std": 0.0020222848103918834,
+        "fidelity_mean": 0.9981702083333335
+      },
+      "baseline_passive": {
+        "ber_mean": 0.1484166666666667,
+        "ber_std": 0.10698058673598372,
+        "fidelity_mean": 0.736539166666667
+      }
+    }
+  },
+  "crosstalk_test": {
+    "ablation_fixed_theta": {
+      "crosstalk_mean": 0.0,
+      "crosstalk_max": 0.0
+    },
+    "ablation_unshielded": {
+      "crosstalk_mean": 0.10000000000000005,
+      "crosstalk_max": 0.1
+    },
+    "active_regenerative": {
+      "crosstalk_mean": 0.0,
+      "crosstalk_max": 0.0
+    },
+    "baseline_passive": {
+      "crosstalk_mean": 0.0,
+      "crosstalk_max": 0.0
+    }
+  },
+  "statistical_tests": {
+    "welch_t_test_active_vs_fixed_theta_noise005": {
+      "t_stat": -19.728756489052376,
+      "p_value": 1.2213784847708037e-86,
+      "cohen_d": -2.5469715107827122,
+      "significant": true
+    },
+    "welch_t_test_active_vs_unshielded_d30": {
+      "t_stat": -31.592281485184458,
+      "p_value": 0.0,
+      "cohen_d": -4.078546002027211,
+      "significant": true
+    }
+  },
+  "gate_verdicts": {
+    "gate_1_zero_attenuation": "PASS",
+    "gate_2_fan_out_fidelity": "PASS",
+    "gate_3_crosstalk_isolation": "PASS",
+    "gate_4_noise_tolerance": "PASS",
+    "gate_5_statistical_advantage": "PASS",
+    "gate_6_homeostatic_stability": "PASS"
+  },
+  "overall_verdict": "SUPPORTED"
+}

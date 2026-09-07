@@ -6,4 +6,5 @@ pub mod experiments {
     pub mod exp_2026_003a_mva_temporal_xor;
     pub mod exp_2026_004a_mva_hebbian_plasticity;
     pub mod exp_2026_005a_mva_continual_learning;
+    pub mod exp_2026_006a_mva_signal_transport;
 }

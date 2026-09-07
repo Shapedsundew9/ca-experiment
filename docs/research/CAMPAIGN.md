@@ -13,12 +13,12 @@
 ## 1. Autonomous Exploration & Checkpoint Guardrails
 
 - **Autonomous Checkpoint Horizon**: 5 cycles  <!-- SINGLE POINT OF CONFIGURATION: change to 3, 5, 10, etc. based on oversight budget -->
-- **Current Burst Progress**: Cycle 0 of 5 (Awaiting Burst Start)
-- **Milestone Cumulative Cycles**: 0 cycles completed on Milestone 1.1
+- **Current Burst Progress**: Cycle 1 of 5 (Milestone 1.1 Inception: Theory & Protocol Formulation)
+- **Milestone Cumulative Cycles**: 0 cycles completed on Milestone 1.1 (Cycle 1 active)
 - **Campaign Cumulative Cycles**: 5 cycles completed across all milestones
 - **Branch Depth Limit**: Max 2 consecutive runs on a single mechanism/branch
-- **Current Branch Depth**: Run 0 of 2
-- **Active Hypothesis / Mechanism**: Milestone 1.1: Signal Transport & Fan-Out (Tier 1). Can the discrete homeostatic substrate propagate binary bitstreams over distance $D \ge 30$ cells without signal dissipation, and duplicate an input channel into multiple independent downstream channels ($\text{Fan-Out} \ge 2$) with 100% transmission fidelity under spatial jitter and background noise?
+- **Current Branch Depth**: Run 1 of 2
+- **Active Hypothesis / Mechanism**: Milestone 1.1: Signal Transport & Fan-Out (Tier 1). Directed regenerative transmission tracks with refractory diode shielding and branching fan-out nodes under homeostatic threshold regulation for zero-attenuation propagation ($D \ge 30$) and 1-to-2 duplication under background noise and spatial jitter.
 - **Escalation Triggers**: Stop and request operator input ONLY on:
   1. *Multi-path ambiguity* (competing hypotheses with no clear theoretical winner)
   2. *2-strike paradigm stall* (2 distinct ideas fail consecutively to show signal)
@@ -33,10 +33,10 @@
 
 | Stage | Active Agent | Active Artifact Reference | Status |
 | :--- | :--- | :--- | :--- |
-| Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md` | READY |
-| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-006.md`, `docs/research/protocols/EXP-2026-006a.md` | PENDING |
-| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | PENDING |
-| Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | PENDING |
+| Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md` | COMPLETED |
+| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-006.md`, `docs/research/protocols/EXP-2026-006a.md` | COMPLETED |
+| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | APPROVED |
+| Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | IN_PROGRESS |
 | Iteration Decision | Sci: Orchestrator | Iteration Directive | PENDING |
 | Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PENDING |
 
