@@ -7,7 +7,13 @@ matching the repository design specification.
 from __future__ import annotations
 
 from tools.viz import palette
-from tools.viz.draw_utils import draw_card_with_bullets, draw_multiline_text, wrap_text
+from tools.viz.draw_utils import (
+    auto_size_canvas,
+    draw_card_with_bullets,
+    draw_multiline_text,
+    measure_card_with_bullets,
+    wrap_text,
+)
 from tools.viz.export import save_figure
 from tools.viz.math_format import (
     MATH_SYMBOLS,
@@ -73,5 +79,7 @@ __all__ = [
     "MATH_SYMBOLS",
     "draw_multiline_text",
     "draw_card_with_bullets",
+    "measure_card_with_bullets",
+    "auto_size_canvas",
     "wrap_text",
 ]

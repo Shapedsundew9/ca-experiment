@@ -127,9 +127,22 @@ def main() -> int:
         help="Dynamical system model.",
     )
     parser.add_argument("--output", required=True, help="Target output file (.svg or .png).")
+    parser.add_argument('--validate', action='store_true', help='Run validation after generation.')
     args = parser.parse_args()
 
     render_phase_portrait(args.system, args.output)
+
+    if args.validate:
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(Path(__file__).resolve().parents[1] / 'validate_figure.py'), '--strict', args.output],
+            capture_output=True, text=True
+        )
+        print(result.stdout)
+        if result.returncode != 0:
+            print(result.stderr, file=sys.stderr)
+            sys.exit(result.returncode)
+
     return 0
 
 

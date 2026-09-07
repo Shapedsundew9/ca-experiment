@@ -6,6 +6,7 @@ and do not clip outside the SVG frame.
 
 from __future__ import annotations
 
+import sys
 import textwrap
 from typing import Any
 
@@ -54,6 +55,35 @@ def draw_multiline_text(
     return current_y
 
 
+def measure_card_with_bullets(
+    entries: list[tuple[str, str]],
+    *,
+    title: str | None = None,
+    max_chars: int = 42,
+    title_spacing: float = 22.0,
+    bullet_title_spacing: float = 15.0,
+    line_spacing: float = 15.0,
+    gap_between_bullets: float = 4.0,
+    top_padding: float = 20.0,
+    bottom_padding: float = 10.0,
+) -> float:
+    """Calculate the required height for a card with the given bullet entries.
+    
+    Returns the minimum height needed to render all content without overflow.
+    Call this before draw_card_with_bullets to determine proper sizing.
+    """
+    total = top_padding
+    if title:
+        total += title_spacing
+    for label, desc in entries:
+        if label:
+            total += bullet_title_spacing
+        wrapped = wrap_text(desc, width_chars=max_chars)
+        total += len(wrapped) * line_spacing
+        total += gap_between_bullets
+    return total + bottom_padding
+
+
 def draw_card_with_bullets(
     drawing: draw.Drawing,
     x: float,
@@ -66,14 +96,19 @@ def draw_card_with_bullets(
     max_chars: int = 42,
     bg_fill: str = DARK_CANVAS,
     border_color: str = BORDER,
-) -> None:
+) -> float:
     """Draw a beautifully formatted card with structured, wrapped bullet points that fit within width."""
+    required_height = measure_card_with_bullets(entries, title=title, max_chars=max_chars)
+    actual_height = max(height, required_height)
+    if required_height > height:
+        print(f"WARNING: Card content requires {required_height:.0f}px but container is {height:.0f}px. Auto-expanding.", file=sys.stderr)
+
     drawing.append(
         draw.Rectangle(
             x,
             y,
             width,
-            height,
+            actual_height,
             rx=6,
             ry=6,
             fill=bg_fill,
@@ -129,3 +164,26 @@ def draw_card_with_bullets(
             )
             current_y += 15
         current_y += 4  # small gap between bullet items
+
+    return actual_height
+
+
+def auto_size_canvas(
+    panels: list[dict],
+    *,
+    margin: float = 20.0,
+    header_space: float = 80.0,
+    footer_space: float = 30.0,
+) -> tuple[float, float]:
+    """Calculate minimum canvas dimensions to fit all planned panels.
+    
+    Each panel dict has keys: 'x', 'y', 'width', 'height'.
+    Returns (canvas_width, canvas_height).
+    """
+    if not panels:
+        return (0.0, 0.0)
+        
+    width = max(p['x'] + p['width'] for p in panels) + margin
+    height = max(p['y'] + p['height'] for p in panels) + footer_space + margin
+        
+    return width, height

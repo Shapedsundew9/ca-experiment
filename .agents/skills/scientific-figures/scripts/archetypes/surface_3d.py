@@ -112,9 +112,22 @@ def main() -> int:
     )
     parser.add_argument("--elev", type=float, default=32.0, help="Elevation angle.")
     parser.add_argument("--azim", type=float, default=45.0, help="Azimuth angle.")
+    parser.add_argument('--validate', action='store_true', help='Run validation after generation.')
 
     args = parser.parse_args()
     render_surface(args.surface, args.output, elevation=args.elev, azimuth=args.azim)
+
+    if args.validate:
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(Path(__file__).resolve().parents[1] / 'validate_figure.py'), '--strict', args.output],
+            capture_output=True, text=True
+        )
+        print(result.stdout)
+        if result.returncode != 0:
+            print(result.stderr, file=sys.stderr)
+            sys.exit(result.returncode)
+
     return 0
 
 

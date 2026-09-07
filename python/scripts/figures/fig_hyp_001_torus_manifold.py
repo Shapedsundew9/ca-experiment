@@ -32,14 +32,78 @@ from tools.viz import (
     TEXT,
     TEXT_MUTED,
     draw_card_with_bullets,
+    measure_card_with_bullets,
     format_subscript,
     save_figure,
 )
 
 
+
+import numpy as np
+import matplotlib.pyplot as plt
+from tools.viz import apply_dark_theme
+
+def render_torus_3d(output_path: str) -> None:
+    n_points = 50
+    r_major, r_minor = 3.0, 1.0
+    theta = np.linspace(0, 2 * np.pi, n_points)
+    phi = np.linspace(0, 2 * np.pi, n_points)
+    theta, phi = np.meshgrid(theta, phi)
+
+    x = (r_major + r_minor * np.cos(theta)) * np.cos(phi)
+    y = (r_major + r_minor * np.cos(theta)) * np.sin(phi)
+    z = r_minor * np.sin(theta)
+
+    fig = plt.figure(figsize=(8, 6))
+    ax = fig.add_subplot(111, projection="3d")
+    apply_dark_theme(fig, ax)
+
+    surf = ax.plot_surface(
+        x,
+        y,
+        z,
+        color=TERTIARY_BLUE,
+        edgecolor=BORDER,
+        linewidth=0.4,
+        alpha=0.85,
+        shade=True,
+    )
+
+    ax.view_init(elev=32.0, azim=45.0)
+    ax.set_title(r"$\mathbb{T}^2$ Continuous Toroidal Embedding", pad=12)
+    ax.set_xlabel(r"X (Toroidal Angle $\phi$)", labelpad=8)
+    ax.set_ylabel(r"Y (Poloidal Angle $\theta$)", labelpad=8)
+    ax.set_zlabel("Z", labelpad=8)
+
+    save_figure(fig, output_path, dpi=300)
+    print(f"Generated FIG-HYP-001 3D Torus at: {output_path}")
+
+
 def build_torus_manifold_figure(output_path: str) -> None:
+
+    bullets = [
+        ("Periodic Closure", "Node coordinates (x, y) wrap modulo 4 across boundaries."),
+        ("Graph Regularity", "Every node has exactly 4 incoming and 4 outgoing tracks."),
+        ("Transmission Channels", "64 directed bit tracks with unit delay (latency τ = 1)."),
+        ("Topological Diameter", "D = 2 + 2 = 4 (Maximum Manhattan graph distance)."),
+        ("Boundary Invariant", "Zero edge reflections or artificial boundary damping."),
+    ]
+    required_card_height = measure_card_with_bullets(bullets, title="Toroidal Substrate Invariants", max_chars=44)
+    
     width = 1040
-    height = 580
+    # Left panel needs 4*88+130 = 482
+    # Right panel top part is roughly 160 px height? Let's check card_y = margin_y + 160
+    # original card_y = margin_y + 240. So top part takes 240 px.
+    # required panel_h = max(482, 240 + required_card_height + 20)
+    
+    margin_x = 80
+    margin_y = 105
+    cell_size = 88
+    cols, rows = 4, 4
+
+    panel_w = cols * cell_size + 140
+    panel_h = max(rows * cell_size + 130, 240 + required_card_height + 20)
+    height = margin_y + panel_h + 35
 
     d = draw.Drawing(width, height)
     # Dark canvas
@@ -95,8 +159,6 @@ def build_torus_manifold_figure(output_path: str) -> None:
     cell_size = 88
     cols, rows = 4, 4
 
-    panel_w = cols * cell_size + 140
-    panel_h = rows * cell_size + 130
     d.append(
         draw.Rectangle(
             margin_x - 70,
@@ -259,41 +321,37 @@ def build_torus_manifold_figure(output_path: str) -> None:
         )
     )
 
-    # 3D Torus Graphic with Isometric Depth
+    # 3D Torus Graphic reference
     tc_x = right_x + right_w / 2
     tc_y = margin_y + 115
 
-    # Shaded outer toroidal silhouette
-    d.append(draw.Ellipse(tc_x, tc_y, 160, 85, fill=TERTIARY_BLUE_FILL, stroke=TERTIARY_BLUE, stroke_width=2.0))
-    # Inner hole
-    d.append(draw.Ellipse(tc_x, tc_y, 60, 30, fill=DARK_PANEL, stroke=BORDER, stroke_width=1.8))
-
-    # Toroidal coordinate equator circle φ (Green dashed ring)
-    loop_phi = draw.Path(stroke=SECONDARY_GREEN, stroke_width=2.0, fill="none", stroke_dasharray="4,3")
-    loop_phi.M(tc_x - 160, tc_y)
-    loop_phi.A(160, 85, 0, 0, 0, tc_x + 160, tc_y)
-    d.append(loop_phi)
-
-    # Poloidal coordinate meridian circle θ (Amber dashed ring)
-    loop_theta = draw.Path(stroke=AMBER, stroke_width=2.0, fill="none", stroke_dasharray="4,3")
-    loop_theta.M(tc_x + 60, tc_y)
-    loop_theta.A(50, 60, 0, 1, 0, tc_x + 160, tc_y)
-    d.append(loop_theta)
-
-    # Coordinates labels with Greek mathematical typography
-    d.append(draw.Text("Poloidal Angle θ (Row Periodicity: y + 1 mod 4)", 11, tc_x, tc_y + 105, text_anchor="middle", fill=AMBER, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Toroidal Angle φ (Col Periodicity: x + 1 mod 4)", 11, tc_x, tc_y - 95, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
+    d.append(
+        draw.Text(
+            "See companion 3D render:",
+            16,
+            tc_x,
+            tc_y - 15,
+            text_anchor="middle",
+            fill=TEXT,
+            font_family="sans-serif",
+        )
+    )
+    d.append(
+        draw.Text(
+            "fig-hyp-001-torus-3d.png",
+            18,
+            tc_x,
+            tc_y + 15,
+            text_anchor="middle",
+            fill=TERTIARY_BLUE,
+            font_family="monospace",
+            font_weight="bold",
+        )
+    )
 
     # Mathematical Properties Card (Auto-wrapped, zero overflow!)
     card_y = margin_y + 240
-    card_h = panel_h - 265
-    bullets = [
-        ("Periodic Closure", "Node coordinates (x, y) wrap modulo 4 across boundaries."),
-        ("Graph Regularity", "Every node has exactly 4 incoming and 4 outgoing tracks."),
-        ("Transmission Channels", "64 directed bit tracks with unit delay (latency τ = 1)."),
-        ("Topological Diameter", "D = 2 + 2 = 4 (Maximum Manhattan graph distance)."),
-        ("Boundary Invariant", "Zero edge reflections or artificial boundary damping."),
-    ]
+    card_h = required_card_height
     draw_card_with_bullets(
         d,
         right_x + 15,
@@ -331,11 +389,16 @@ def main() -> int:
         default="docs/research/assets/fig-hyp-001-torus-manifold.svg",
         help="Target output path.",
     )
+    parser.add_argument(
+        "--torus-3d-output",
+        default="docs/research/assets/fig-hyp-001-torus-3d.png",
+        help="Target output path for the companion 3D torus render.",
+    )
     args = parser.parse_args()
 
     build_torus_manifold_figure(args.output)
+    render_torus_3d(args.torus_3d_output)
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

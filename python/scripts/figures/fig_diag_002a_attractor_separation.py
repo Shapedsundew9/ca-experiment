@@ -105,7 +105,17 @@ def render_fig_diag_002a(output_path: str, telemetry_path: str | None = None) ->
     stds = [0.008, 0.003, 0.002]
     colors = [PRIMARY_RED, SECONDARY_GREEN, TERTIARY_BLUE]
 
-    bars = ax2.bar(metrics, values, yerr=stds, capsize=6, color=colors, edgecolor=BORDER, width=0.55, alpha=0.9)
+    bars = ax2.bar(
+        metrics,
+        values,
+        yerr=stds,
+        capsize=6,
+        error_kw=dict(ecolor=TEXT_MUTED, lw=1.2, capthick=1.2),
+        color=colors,
+        edgecolor=BORDER,
+        width=0.55,
+        alpha=0.9,
+    )
     ax2.set_title(f"Separation vs. Basin Consistency (SNR = {snr:.2f})", pad=10)
     ax2.set_ylabel(r"Normalized Hamming Distance $D$", labelpad=8)
     ax2.set_ylim(0.0, 0.068)

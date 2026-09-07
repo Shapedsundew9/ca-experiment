@@ -29,6 +29,7 @@ from tools.viz import (
     TERTIARY_BLUE,
     TEXT,
     TEXT_MUTED,
+    format_subscript,
     save_figure,
 )
 
@@ -154,7 +155,7 @@ def render_lattice(
             # Node ID and (x, y)
             d.append(
                 draw.Text(
-                    f"v_{flat_id}",
+                    format_subscript(f"v_{flat_id}"),
                     14,
                     cx,
                     cy - 4,
@@ -252,6 +253,7 @@ def main() -> int:
     parser.add_argument("--target-x", type=int, default=1, help="Target node X.")
     parser.add_argument("--target-y", type=int, default=1, help="Target node Y.")
     parser.add_argument("--no-wrap", action="store_true", help="Disable periodic wrap arrows.")
+    parser.add_argument('--validate', action='store_true', help='Run validation after generation.')
 
     args = parser.parse_args()
     render_lattice(
@@ -262,6 +264,18 @@ def main() -> int:
         target_node=(args.target_x, args.target_y),
         show_wrap=not args.no_wrap,
     )
+
+    if args.validate:
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(Path(__file__).resolve().parents[1] / 'validate_figure.py'), '--strict', args.output],
+            capture_output=True, text=True
+        )
+        print(result.stdout)
+        if result.returncode != 0:
+            print(result.stderr, file=sys.stderr)
+            sys.exit(result.returncode)
+
     return 0
 
 

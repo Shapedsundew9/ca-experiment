@@ -114,6 +114,18 @@ Never commit an unscripted image asset. Every figure must have a corresponding P
 
 ---
 
+## 7.5 Compositing Mixed 2D/3D Figures
+
+When a figure combines flat schematics with 3D surface renders:
+
+1. Render 3D components with matplotlib `mplot3d` as **separate companion PNGs** (300 DPI).
+2. Keep 2D schematics as **pure vector SVGs** via DrawSVG.
+3. Never embed base64 raster data inside SVG files — this destroys git diffability.
+4. Name companion files with a `-3d` suffix: `fig-hyp-001-torus-3d.png`.
+5. The markdown document embeds both files to compose the final visual.
+
+---
+
 ## 7. Mathematical Typography & Layout Overflow Invariants
 
 To guarantee publication-grade visual and mathematical quality, all figure generator scripts must strictly adhere to the following invariants:
@@ -141,10 +153,31 @@ SVG `<text>` does NOT auto-wrap. Unbounded strings will overflow container cards
 - **Auto-Wrapping Helper**: Use `from tools.viz import draw_card_with_bullets, wrap_text` to automatically wrap descriptions into clean multi-line bullet entries.
 - **Canvas Margins**: Ensure all text elements have at least 15px clearance from outer canvas borders.
 
-### Rule 3: Automated Linter Enforcement
+### Rule 3: Layout Pre-Measurement
 
-Before committing any figure, run `validate_figure.py`. It inspects SVG XML for:
+All card-based layouts with bullet content must pre-calculate required heights:
+
+- **Pre-measure**: Call `measure_card_with_bullets()` from `tools.viz` before creating the SVG Drawing to determine minimum card heights.
+- **Dynamic sizing**: Use `auto_size_canvas()` to compute canvas dimensions from panel specifications instead of hardcoding pixel values.
+- **Return values**: `draw_card_with_bullets()` now returns the actual height used. Use this return value to position subsequent elements.
+
+### Rule 4: Light Typography & Contrast on Dark Canvas
+
+Never emit unstyled black text, ticks, spines, or error bars on the repository dark theme:
+
+- **Primary Text**: Use `TEXT` (`#e2e8f0`) for master titles, panel headers, and primary axis labels.
+- **Secondary & Ticks**: Use `TEXT_MUTED` (`#94a3b8`) for tick marks, tick labels, subtitles, and error bars.
+- **Matplotlib Theming**: Always call `apply_dark_theme(fig, ax)`, which applies `ax.tick_params(colors=TEXT_MUTED, labelcolor=TEXT_MUTED)` across all subplots.
+- **Error Bars & Caps**: When using `ax.bar()` or `ax.errorbar()`, always pass `error_kw=dict(ecolor=TEXT_MUTED, lw=1.2, capthick=1.2)` to prevent Matplotlib defaulting error bars to black.
+
+### Rule 5: Automated Linter Enforcement
+
+Before committing any figure, run `validate_figure.py --strict`. It inspects SVG XML for:
 
 - Raw code underscores in text elements (`\b[A-Za-z]+_[A-Za-z0-9]+\b`).
 - Raw scientific notation (`\b\d+e-\d+\b`).
 - Horizontal boundary overflow (`x + estimated_width > canvas_width`).
+- Vertical canvas overflow (`y > canvas_height - 5`).
+- Container containment violations (text exceeding card boundaries).
+- Text-text collisions (overlapping vertical text elements).
+- Unstyled black strokes or fills (`#000000`, `black`) on the dark canvas.

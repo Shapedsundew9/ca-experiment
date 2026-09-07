@@ -116,11 +116,18 @@ Run the script using the workspace Python environment:
 .venv/bin/python python/scripts/figures/your_script.py --output docs/research/assets/fig-id-desc.svg
 ```
 
-Validate the generated asset using the skill's validation script:
+Validate the generated asset using the skill's validation script **in strict mode**:
 
 ```bash
-.venv/bin/python .agents/skills/scientific-figures/scripts/validate_figure.py docs/research/assets/fig-id-desc.svg
+.venv/bin/python .agents/skills/scientific-figures/scripts/validate_figure.py --strict docs/research/assets/fig-id-desc.svg
 ```
+
+If any WARNING appears, the figure **MUST** be fixed before committing. Common warnings include:
+
+- **Vertical canvas overflow**: Text renders below the SVG canvas boundary.
+- **Container overflow**: Text exceeds its enclosing card or panel rect.
+- **Text collision**: Two text elements overlap vertically.
+- **Raw underscores**: Programming-style identifiers used instead of Unicode subscripts.
 
 ### Step 4: Register & Embed
 
@@ -134,6 +141,16 @@ Validate the generated asset using the skill's validation script:
    ![Figure Caption](<relative-path-to-svg>)
    ```
 
+### Compositing 2D Schematics with 3D Renders
+
+When a figure requires both flat 2D schematic elements (grids, stencils, flow diagrams) AND 3D surface renders (torus, saddle, energy landscape):
+
+1. **Never fake 3D** with 2D primitives (ellipses, arcs) in DrawSVG. The result always looks flat and unconvincing.
+2. **Generate separate files**: Render the 3D part with matplotlib (`plot_surface` from `mplot3d`) as a companion **300 DPI PNG**. Keep the 2D schematic as a pure **vector SVG** in DrawSVG.
+3. **Git-friendly separation**: This approach keeps SVGs text-diffable and avoids embedding base64 raster blobs inside XML.
+4. **Reference companion files**: The schematic SVG may include a text reference to the companion 3D render. The target Markdown document embeds both files.
+5. **Naming convention**: Use the same figure ID prefix with a `-3d` suffix for the companion render (e.g., `fig-hyp-001-torus-manifold.svg` + `fig-hyp-001-torus-3d.png`).
+
 ---
 
 ## 5. Quality & Mathematical Typography Invariants
@@ -146,8 +163,29 @@ All figure authoring agents must enforce the following invariants:
    - In Matplotlib: Use LaTeX mathtext (`$v_0$`, `$W_{ij}$`, `$\mathbb{Z}_4 \times \mathbb{Z}_4$`, `$\mathbb{T}^2$`, `$10^{-12}$`).
 2. **Container Width Budgeting & Multi-Line Text**:
    SVG `<text>` does NOT wrap. Never place long text strings into fixed-width cards. Always wrap descriptions into structured multi-line entries using `draw_card_with_bullets` or `wrap_text` from `tools.viz`. Ensure minimum 15px canvas margin.
-3. **Automated Linter Enforcement**:
-   Always run `.venv/bin/python .agents/skills/scientific-figures/scripts/validate_figure.py <path>`. The script checks for syntax, palette, size, unescaped underscores, and text frame overflow.
+3. **High-Contrast Light Typography on Dark Canvas**:
+   Never render black or near-black text, tick lines, tick labels, or error bars (`#000000`, `black`) against the `#161922` canvas or `#1e2230` panels. Always use `TEXT` (`#e2e8f0`) for primary text and `TEXT_MUTED` (`#94a3b8`) for tick marks, tick labels, and error bars. In Matplotlib, always call `apply_dark_theme(fig, ax)`, and pass `error_kw=dict(ecolor=TEXT_MUTED)` when drawing error bars.
+4. **Automated Linter Enforcement**:
+   Always run `.venv/bin/python .agents/skills/scientific-figures/scripts/validate_figure.py --strict <path>`. The script checks for syntax, palette, size, unescaped underscores, text frame overflow, vertical/container clipping, and unstyled black elements.
+
+### Rule 5: Layout Budgeting & Overflow Prevention
+
+Before writing any DrawSVG figure with text-heavy panels:
+
+1. **Pre-measure card content**: Call `measure_card_with_bullets(entries, title=..., max_chars=...)` to calculate required height before allocating canvas space.
+2. **Size canvas dynamically**: Use `auto_size_canvas(panels)` to compute minimum canvas dimensions rather than hardcoding width/height values.
+3. **Verify containment**: After generation, run `validate_figure.py --strict` to ensure all text stays within its container and within the canvas bounds.
+
+```python
+from tools.viz import measure_card_with_bullets, auto_size_canvas
+
+# Calculate content requirements before creating the Drawing
+required_height = measure_card_with_bullets(bullets, title="My Card", max_chars=44)
+canvas_w, canvas_h = auto_size_canvas([
+    {'x': 10, 'y': 80, 'width': 500, 'height': 400},
+    {'x': 530, 'y': 80, 'width': 400, 'height': required_height + 200},
+])
+```
 
 ---
 

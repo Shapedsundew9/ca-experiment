@@ -42,7 +42,7 @@ from tools.viz import (
 
 def build_hebbian_highway_figure(output_path: str) -> None:
     width = 1040
-    height = 560
+    height = 620
 
     d = draw.Drawing(width, height)
     # Dark canvas
@@ -88,7 +88,7 @@ def build_hebbian_highway_figure(output_path: str) -> None:
 
     # Side-by-side panel geometries
     panel_w = 475
-    panel_h = 445
+    panel_h = 505
     panel1_x = 30
     panel2_x = 535
     panel_y = 80
@@ -188,9 +188,9 @@ def build_hebbian_highway_figure(output_path: str) -> None:
     draw_card_with_bullets(
         d,
         panel1_x + 15,
-        panel_y + panel_h - 95,
+        panel_y + panel_h - 140,
         panel_w - 30,
-        85,
+        130,
         bullets_p1,
         max_chars=54,
     )
@@ -241,9 +241,9 @@ def build_hebbian_highway_figure(output_path: str) -> None:
     draw_card_with_bullets(
         d,
         panel2_x + 15,
-        panel_y + panel_h - 95,
+        panel_y + panel_h - 140,
         panel_w - 30,
-        85,
+        130,
         bullets_p2,
         max_chars=54,
     )

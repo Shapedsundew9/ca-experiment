@@ -50,6 +50,19 @@ def save_figure(
 
     # Matplotlib Figure
     if hasattr(fig_or_drawing, "savefig"):
+        # Defense-in-depth: ensure all axes have high-contrast light text before saving
+        from tools.viz.palette import TEXT
+        if hasattr(fig_or_drawing, "get_axes"):
+            for ax in fig_or_drawing.get_axes():
+                if hasattr(ax, "xaxis") and hasattr(ax.xaxis, "label"):
+                    if ax.xaxis.label.get_color() in ["black", "#000000", (0.0, 0.0, 0.0, 1.0), (0.0, 0.0, 0.0)]:
+                        ax.xaxis.label.set_color(TEXT)
+                if hasattr(ax, "yaxis") and hasattr(ax.yaxis, "label"):
+                    if ax.yaxis.label.get_color() in ["black", "#000000", (0.0, 0.0, 0.0, 1.0), (0.0, 0.0, 0.0)]:
+                        ax.yaxis.label.set_color(TEXT)
+                if hasattr(ax, "title") and ax.title.get_color() in ["black", "#000000", (0.0, 0.0, 0.0, 1.0), (0.0, 0.0, 0.0)]:
+                    ax.title.set_color(TEXT)
+
         fig_or_drawing.savefig(
             str(path),
             dpi=dpi,

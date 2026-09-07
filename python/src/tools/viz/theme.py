@@ -40,7 +40,9 @@ def get_mpl_rc_params() -> dict[str, Any]:
         "axes.labelcolor": TEXT,
         "axes.titlecolor": TEXT,
         "xtick.color": TEXT_MUTED,
+        "xtick.labelcolor": TEXT_MUTED,
         "ytick.color": TEXT_MUTED,
+        "ytick.labelcolor": TEXT_MUTED,
         "font.family": "sans-serif",
         "font.sans-serif": [
             "ui-sans-serif",
@@ -80,6 +82,24 @@ def style_axis(ax: Any) -> None:
     """Apply detailed dark styling to a specific 2D or 3D Matplotlib axis."""
     ax.set_facecolor(DARK_PANEL)
 
+    # Tick marks and labels — must apply to ALL axes (2D and 3D)
+    ax.tick_params(
+        axis="both",
+        colors=TEXT_MUTED,
+        which="both",
+        labelcolor=TEXT_MUTED,
+    )
+
+    # Axis labels and title — guarantee high contrast light text
+    if hasattr(ax, "xaxis") and hasattr(ax.xaxis, "label"):
+        ax.xaxis.label.set_color(TEXT)
+    if hasattr(ax, "yaxis") and hasattr(ax.yaxis, "label"):
+        ax.yaxis.label.set_color(TEXT)
+    if hasattr(ax, "zaxis") and hasattr(ax.zaxis, "label"):
+        ax.zaxis.label.set_color(TEXT)
+    if hasattr(ax, "title"):
+        ax.title.set_color(TEXT)
+
     # If it's a 3D axis (Axes3D), style panes and lines
     if hasattr(ax, "xaxis") and hasattr(ax.xaxis, "pane"):
         ax.xaxis.pane.set_facecolor(DARK_PANEL)
@@ -96,7 +116,6 @@ def style_axis(ax: Any) -> None:
         ax.yaxis._axinfo["grid"]["color"] = GRID
         ax.zaxis._axinfo["grid"]["color"] = GRID
         ax.zaxis.line.set_color(BORDER)
-        ax.tick_params(colors=TEXT_MUTED)
 
     # 2D spines styling
     if hasattr(ax, "spines"):
@@ -111,9 +130,18 @@ def apply_dark_theme(fig: Any | None = None, ax: Any | None = None) -> None:
     if fig is not None:
         fig.patch.set_facecolor(DARK_CANVAS)
         fig.patch.set_edgecolor(DARK_CANVAS)
+        if hasattr(fig, "_suptitle") and fig._suptitle is not None:
+            fig._suptitle.set_color(TEXT)
     if ax is not None:
         if isinstance(ax, (list, tuple)):
             for a in ax:
                 style_axis(a)
+        elif hasattr(ax, "flat"):
+            for a in ax.flat:
+                style_axis(a)
         else:
             style_axis(ax)
+
+
+# Automatically configure matplotlib global rcParams on module import
+setup_matplotlib()
