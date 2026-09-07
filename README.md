@@ -559,6 +559,17 @@ See [`docs/templates/mermaid-style-guide.md`](docs/templates/mermaid-style-guide
 
 ---
 
+## 📐 Mathematical Notation Guide
+
+All mathematical formulas and LaTeX expressions in documentation must render identically across both GitHub web preview (MathJax / CommonMark) and local VS Code preview (KaTeX). Follow the cross-platform standards in [`docs/templates/math-style-guide.md`](docs/templates/math-style-guide.md):
+
+- **Delimiters & Braces:** Always use `\lbrace` and `\rbrace` instead of `\{` and `\}` for set brackets and sized delimiters (e.g., `\lbrace 0, 1 \rbrace`, `\big\lbrace ... \big\rbrace`, `\left\lbrace ... \right\rbrace`).
+- **Norms:** Use `\lVert` and `\rVert` instead of `\|`.
+- **Spacing:** Avoid `, \,` (which unescapes to `, ,`); use standard comma spacing `,` or named commands like `\thinspace` and `\quad`.
+- **Display Blocks:** Standalone display equations can use either `$$...$$` with control-word delimiters or fenced code blocks ```` ```math ... ``` ````.
+
+---
+
 ## 📁 Project Structure & Layout
 
 This template enforces a strict separation between Rust high-performance core logic and Python tooling:

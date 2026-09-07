@@ -43,8 +43,8 @@
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | Homeostatic Critical Firing Density (Sprint 0) | Mean firing density $\bar{\rho} \in [0.05, 0.20]$, 0 extinctions, 0 saturations across $10^5$ ticks ($N_{\text{ref}}=2$) | VERIFIED | [`DIAG-2026-001a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-001a.md) |
 | 2 | Attractor Separation & Limit Cycles (Sprint 1) | High separation property $D(S_A, S_B) > 0$ ($p < 10^{-12}$), basin consistency $D(A, A') = 0.0115 < 0.05$ | VERIFIED | [`DIAG-2026-002a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-002a.md) |
-| 3 | Non-linear Temporal Mixing (Sprint 2) | Non-linear XOR capacity $K_{\text{xor}} > 0$ ($p < 10^{-12}$), homeostatic advantage $+80\%$ ($K=0.1600$ vs $0.0943$) | VERIFIED (Ceiling $D=4$) | [`DIAG-2026-003a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-003a.md) |
-| 4 | Local Structural Plasticity (Sprint 3) | Local Hebbian track rewiring breaks isotropic symmetry into resonant loops; $+463.6\%$ noise resilience ($p < 10^{-32}$) | VERIFIED | [`DIAG-2026-004a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-004a.md) |
+| 3 | Non-linear Temporal Mixing (Sprint 2) | Non-linear XOR capacity $K_{\text{xor}} > 0$ ($p < 10^{-12}$), homeostatic advantage +80% ($K=0.1600$ vs $0.0943$) | VERIFIED (Ceiling $D=4$) | [`DIAG-2026-003a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-003a.md) |
+| 4 | Local Structural Plasticity (Sprint 3) | Local Hebbian track rewiring breaks isotropic symmetry into resonant loops; +463.6% noise resilience ($p < 10^{-32}$) | VERIFIED | [`DIAG-2026-004a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-004a.md) |
 | 5 | Lifelong Adaptation & Thermodynamic Scaling | Continual BWT $\ge -0.10$, AR $\ge 0.85$, $D_{\text{sep}} \ge 0.05$, $p < 10^{-6}$ | VERIFIED | [`DIAG-2026-005a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-005a.md) |
 
 ---

@@ -48,6 +48,18 @@
 - Convert any textual diagrams to Mermaid for consistency and maintainability.
 - Follow the style in `docs/templates/mermaid-style-guide.md` for Mermaid diagrams.
 
+## Mathematical Notation
+
+- Ensure LaTeX formulas render identically in both GitHub web preview (MathJax/CommonMark) and VS Code preview (KaTeX).
+- Follow the style and compatibility rules in `docs/templates/math-style-guide.md`.
+- CommonMark unescapes ASCII punctuation characters after backslashes before MathJax parses them. To avoid delimiter errors:
+  - Use `\lbrace` and `\rbrace` instead of `\{` and `\}` for set brackets and delimiters (e.g., `\lbrace 0, 1 \rbrace`, `\big\lbrace ... \big\rbrace`, `\left\lbrace ... \right\rbrace`). Never use `\big\{` or `\left\{`.
+  - Use `\lVert` and `\rVert` (or `\Vert`) instead of `\|` for vector/matrix norms.
+  - Avoid `, \,`; standard commas `,` in LaTeX already provide punctuation spacing. Use named spacing commands (`\thinspace`, `\quad`) if explicit spacing is needed.
+  - Avoid underscores inside `\text{...}`; use hyphens (e.g., `\text{sum-max}` instead of `\text{sum\_max}`).
+  - Avoid `\%` inside math spans; write percentages in prose as `95%` or use `\text{\%}`.
+  - For complex standalone multi-line equations (such as systems of cases or matrices), use fenced code blocks with the `math` language identifier (```math ...```) or standard `$$ ... $$` with control-word delimiters.
+
 ## 3rd Party Packages
 
 - Minimize the number of 3rd party packages used in the project.

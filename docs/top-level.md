@@ -54,7 +54,7 @@ Do not start with an unconstrained graph or continuous signals. Constrain the de
 #### 1. The Signal Protocol (Bit-Streams)
 
 * Use synchronous, discrete bit-streams where time $t \in \mathbb{N}$.
-* A track between node $i$ and node $j$ transmits a single bit $b \in \{0, 1\}$ per clock tick.
+* A track between node $i$ and node $j$ transmits a single bit $b \in \lbrace 0, 1 \rbrace$ per clock tick.
 * Information is encoded in **temporal pulse spacing** (inter-spike intervals) or **bit density** (Bernoulli rate coding). This natively mimics spike-timing-dependent computation and keeps arithmetic bitwise.
 
 #### 2. Node Architecture (The 4-Neighbor Micro-Core)
@@ -152,7 +152,7 @@ flowchart LR
 
 Do not give the agents sequence modeling or language modeling tasks yet. The network must first prove it has **non-linear mixing** and **fading memory**.
 
-* **Input:** Feed a bit $x_t \in \{0, 1\}$ into the network at irregular intervals.
+* **Input:** Feed a bit $x_t \in \lbrace 0, 1 \rbrace$ into the network at irregular intervals.
 * **Target:** Predict $y_t = x_t \oplus x_{t-\tau}$, where $\tau$ is a delay of 3 to 10 ticks.
 * **Evaluation:** A feedforward network or simple memoryless CA cannot solve this. The substrate *must* sustain the reverberation of $x_{t-\tau}$ in internal feedback loops while simultaneously performing the non-linear XOR separation with $x_t$.
 
@@ -162,7 +162,7 @@ Do not give the agents sequence modeling or language modeling tasks yet. The net
 
 | Phase | Scope | Core Question to Validate | Termination Gate |
 | --- | --- | --- | --- |
-| **Sprint 0** | 16-node 2D Torus / Small-World Graph | Can local homeostatic threshold adjustment keep bit activity within $5\%\text{--}20\%$ firing density? | Zero state extinctions; zero full-saturation runaways across $10^5$ ticks. |
+| **Sprint 0** | 16-node 2D Torus / Small-World Graph | Can local homeostatic threshold adjustment keep bit activity within 5%--20% firing density? | Zero state extinctions; zero full-saturation runaways across $10^5$ ticks. |
 | **Sprint 1** | Fixed Topology + Attractor Mapping | Does different input history reliably guide the network into distinct, reproducible limit cycles / attractors? | High separation property: $D(S_A, S_B) > 0$ for distinct inputs $A \neq B$. |
-| **Sprint 2** | Temporal XOR Task | Can a simple linear readout extract $x_t \oplus x_{t-\tau}$ purely from the settled substrate dynamics? | $>95\%$ accuracy on delayed XOR with $\tau \ge 5$ ticks. |
+| **Sprint 2** | Temporal XOR Task | Can a simple linear readout extract $x_t \oplus x_{t-\tau}$ purely from the settled substrate dynamics? | $> 95$% accuracy on delayed XOR with $\tau \ge 5$ ticks. |
 | **Sprint 3** | Local Plasticity Rules | Can edges rewire or adjust delay tracks via a strictly local, bitwise Hebbian/anti-Hebbian rule without backprop? | Network autonomously improves attractor basin depth for recurring inputs. |
