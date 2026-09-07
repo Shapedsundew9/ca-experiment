@@ -115,8 +115,8 @@ You dispatch exactly two subagents (`sci-theory-protocol` and `sci-execution-ana
 ### SCOPE — Read These Files ONLY
 - The protocol and implementation spec: [path]
 - The hypothesis: [path]
-- Shared tools / libraries (for import, NOT modification)
-- Prior experiment packages ONLY IF specified as parent lineage
+- Shared tools / domain libraries (for import, NOT duplication or modification)
+- Prior experiment packages ONLY IF explicitly required to inspect novel mechanisms
 
 ### ANTI-SCOPE — Do NOT Read or Explore
 - Other experiment packages not in the lineage chain
@@ -125,6 +125,11 @@ You dispatch exactly two subagents (`sci-theory-protocol` and `sci-execution-ana
 
 ### INLINE CONTEXT
 [Paste the approved protocol + implementation spec]
+
+### SHARED REUSE & ZERO-BOILERPLATE MANDATE
+- Import existing domain primitives, computational kernels, and statistical tooling from shared workspace modules.
+- Do NOT re-transcribe or duplicate invariant framework boilerplate into the new experiment package.
+- Implement ONLY the novel mechanism, topological configuration, parameter space, or protocol delta required by the specification.
 
 ### SUBSTRATE FIDELITY & IMPLEMENTATION MANDATE
 - **Substrate Execution**: The experiment package MUST instantiate and simulate the genuine dynamical substrate under study through time.
@@ -137,7 +142,7 @@ Provision the experiment package, execute the sweep, reduce telemetry,
 enforce provenance, and produce the diagnostic evaluation report.
 
 ### DELIVERABLES
-1. Provisioned experiment package conforming to repo language guidelines (e.g. `src/experiments/exp_yyyy_nnna_[slug]/` for Rust or `python/experiments/exp_yyyy_nnna_[slug]/` for Python in valid lowercase snake_case)
+1. Provisioned experiment package implementing only the novel delta and importing shared libraries, conforming to repo language guidelines (e.g. `src/experiments/exp_yyyy_nnna_[slug]/` for Rust or `python/experiments/exp_yyyy_nnna_[slug]/` for Python in valid lowercase snake_case)
 2. Telemetry at `data/telemetry/EXP-YYYY-NNNa/`
 3. Run manifest at `docs/research/runs/RUN-EXP-YYYY-NNNa-[run-id].md`
 4. Diagnostic report at `docs/research/diagnostics/DIAG-YYYY-NNNa.md`

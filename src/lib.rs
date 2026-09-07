@@ -1,5 +1,7 @@
 //! ca-experiment library
 
+pub mod substrate;
+
 pub mod experiments {
     pub mod exp_2026_001a_mva_homeostasis;
     pub mod exp_2026_002a_mva_attractor_mapping;
@@ -14,3 +16,4 @@ pub mod experiments {
 
 pub use experiments::exp_2026_008a_mva_bistable_latching;
 pub use experiments::exp_2026_009a_mva_finite_state_automata;
+pub use substrate::prelude::*;

@@ -7,6 +7,8 @@
   - Implement substrate simulations, cellular automata kernels, and core computational experiments in Rust (under `src/experiments/exp_yyyy_nnna_[slug]/`, `src/bin/`, and `tests/`) for high execution performance, bare-metal throughput, deterministic bitwise operations, and thermodynamic energy modeling.
   - Implement tooling, telemetry reduction, empirical analysis, scientific figure generation, and diagramming in Python (under `python/src/tools/`, `python/scripts/`, `python/tests/`, and optional exploratory Python experiments in `python/experiments/`).
 - Put Rust code in `src/` and Rust integration tests in `tests/`.
+- Put shared substrate simulation kernels, excitable node dynamics, pseudo-random generators, statistical metrics, and reusable circuit primitives in `src/substrate/` (exposed as `crate::substrate`).
+- When implementing experiments in `src/experiments/exp_yyyy_nnna_[slug]/`, do NOT copy or re-implement shared substrate simulation kernels, random number generators, or statistical metrics. Import shared components from `crate::substrate`.
 - Put reusable Python code in `python/src/tools/`.
 - Put Python tests in `python/tests/`.
 - Put one-off Python programs in `python/scripts/`.

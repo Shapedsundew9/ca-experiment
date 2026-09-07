@@ -1,49 +1,41 @@
-//! Excitable node dynamics and network substrate for EXP-2026-009a.
+//! Network substrate and graph simulation engine.
+//!
+//! Handles presynaptic spike integration across weighted directed edges, refractory period
+//! management, channel noise injection, Heaviside thresholding, and homeostatic adaptation.
 
-use super::config::ExperimentConfig;
+use std::collections::HashMap;
 
-pub use crate::substrate::{CircuitNode, FastRng};
+use super::config::SubstrateConfig;
+use super::node::CircuitNode;
+use super::rng::FastRng;
 
 #[derive(Debug, Clone)]
-pub struct CircuitSubstrate {
-    pub config: ExperimentConfig,
+pub struct NetworkSubstrate {
+    pub config: SubstrateConfig,
     pub nodes: Vec<CircuitNode>,
     /// in_neighbors[i] = list of (source_node_id, synaptic_weight)
     pub in_neighbors: Vec<Vec<(usize, f64)>>,
     pub prev_spikes: Vec<f64>,
     pub rng: FastRng,
-    pub in_sigma0_idx: usize,
-    pub in_sigma1_idx: usize,
-    pub v_accept_idx: usize,
-    /// Ring node indices for each ring: ring_nodes[ring_idx] = [r0, r1, r2, r3]
-    pub ring_nodes: Vec<[usize; 4]>,
-    pub is_ring_node: Vec<bool>,
+    pub named_ports: HashMap<String, usize>,
+    pub is_noisy_node: Vec<bool>,
     pub total_spikes: usize,
     pub total_steps: usize,
     pub eval_spikes: usize,
     pub eval_steps: usize,
 }
 
-impl CircuitSubstrate {
+impl NetworkSubstrate {
+    /// Create a new network substrate with nodes, directed edges, and configuration.
     pub fn new(
-        config: ExperimentConfig,
+        config: SubstrateConfig,
         nodes: Vec<CircuitNode>,
         in_neighbors: Vec<Vec<(usize, f64)>>,
-        in_sigma0_idx: usize,
-        in_sigma1_idx: usize,
-        v_accept_idx: usize,
-        ring_nodes: Vec<[usize; 4]>,
     ) -> Self {
         let n = nodes.len();
         let prev_spikes = vec![0.0; n];
-        let rng = FastRng::seed_from_u64(config.seed.wrapping_add(0xCA_2026_009A));
-
-        let mut is_ring_node = vec![false; n];
-        for ring in &ring_nodes {
-            for &idx in ring {
-                is_ring_node[idx] = true;
-            }
-        }
+        let rng = FastRng::seed_from_u64(config.seed);
+        let is_noisy_node = vec![false; n];
 
         Self {
             config,
@@ -51,11 +43,8 @@ impl CircuitSubstrate {
             in_neighbors,
             prev_spikes,
             rng,
-            in_sigma0_idx,
-            in_sigma1_idx,
-            v_accept_idx,
-            ring_nodes,
-            is_ring_node,
+            named_ports: HashMap::new(),
+            is_noisy_node,
             total_spikes: 0,
             total_steps: 0,
             eval_spikes: 0,
@@ -63,27 +52,35 @@ impl CircuitSubstrate {
         }
     }
 
-    /// Advance simulation by one discrete clock tick.
-    /// Inputs: `(token_0, token_1)`
-    /// Returns: `v_accept_spike`.
-    #[allow(clippy::needless_range_loop)]
-    pub fn step(&mut self, inputs: (f64, f64), in_eval_window: bool) -> f64 {
+    /// Register a named port mapping (e.g. "input_0", "accept", "data").
+    pub fn set_port(&mut self, name: impl Into<String>, node_idx: usize) {
+        self.named_ports.insert(name.into(), node_idx);
+    }
+
+    /// Retrieve the node index for a named port.
+    pub fn port(&self, name: &str) -> Option<usize> {
+        self.named_ports.get(name).copied()
+    }
+
+    /// Advance the simulation by one discrete clock tick.
+    ///
+    /// Accepts a list of external sensory injections `&[(node_idx, current_amplitude)]`
+    /// and a flag indicating whether this step falls within the telemetry evaluation window.
+    pub fn step(&mut self, external_inputs: &[(usize, f64)], in_eval_window: bool) {
         let n = self.nodes.len();
         let mut curr_spikes = vec![0.0; n];
         let alpha_rho = self.config.alpha_rho;
 
-        for i in 0..n {
-            let mut in_synaptic = 0.0;
+        // Map external inputs by node index
+        let mut ext_map = vec![0.0; n];
+        for &(idx, current) in external_inputs {
+            if idx < n {
+                ext_map[idx] += current;
+            }
+        }
 
-            // Sensory ingress inputs
-            if i == self.in_sigma0_idx && inputs.0 > 0.0 {
-                let w = self.nodes[i].theta.max(1.10);
-                in_synaptic += w * inputs.0;
-            }
-            if i == self.in_sigma1_idx && inputs.1 > 0.0 {
-                let w = self.nodes[i].theta.max(1.10);
-                in_synaptic += w * inputs.1;
-            }
+        for i in 0..n {
+            let mut in_synaptic = ext_map[i];
 
             // Presynaptic spikes from graph edges
             for &(src, w) in &self.in_neighbors[i] {
@@ -92,10 +89,10 @@ impl CircuitSubstrate {
                 }
             }
 
-            // Channel noise pulse: solitary subthreshold thermal fluctuation on ring nodes
+            // Thermal channel noise fluctuation on designated noisy nodes
             let mut noise_amp = 0.0;
             if self.config.noise_rate > 0.0
-                && self.is_ring_node[i]
+                && self.is_noisy_node[i]
                 && self.rng.bernoulli(self.config.noise_rate)
             {
                 noise_amp = self.rng.normal(0.923, 0.0274).max(0.0);
@@ -137,8 +134,7 @@ impl CircuitSubstrate {
             // Rolling firing rate EMA
             node.rolling_rate = (1.0 - alpha_rho) * node.rolling_rate + alpha_rho * spike;
 
-            // Somatic threshold adaptation:
-            // Increments by homeostatic quantum on firing; relaxes toward resting baseline when silent
+            // Somatic threshold adaptation: increments on spike; relaxes when silent
             if node.beta_theta > 0.0 {
                 if spike > 0.0 {
                     node.theta = (node.theta + node.beta_theta * alpha_rho).min(node.theta_max);
@@ -153,8 +149,6 @@ impl CircuitSubstrate {
         if in_eval_window {
             self.eval_steps += 1;
         }
-
-        self.nodes[self.v_accept_idx].spike
     }
 
     /// Directly inject a spike into a specific node (e.g. for initial state seeding).
@@ -166,34 +160,15 @@ impl CircuitSubstrate {
         }
     }
 
-    /// Returns the number of currently active rings in the substrate based on recent firing.
-    pub fn active_ring_count(&self) -> usize {
-        let mut count = 0;
-        for ring in &self.ring_nodes {
-            let active = ring.iter().any(|&idx| self.nodes[idx].spike > 0.0);
-            if active {
-                count += 1;
-            }
+    /// Reset all node voltages, refractory counters, and spikes to rest.
+    pub fn reset_state(&mut self) {
+        for node in &mut self.nodes {
+            node.reset_state();
         }
-        count
+        self.prev_spikes.fill(0.0);
     }
 
-    /// Returns which ring is currently active (if exactly one), or None.
-    pub fn active_ring_id(&self) -> Option<usize> {
-        let mut active_id = None;
-        for (r_idx, ring) in self.ring_nodes.iter().enumerate() {
-            let active = ring.iter().any(|&idx| self.nodes[idx].spike > 0.0);
-            if active {
-                if active_id.is_some() {
-                    return None; // More than one ring active
-                }
-                active_id = Some(r_idx);
-            }
-        }
-        active_id
-    }
-
-    /// Calculate mean firing density over the evaluation window
+    /// Calculate mean firing density over the evaluation window.
     pub fn evaluation_firing_density(&self) -> f64 {
         if self.eval_steps == 0 || self.nodes.is_empty() {
             0.0
