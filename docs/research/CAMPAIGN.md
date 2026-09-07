@@ -1,28 +1,28 @@
 # Scientific Research Campaign: Multi-Scale Self-Organizing Computational Substrate
 
 - **Campaign Identifier**: CAMPAIGN-2026-MVA-SUBSTRATE
-- **Current Status**: ACTIVE (Tier 3: Milestone 3.2 Associative Retrieval Protocol Design & Execution)
+- **Current Status**: CHECKPOINT_PAUSE (Tier 3 Complete: Milestone 3.1 & 3.2 Verified; Checkpoint Horizon Reached; Awaiting Operator Review)
 - **Roadmap Reference**: `docs/vision.md` (Milestone Tiers)
-- **Active Milestone**: Milestone 3.2: Associative Key-Value Retrieval ("Needle in a Haystack")
+- **Active Milestone**: Milestone 3.2: Associative Key-Value Retrieval ("Needle in a Haystack") (VERIFY_COMPLETE)
 - **Target Paradigm**: Autopoietic, thermodynamically bounded computational substrate via discrete bit-stream cellular automata and homeostatic self-organized criticality
-- **Parent Lineage**: `src/experiments/exp_2026_010a_mva_pushdown_memory/` (Tag: `exp/EXP-2026-010a-01`)
-- **Last Updated**: 2026-09-07 21:50:00 UTC
+- **Parent Lineage**: `src/experiments/exp_2026_011a_mva_associative_retrieval/` (Tag: `exp/EXP-2026-011a-01`)
+- **Last Updated**: 2026-09-07 22:15:00 UTC
 
 ---
 
 ## 1. Autonomous Exploration & Checkpoint Guardrails
 
 - **Autonomous Checkpoint Horizon**: 5 cycles  <!-- SINGLE POINT OF CONFIGURATION: change to 3, 5, 10, etc. based on oversight budget -->
-- **Current Burst Progress**: Cycle 5 of 5 (Milestone 3.2 Protocol Design & Dispatch)
-- **Milestone Cumulative Cycles**: 0 cycles completed on Milestone 3.2 (Cycle 1 in progress)
-- **Campaign Cumulative Cycles**: 10 cycles completed across all milestones (Cycle 11 in progress)
+- **Current Burst Progress**: Cycle 5 of 5 (COMPLETED — Checkpoint Horizon Reached)
+- **Milestone Cumulative Cycles**: 1 cycle completed on Milestone 3.2
+- **Campaign Cumulative Cycles**: 11 cycles completed across all milestones (Cycle 11 completed)
 - **Branch Depth Limit**: Max 2 consecutive runs on a single mechanism/branch
 - **Current Branch Depth**: Run 1 of 2
-- **Active Hypothesis / Mechanism**: Milestone 3.2: Associative Key-Value Retrieval ("Needle in a Haystack") via Addressable Resonant Attractor Arrays. Developing a dynamically addressable spatial cellular memory array where streaming variable bindings ($K_i \to V_i$) are latched into orthogonal key-indexed resonant attractor basins via sequential coincidence gating, distractor/filler tokens are filtered via subthreshold passivity and dynamic somatic adaptation, and targeted values $V_j$ are extracted via query probe $Q(K_j)$ across variable context horizons ($N \ge 16$ pairs, sequence length $L \ge 256$) with $\ge 99\%$ retrieval accuracy under ADR-0001.
+- **Active Hypothesis / Mechanism**: Milestone 3.2: Associative Key-Value Retrieval ("Needle in a Haystack") via Addressable Resonant Attractor Arrays. 16 addressable dual-resonant slots with coincidence write gating, query interrogation, distractor subthreshold sink, and dual-rail reduction tree readout under ADR-0001. Evaluated on 54,000 streaming sequences over 30 seeds with $L \in [64, 512]$ tokens and noise $\epsilon \in [0.00, 0.05]$. Verified complete in `EXP-2026-011a-01` ($1.000$ accuracy at baseline and over long context horizons, $\chi_{\text{distractor}} = 0.000$, decisive advantage over unindexed control $d = 7.824, p < 10^{-40}$). All 6 gates passed. Tier 3 is now fully verified.
 - **Escalation Triggers**: Stop and request operator input ONLY on:
   1. *Multi-path ambiguity* (competing hypotheses with no clear theoretical winner)
   2. *2-strike paradigm stall* (2 distinct ideas fail consecutively to show signal)
-  3. *Checkpoint horizon reached* (Current Burst Progress == Autonomous Checkpoint Horizon)
+  3. *Checkpoint horizon reached* (Current Burst Progress == Autonomous Checkpoint Horizon) — **TRIGGERED: Awaiting Operator Review**
   4. *Repo-level boundary modification* (modifications outside isolated experiment packages, module roots, or test harnesses)
 - **Graveyard of Discarded Ideas (Autopsy Log)**:
   - *Instantaneous 16-node readout for $\tau > 4$ on $4 \times 4$ Torus*: Falsified in `EXP-2026-003a`. Fixed isotropic torus edges cannot sustain reverberation beyond graph diameter ($D=4$) due to wavefront collision and refractory annihilation. Resolved in `EXP-2026-004a` via Hebbian symmetry breaking (+463% noise resilience).
@@ -40,11 +40,11 @@
 | Stage | Active Agent | Active Artifact Reference | Status |
 | :--- | :--- | :--- | :--- |
 | Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md`, `docs/architecture/adr-0001-substrate-connectivity-topology.md` | COMPLETED |
-| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-011.md`, `docs/research/protocols/EXP-2026-011a.md` | IN_PROGRESS |
-| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | PENDING |
-| Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | PENDING |
-| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-011a.md`) | PENDING |
-| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PENDING |
+| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-011.md`, `docs/research/protocols/EXP-2026-011a.md` | COMPLETED |
+| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | COMPLETED (APPROVED) |
+| Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | COMPLETED |
+| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-011a.md`) | COMPLETED (VERIFY_COMPLETE) |
+| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PAUSED (Checkpoint Horizon 5 of 5 reached; Awaiting Operator Review) |
 
 ---
 
@@ -58,7 +58,9 @@
 | **Tier 2** | 2.1 Bistable Latching | Dynamic bit retention over $\Delta t \ge 10^3$ steps | VERIFIED | 1 | [`DIAG-2026-008a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-008a.md) |
 | **Tier 2** | 2.2 Finite State Automata | Regular expression DFA streaming recognition | VERIFIED | 1 | [`DIAG-2026-009a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-009a.md) |
 | **Tier 3** | 3.1 Pushdown Memory | Dyck-1 / Dyck-2 balanced parentheses recognition | VERIFIED | 1 | [`DIAG-2026-010a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-010a.md) |
-| **Tier 3** | 3.2 Associative Retrieval | Key-Value variable binding retrieval ($N \ge 16$) | IN_PROGRESS | 0 | Inception & Protocol Design |
+| **Tier 3** | 3.2 Associative Retrieval | Key-Value variable binding retrieval ($N \ge 16$) | VERIFIED | 1 | [`DIAG-2026-011a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-011a.md) |
+| **Tier 4** | 4.1 Distributed Representations | Fault-tolerant basins & nearest-neighbor under noise | UNLOCKED | - | Ready for Tier 4 Inception upon operator authorization |
+| **Tier 4** | 4.2 Next-Token Prediction | Probabilistic next-token prediction on PCFG | LOCKED | - | Requires 4.1 |
 
 ---
 
@@ -76,15 +78,16 @@
 | 8 | `HYP-2026-008` | `EXP-2026-008a` | `src/experiments/exp_2026_008a_mva_bistable_latching/` | `RUN-EXP-2026-008a-01` | `exp/EXP-2026-008a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Milestone 2.1 Complete; Advance to Milestone 2.2) | Autonomous (Gate I) |
 | 9 | `HYP-2026-009` | `EXP-2026-009a` | `src/experiments/exp_2026_009a_mva_finite_state_automata/` | `RUN-EXP-2026-009a-01` | `exp/EXP-2026-009a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Milestone 2.2 Complete; Advance to Tier 3) | Autonomous (Gate I) |
 | 10 | `HYP-2026-010` | `EXP-2026-010a` | `src/experiments/exp_2026_010a_mva_pushdown_memory/` | `RUN-EXP-2026-010a-01` | `exp/EXP-2026-010a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Milestone 3.1 Complete; Advance to Milestone 3.2) | Autonomous (Gate I) |
+| 11 | `HYP-2026-011` | `EXP-2026-011a` | `src/experiments/exp_2026_011a_mva_associative_retrieval/` | `RUN-EXP-2026-011a-01` | `exp/EXP-2026-011a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Tier 3 Complete; Checkpoint Horizon Reached) | Operator Review Required (Horizon 5/5) |
 
 ---
 
 ## 5. Resource & Compute Accounting
 
 - **Total Allocated Compute Budget**: 100 Compute-Hours
-- **Compute Consumed to Date**: < 0.03 Compute-Hours
+- **Compute Consumed to Date**: < 0.04 Compute-Hours
 - **Remaining Compute Budget**: ~100 Compute-Hours
-- **Autonomous Checkpoint Horizon**: 5 cycles per burst (Current Burst: Cycle 5 of 5 in progress; Checkpoint Horizon will be reached upon completion)
+- **Autonomous Checkpoint Horizon**: 5 cycles per burst (Current Burst: Cycle 5 of 5 completed — Checkpoint Horizon reached)
 
 ---
 
