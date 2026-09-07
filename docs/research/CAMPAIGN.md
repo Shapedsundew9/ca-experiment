@@ -1,24 +1,24 @@
 # Scientific Research Campaign: Multi-Scale Self-Organizing Computational Substrate
 
 - **Campaign Identifier**: CAMPAIGN-2026-MVA-SUBSTRATE
-- **Current Status**: ACTIVE (Tier 2: Milestone 2.1 Verified Complete; Ready for Milestone 2.2 Inception)
+- **Current Status**: ACTIVE (Tier 2: Milestone 2.2 Finite State Automata Complete; Transitioning to Tier 3)
 - **Roadmap Reference**: `docs/vision.md` (Milestone Tiers)
-- **Active Milestone**: Milestone 2.1: Bistable Latching (Dynamic Bit Storage) (VERIFIED) -> Unlocking Milestone 2.2: Finite State Automata
+- **Active Milestone**: Milestone 2.2: Finite State Automata (Regular Languages)
 - **Target Paradigm**: Autopoietic, thermodynamically bounded computational substrate via discrete bit-stream cellular automata and homeostatic self-organized criticality
-- **Parent Lineage**: `src/experiments/exp_2026_008a_mva_bistable_latching/` (Tag: `exp/EXP-2026-008a-01`)
-- **Last Updated**: 2026-09-07 18:50:00 UTC
+- **Parent Lineage**: `src/experiments/exp_2026_009a_mva_finite_state_automata/` (Tag: `exp/EXP-2026-009a-01`)
+- **Last Updated**: 2026-09-07 20:50:00 UTC
 
 ---
 
 ## 1. Autonomous Exploration & Checkpoint Guardrails
 
 - **Autonomous Checkpoint Horizon**: 5 cycles  <!-- SINGLE POINT OF CONFIGURATION: change to 3, 5, 10, etc. based on oversight budget -->
-- **Current Burst Progress**: Cycle 2 of 5 (Milestone 2.1 Complete: All 6 Gates Passed)
-- **Milestone Cumulative Cycles**: 1 cycle completed on Milestone 2.1
-- **Campaign Cumulative Cycles**: 8 cycles completed across all milestones
+- **Current Burst Progress**: Cycle 3 of 5 (Milestone 2.2 Completed; Diagnostic Report Authoring)
+- **Milestone Cumulative Cycles**: 1 cycle completed on Milestone 2.2
+- **Campaign Cumulative Cycles**: 9 cycles completed across all milestones (Cycle 9 completed)
 - **Branch Depth Limit**: Max 2 consecutive runs on a single mechanism/branch
 - **Current Branch Depth**: Run 1 of 2
-- **Active Hypothesis / Mechanism**: Milestone 2.1: Bistable Latching (Dynamic Bit Storage) (Tier 2). Localized recurrent attractor circuit / bistable resonant latch (Set-Reset / Gated D-Latch) with relaxed topology (ADR-0001), bounded degree ($k \le 4$), refractory diode shielding ($N_{\text{ref}} = 2$), and dynamic somatic threshold adaptation for indefinite dynamic bit retention ($\Delta t \ge 10^3$ steps) with 100% read accuracy under quiescent retention. Verified complete in `EXP-2026-008a-01`.
+- **Active Hypothesis / Mechanism**: Milestone 2.2: Sequential State Tracking via Coupled Resonant Attractor Basins for Deterministic Finite Automata (DFA). Coupling bistable resonant loops with synchronized gating/transition logic lines (synthesized from Tier 1.2 logic and Tier 2.1 resonant latches under ADR-0001) to implement state transitions driven by streaming binary inputs. Target tasks: Streaming parity tracking (2-state DFA) and canonical regular language recognition (e.g., regex `(10)+1`) over streaming sequence lengths $L \in [10, 100]$ tokens with 0% classification error and zero crosstalk.
 - **Escalation Triggers**: Stop and request operator input ONLY on:
   1. *Multi-path ambiguity* (competing hypotheses with no clear theoretical winner)
   2. *2-strike paradigm stall* (2 distinct ideas fail consecutively to show signal)
@@ -40,11 +40,11 @@
 | Stage | Active Agent | Active Artifact Reference | Status |
 | :--- | :--- | :--- | :--- |
 | Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md`, `docs/architecture/adr-0001-substrate-connectivity-topology.md` | COMPLETED |
-| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-008.md`, `docs/research/protocols/EXP-2026-008a.md` | COMPLETED |
-| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | APPROVED |
+| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-009.md`, `docs/research/protocols/EXP-2026-009a.md` | COMPLETED |
+| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | COMPLETED |
 | Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | COMPLETED |
-| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-008a.md`) | COMPLETED (VERIFY_COMPLETE) |
-| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | APPROVED (Milestone 2.1 Verified Complete) |
+| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-009a.md`) | COMPLETED |
+| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PENDING |
 
 ---
 
@@ -56,7 +56,7 @@
 | **Tier 1** | 1.1 Signal Transport & Fan-Out | 1-to-2 Buffer over $D \ge 30$ cells, 100% transmission fidelity | VERIFIED | 1 | [`DIAG-2026-006a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-006a.md) |
 | **Tier 1** | 1.2 Multi-Gate Composition | 1-bit Full Adder / 2-bit Multiplier, zero crosstalk | VERIFIED | 1 | [`DIAG-2026-007a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-007a.md) |
 | **Tier 2** | 2.1 Bistable Latching | Dynamic bit retention over $\Delta t \ge 10^3$ steps | VERIFIED | 1 | [`DIAG-2026-008a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-008a.md) |
-| **Tier 2** | 2.2 Finite State Automata | Regular expression DFA streaming recognition | UNLOCKED | - | Ready for Inception |
+| **Tier 2** | 2.2 Finite State Automata | Regular expression DFA streaming recognition | VERIFIED | 1 | [`DIAG-2026-009a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-009a.md) |
 | **Tier 3** | 3.1 Pushdown Memory | Dyck-1 / Dyck-2 balanced parentheses recognition | LOCKED | - | Requires Tier 2 |
 | **Tier 3** | 3.2 Associative Retrieval | Key-Value variable binding retrieval ($N \ge 16$) | LOCKED | - | Requires 3.1 |
 
@@ -74,6 +74,7 @@
 | 6 | `HYP-2026-006` | `EXP-2026-006a` | `src/experiments/exp_2026_006a_mva_signal_transport/` | `RUN-EXP-2026-006a-01` | `exp/EXP-2026-006a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Advance to Milestone 1.2) | Autonomous (Gate I) |
 | 7 | `HYP-2026-007` | `EXP-2026-007a` | `src/experiments/exp_2026_007a_mva_multi_gate_composition/` | `RUN-EXP-2026-007a-01` | `exp/EXP-2026-007a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Tier 1 Complete; Advance to Tier 2) | Autonomous (Gate I) |
 | 8 | `HYP-2026-008` | `EXP-2026-008a` | `src/experiments/exp_2026_008a_mva_bistable_latching/` | `RUN-EXP-2026-008a-01` | `exp/EXP-2026-008a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Milestone 2.1 Complete; Advance to Milestone 2.2) | Autonomous (Gate I) |
+| 9 | `HYP-2026-009` | `EXP-2026-009a` | `src/experiments/exp_2026_009a_mva_finite_state_automata/` | `RUN-EXP-2026-009a-01` | `exp/EXP-2026-009a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Milestone 2.2 Complete; Advance to Tier 3) | Autonomous (Gate I) |
 
 ---
 
