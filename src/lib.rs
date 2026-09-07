@@ -13,9 +13,11 @@ pub mod experiments {
     pub mod exp_2026_008a_mva_bistable_latching;
     pub mod exp_2026_009a_mva_finite_state_automata;
     pub mod exp_2026_010a_mva_pushdown_memory;
+    pub mod exp_2026_011a_mva_associative_retrieval;
 }
 
 pub use experiments::exp_2026_008a_mva_bistable_latching;
 pub use experiments::exp_2026_009a_mva_finite_state_automata;
 pub use experiments::exp_2026_010a_mva_pushdown_memory;
+pub use experiments::exp_2026_011a_mva_associative_retrieval;
 pub use substrate::prelude::*;
