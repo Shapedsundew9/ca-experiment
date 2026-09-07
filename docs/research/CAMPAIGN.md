@@ -70,7 +70,7 @@
 
 ## 5. Resource & Compute Accounting
 
-- **Total Allocated Compute Budget**: 500 Compute-Hours
+- **Total Allocated Compute Budget**: 100 Compute-Hours
 - **Compute Consumed to Date**: < 0.01 Compute-Hours
-- **Remaining Compute Budget**: ~500 Compute-Hours
+- **Remaining Compute Budget**: ~100 Compute-Hours
 - **Autonomous Checkpoint Horizon**: 5 cycles per burst (Current Burst: Cycle 0 of 5)
