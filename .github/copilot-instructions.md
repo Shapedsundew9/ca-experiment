@@ -46,7 +46,7 @@
 
 - **System & Logic Diagrams**: Use Mermaid for software architectures, state machines, sequence diagrams, and pipeline logic. Follow `docs/templates/mermaid-style-guide.md`.
 - **Scientific Figures & Mathematical Visualizations**: Use Python-generated SVGs (or 300 DPI PNGs) when Mermaid is structurally incapable of representing the concept (3D geometric manifolds, continuous surfaces, discrete spatial lattices, phase portraits, and empirical telemetry distributions). Follow `docs/templates/figure-style-guide.md`.
-- **Visual Repertoire & Script Authorship**: Agents are empowered to create new generator scripts in `python/scripts/figures/` or adapt existing archetypes in `.agents/skills/scientific-figures/scripts/`. Every figure must be 100% reproducible via its generator script.
+- **Visual Repertoire & Script Authorship**: Agents are empowered to create new generator scripts in `python/scripts/figures/` or adapt existing archetypes in `.github/skills/scientific-figures/scripts/` (symbolically linked with `.agents/skills/scientific-figures/scripts/`). Every figure must be 100% reproducible via its generator script.
 - **Theme Consistency**: All figures must adopt the repo's dark theme palette (`#161922` canvas, `#1e2230` panel, gentle RGB accents `#e06c75`, `#73c991`, `#61afef`).
 - **Storage**: Store general figures in `docs/assets/figures/` and experiment-specific figures in `docs/research/assets/`. Document scripts in `python/scripts/figures/README.md`.
 

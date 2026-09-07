@@ -76,7 +76,7 @@ flowchart TD
 
 ## 3. Four Universal Scientific Archetypes
 
-The skill provides foundational, parameterized starter archetypes located in `.agents/skills/scientific-figures/scripts/archetypes/`:
+The skill provides foundational, parameterized starter archetypes located in `.github/skills/scientific-figures/scripts/archetypes/` (or `.agents/skills/scientific-figures/scripts/archetypes/`):
 
 | Archetype | Script | Core Mathematical / Empirical Concepts | Typical Use Cases |
 | :--- | :--- | :--- | :--- |
@@ -96,7 +96,7 @@ When an agent needs a scientific figure, it must follow this 4-step workflow:
 Inspect existing scripts in:
 
 1. `python/scripts/figures/` (the repository's current repertoire gallery)
-2. `.agents/skills/scientific-figures/scripts/archetypes/` (the template archetypes)
+2. `.github/skills/scientific-figures/scripts/archetypes/` (or `.agents/skills/scientific-figures/scripts/archetypes/`)
 
 Check [`python/scripts/figures/README.md`](file:///workspaces/ca-experiment/python/scripts/figures/README.md) to see if a similar visual generator already exists.
 
@@ -116,10 +116,10 @@ Run the script using the workspace Python environment:
 .venv/bin/python python/scripts/figures/your_script.py --output docs/research/assets/fig-id-desc.svg
 ```
 
-Validate the generated asset using the skill's validation script **in strict mode**:
+Validate the generated asset using the skill's validation script **in strict mode** (accessible via either `.github/skills/` or `.agents/skills/`):
 
 ```bash
-.venv/bin/python .agents/skills/scientific-figures/scripts/validate_figure.py --strict docs/research/assets/fig-id-desc.svg
+.venv/bin/python .github/skills/scientific-figures/scripts/validate_figure.py --strict docs/research/assets/fig-id-desc.svg
 ```
 
 If any WARNING appears, the figure **MUST** be fixed before committing. Common warnings include:
@@ -166,7 +166,7 @@ All figure authoring agents must enforce the following invariants:
 3. **High-Contrast Light Typography on Dark Canvas**:
    Never render black or near-black text, tick lines, tick labels, or error bars (`#000000`, `black`) against the `#161922` canvas or `#1e2230` panels. Always use `TEXT` (`#e2e8f0`) for primary text and `TEXT_MUTED` (`#94a3b8`) for tick marks, tick labels, and error bars. In Matplotlib, always call `apply_dark_theme(fig, ax)`, and pass `error_kw=dict(ecolor=TEXT_MUTED)` when drawing error bars.
 4. **Automated Linter Enforcement**:
-   Always run `.venv/bin/python .agents/skills/scientific-figures/scripts/validate_figure.py --strict <path>`. The script checks for syntax, palette, size, unescaped underscores, text frame overflow, vertical/container clipping, and unstyled black elements.
+   Always run `.venv/bin/python .github/skills/scientific-figures/scripts/validate_figure.py --strict <path>` (or `.agents/skills/scientific-figures/scripts/validate_figure.py`). The script checks for syntax, palette, size, unescaped underscores, text frame overflow, vertical/container clipping, and unstyled black elements.
 
 ### Rule 5: Layout Budgeting & Overflow Prevention
 
