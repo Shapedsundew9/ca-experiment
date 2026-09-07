@@ -1,24 +1,24 @@
 # Scientific Research Campaign: Multi-Scale Self-Organizing Computational Substrate
 
 - **Campaign Identifier**: CAMPAIGN-2026-MVA-SUBSTRATE
-- **Current Status**: ACTIVE (Targeting Tier 1, Milestone 1.2: Multi-Gate Composition & Wire Crossing)
+- **Current Status**: ACTIVE (Tier 1 Verified Complete; Ready for Tier 2 Inception)
 - **Roadmap Reference**: `docs/vision.md` (Milestone Tiers)
-- **Active Milestone**: Milestone 1.2: Multi-Gate Composition & Wire Crossing
+- **Active Milestone**: Milestone 1.2: Multi-Gate Composition & Wire Crossing (VERIFIED) -> Unlocking Tier 2: Milestone 2.1
 - **Target Paradigm**: Autopoietic, thermodynamically bounded computational substrate via discrete bit-stream cellular automata and homeostatic self-organized criticality
-- **Parent Lineage**: `src/experiments/exp_2026_006a_mva_signal_transport/` (Tag: `exp/EXP-2026-006a-01`)
-- **Last Updated**: 2026-09-07 17:42:00 UTC
+- **Parent Lineage**: `src/experiments/exp_2026_007a_mva_multi_gate_composition/` (Tag: `exp/EXP-2026-007a-01`)
+- **Last Updated**: 2026-09-07 18:00:00 UTC
 
 ---
 
 ## 1. Autonomous Exploration & Checkpoint Guardrails
 
 - **Autonomous Checkpoint Horizon**: 5 cycles  <!-- SINGLE POINT OF CONFIGURATION: change to 3, 5, 10, etc. based on oversight budget -->
-- **Current Burst Progress**: Cycle 1 of 5 (Milestone 1.2 Inception: Theory & Protocol Formulation)
-- **Milestone Cumulative Cycles**: 0 cycles completed on Milestone 1.2 (Cycle 1 active)
-- **Campaign Cumulative Cycles**: 6 cycles completed across all milestones
+- **Current Burst Progress**: Cycle 1 of 5 (Milestone 1.2 Complete: All 6 Gates Passed)
+- **Milestone Cumulative Cycles**: 1 cycle completed on Milestone 1.2
+- **Campaign Cumulative Cycles**: 7 cycles completed across all milestones
 - **Branch Depth Limit**: Max 2 consecutive runs on a single mechanism/branch
 - **Current Branch Depth**: Run 1 of 2
-- **Active Hypothesis / Mechanism**: Milestone 1.2: Multi-Gate Composition & Wire Crossing (Tier 1). Cascaded Boolean logic gates (AND, OR, NOT, XOR) and planar wire crossing mechanisms with delay equalization and refractory diode shielding for 100% truth-table parity on a 1-bit Full Adder without crosstalk or intermediate signal degradation.
+- **Active Hypothesis / Mechanism**: Milestone 1.2: Multi-Gate Composition & Wire Crossing (Tier 1). Cascaded Boolean logic gates (AND, OR, NOT, XOR) and planar wire crossing mechanisms with delay equalization and refractory diode shielding for 100% truth-table parity on a 1-bit Full Adder without crosstalk or intermediate signal degradation. Verified complete in `EXP-2026-007a-01`.
 - **Escalation Triggers**: Stop and request operator input ONLY on:
   1. *Multi-path ambiguity* (competing hypotheses with no clear theoretical winner)
   2. *2-strike paradigm stall* (2 distinct ideas fail consecutively to show signal)
@@ -28,6 +28,8 @@
   - *Instantaneous 16-node readout for $\tau > 4$ on $4 \times 4$ Torus*: Falsified in `EXP-2026-003a`. Fixed isotropic torus edges cannot sustain reverberation beyond graph diameter ($D=4$) due to wavefront collision and refractory annihilation. Resolved in `EXP-2026-004a` via Hebbian symmetry breaking (+463% noise resilience).
   - *Passive Leaky Transmission Cable*: Extinguished exponentially ($V(x) \propto (1-\lambda)^x$) by $D \ge 10$ ($V(30) \approx 0.042 \ll \theta$), resulting in $\text{BER} \approx 0.15$ and complete signal extinction in `EXP-2026-006a`. Resolved by active all-or-none somatic regeneration.
   - *Unshielded Bidirectional Physical Coupling ($N_{\text{ref}} = 0$)*: Falsified in `EXP-2026-006a`. Retrograde back-coupling causes continuous standing-wave ring reverberations ($\text{BER} = 0.2140$, inter-branch crosstalk $\chi_{1\to 2} = 0.1000$). Resolved via refractory diode shielding ($N_{\text{ref}} = 2$).
+  - *Uncompensated Delay Cascades*: Falsified in `EXP-2026-007a`. Path latency disparities cause multi-input coincidence failure ($\Delta \tau = 3$, accuracy collapsed to 0.3750). Resolved via meander delay equalization tracks ($\Delta \tau = 0$).
+  - *Unshielded 4-Way Planar Wire Crossing*: Falsified in `EXP-2026-007a`. Crossing intersection merges signals, generating massive crosstalk ($\chi_{\text{cross}} = 0.5000$). Resolved via refractory-shielded planar bridge ($\chi_{\text{cross}} = 0.0000$).
 
 ---
 
@@ -39,8 +41,8 @@
 | Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-007.md`, `docs/research/protocols/EXP-2026-007a.md` | COMPLETED |
 | Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | APPROVED |
 | Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | COMPLETED |
-| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-007a.md`) | PENDING |
-| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PENDING |
+| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-007a.md`) | COMPLETED (VERIFY_COMPLETE) |
+| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | APPROVED (Tier 1 Verified Complete) |
 
 ---
 
@@ -50,8 +52,8 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Tier 0** | Phase 0 MVA (Rungs 1–5) | Firing density, attractors, XOR, Hebbian, continual learning | VERIFIED | 5 | [`DIAG-2026-001a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-001a.md) through [`005a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-005a.md) |
 | **Tier 1** | 1.1 Signal Transport & Fan-Out | 1-to-2 Buffer over $D \ge 30$ cells, 100% transmission fidelity | VERIFIED | 1 | [`DIAG-2026-006a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-006a.md) |
-| **Tier 1** | 1.2 Multi-Gate Composition | 1-bit Full Adder / 2-bit Multiplier, zero crosstalk | UNLOCKED | - | Ready for Inception |
-| **Tier 2** | 2.1 Bistable Latching | Dynamic bit retention over $\Delta t \ge 10^3$ steps | LOCKED | - | Requires Tier 1 |
+| **Tier 1** | 1.2 Multi-Gate Composition | 1-bit Full Adder / 2-bit Multiplier, zero crosstalk | VERIFIED | 1 | [`DIAG-2026-007a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-007a.md) |
+| **Tier 2** | 2.1 Bistable Latching | Dynamic bit retention over $\Delta t \ge 10^3$ steps | UNLOCKED | - | Ready for Inception |
 | **Tier 2** | 2.2 Finite State Automata | Regular expression DFA streaming recognition | LOCKED | - | Requires 2.1 |
 | **Tier 3** | 3.1 Pushdown Memory | Dyck-1 / Dyck-2 balanced parentheses recognition | LOCKED | - | Requires Tier 2 |
 | **Tier 3** | 3.2 Associative Retrieval | Key-Value variable binding retrieval ($N \ge 16$) | LOCKED | - | Requires 3.1 |
@@ -68,6 +70,7 @@
 | 4 | `HYP-2026-004` | `EXP-2026-004a` | `src/experiments/exp_2026_004a_mva_hebbian_plasticity/` | `RUN-EXP-2026-004a-01` | `exp/EXP-2026-004a-01` | Supported (+463% noise resilience, $p < 10^{-32}$) | ADVANCE (Rung 5 evaluation) | Autonomous (Gate I) |
 | 5 | `HYP-2026-005` | `EXP-2026-005a` | `src/experiments/exp_2026_005a_mva_continual_learning/` | `RUN-EXP-2026-005a-01` | `exp/EXP-2026-005a-01` | Supported (All 6 Gates Pass) | ADVANCE (Tier 1 evaluation) | Autonomous (Gate I) |
 | 6 | `HYP-2026-006` | `EXP-2026-006a` | `src/experiments/exp_2026_006a_mva_signal_transport/` | `RUN-EXP-2026-006a-01` | `exp/EXP-2026-006a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Advance to Milestone 1.2) | Autonomous (Gate I) |
+| 7 | `HYP-2026-007` | `EXP-2026-007a` | `src/experiments/exp_2026_007a_mva_multi_gate_composition/` | `RUN-EXP-2026-007a-01` | `exp/EXP-2026-007a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Tier 1 Complete; Advance to Tier 2) | Autonomous (Gate I) |
 
 ---
 
