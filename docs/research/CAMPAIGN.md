@@ -1,24 +1,24 @@
 # Scientific Research Campaign: Multi-Scale Self-Organizing Computational Substrate
 
 - **Campaign Identifier**: CAMPAIGN-2026-MVA-SUBSTRATE
-- **Current Status**: ACTIVE (Tier 1 Verified Complete; Ready for Tier 2 Inception)
+- **Current Status**: ACTIVE (Milestone 2.1 Inception: Theory & Protocol)
 - **Roadmap Reference**: `docs/vision.md` (Milestone Tiers)
-- **Active Milestone**: Milestone 1.2: Multi-Gate Composition & Wire Crossing (VERIFIED) -> Unlocking Tier 2: Milestone 2.1
+- **Active Milestone**: Milestone 2.1: Bistable Latching (Dynamic Bit Storage) (Tier 2: Temporal Dynamics & State Retention)
 - **Target Paradigm**: Autopoietic, thermodynamically bounded computational substrate via discrete bit-stream cellular automata and homeostatic self-organized criticality
 - **Parent Lineage**: `src/experiments/exp_2026_007a_mva_multi_gate_composition/` (Tag: `exp/EXP-2026-007a-01`)
-- **Last Updated**: 2026-09-07 18:00:00 UTC
+- **Last Updated**: 2026-09-07 18:25:00 UTC
 
 ---
 
 ## 1. Autonomous Exploration & Checkpoint Guardrails
 
 - **Autonomous Checkpoint Horizon**: 5 cycles  <!-- SINGLE POINT OF CONFIGURATION: change to 3, 5, 10, etc. based on oversight budget -->
-- **Current Burst Progress**: Cycle 1 of 5 (Milestone 1.2 Complete: All 6 Gates Passed)
-- **Milestone Cumulative Cycles**: 1 cycle completed on Milestone 1.2
-- **Campaign Cumulative Cycles**: 7 cycles completed across all milestones
+- **Current Burst Progress**: Cycle 2 of 5 (Milestone 2.1 Inception: Theory & Protocol)
+- **Milestone Cumulative Cycles**: 0 cycles completed on Milestone 2.1
+- **Campaign Cumulative Cycles**: 7 cycles completed across all milestones (Initiating Cycle 8)
 - **Branch Depth Limit**: Max 2 consecutive runs on a single mechanism/branch
 - **Current Branch Depth**: Run 1 of 2
-- **Active Hypothesis / Mechanism**: Milestone 1.2: Multi-Gate Composition & Wire Crossing (Tier 1). Cascaded Boolean logic gates (AND, OR, NOT, XOR) and planar wire crossing mechanisms with delay equalization and refractory diode shielding for 100% truth-table parity on a 1-bit Full Adder without crosstalk or intermediate signal degradation. Verified complete in `EXP-2026-007a-01`.
+- **Active Hypothesis / Mechanism**: Milestone 2.1: Bistable Latching (Dynamic Bit Storage) (Tier 2). Localized recurrent attractor circuit / bistable resonant latch (Set-Reset / Gated D-Latch) with relaxed topology (ADR-0001), bounded degree (k <= 4), refractory diode shielding (N_ref = 2), and homeostatic threshold adaptation for indefinite dynamic bit retention (Delta t >= 10^3 steps) with 100% read accuracy under quiescent retention.
 - **Escalation Triggers**: Stop and request operator input ONLY on:
   1. *Multi-path ambiguity* (competing hypotheses with no clear theoretical winner)
   2. *2-strike paradigm stall* (2 distinct ideas fail consecutively to show signal)
@@ -37,12 +37,12 @@
 
 | Stage | Active Agent | Active Artifact Reference | Status |
 | :--- | :--- | :--- | :--- |
-| Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md` | COMPLETED |
-| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-007.md`, `docs/research/protocols/EXP-2026-007a.md` | COMPLETED |
+| Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md`, `docs/architecture/adr-0001-substrate-connectivity-topology.md` | COMPLETED |
+| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-008.md`, `docs/research/protocols/EXP-2026-008a.md` | COMPLETED |
 | Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | APPROVED |
 | Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | COMPLETED |
-| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-007a.md`) | COMPLETED (VERIFY_COMPLETE) |
-| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | APPROVED (Tier 1 Verified Complete) |
+| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-008a.md`) | PENDING |
+| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PENDING |
 
 ---
 

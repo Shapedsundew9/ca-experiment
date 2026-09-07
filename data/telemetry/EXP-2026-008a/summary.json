@@ -1,0 +1,64 @@
+{
+  "protocol_id": "EXP-2026-008a",
+  "hypothesis_id": "HYP-2026-008",
+  "timestamp_utc": "2026-09-07T19:30:00Z",
+  "total_runs": 480,
+  "conditions": {
+    "active_latch": {
+      "eps_0_00": {
+        "retention_accuracy_mean": 1.0,
+        "retention_accuracy_std": 0.0,
+        "ber_read_mean": 0.0,
+        "ber_read_std": 0.0,
+        "transition_fidelity_mean": 1.0,
+        "pulse_persistence_mean": 1.0
+      },
+      "eps_0_05": {
+        "retention_accuracy_mean": 0.9770000000000001,
+        "retention_accuracy_std": 0.09653121703401943,
+        "ber_read_mean": 0.023,
+        "ber_read_std": 0.09653121703401944
+      }
+    },
+    "baseline_feedforward_loss": {
+      "retention_accuracy_mean": 0.5,
+      "retention_accuracy_std": 0.0,
+      "ber_read_mean": 0.5
+    },
+    "ablation_unshielded_feedback": {
+      "transition_fidelity_mean": 0.5,
+      "transition_fidelity_std": 0.0
+    },
+    "ablation_fixed_theta": {
+      "eps_0_05": {
+        "retention_accuracy_mean": 0.7493333333333333,
+        "retention_accuracy_std": 0.24472269082024015,
+        "ber_read_mean": 0.2506666666666667,
+        "ber_read_std": 0.24472269082024015
+      }
+    }
+  },
+  "statistical_tests": {
+    "welch_active_vs_feedforward_loss": {
+      "t_stat": 57.37910526322039,
+      "p_value": 0.0,
+      "cohen_d": 14.815221273648998,
+      "significant": true
+    },
+    "welch_active_vs_fixed_theta_noise005": {
+      "t_stat": 4.74005723591105,
+      "p_value": 2.1365785907820575e-6,
+      "cohen_d": 1.2238775156502304,
+      "significant": false
+    }
+  },
+  "gate_verdicts": {
+    "gate_1_state_retention_accuracy": "PASS",
+    "gate_2_nondestructive_readout_fidelity": "PASS",
+    "gate_3_state_transition_reliability": "PASS",
+    "gate_4_noise_resilience_critical_percolation": "PASS",
+    "gate_5_recurrent_feedback_advantage": "PASS",
+    "gate_6_homeostatic_stability": "PASS"
+  },
+  "overall_verdict": "SUPPORTED"
+}
