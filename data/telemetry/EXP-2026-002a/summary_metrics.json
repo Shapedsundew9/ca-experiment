@@ -1,0 +1,17 @@
+{
+  "total_runs": 2700,
+  "mean_inter_pattern_distance": 0.04173314220829289,
+  "mean_intra_pattern_distance": 0.011481858576768164,
+  "mean_noise_perturbed_distance": 0.005519743664459254,
+  "snr_active": 3.6347026859165212,
+  "snr_fixed": 2.9263380907553898,
+  "cycle_detection_rate_pct": 73.85185185185185,
+  "cohens_d": 0.7785809516339062,
+  "mann_whitney_p_value": 1e-12,
+  "criterion1_separation_pass": false,
+  "criterion2_basin_consistency_pass": true,
+  "criterion3_noise_robustness_pass": true,
+  "criterion4_limit_cycle_pass": false,
+  "criterion5_homeostatic_advantage_pass": false,
+  "overall_verdict": false
+}
