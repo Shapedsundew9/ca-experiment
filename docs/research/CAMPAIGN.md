@@ -13,12 +13,12 @@
 ## 1. Autonomous Exploration & Checkpoint Guardrails
 
 - **Autonomous Checkpoint Horizon**: 5 cycles  <!-- SINGLE POINT OF CONFIGURATION: change to 3, 5, 10, etc. based on oversight budget -->
-- **Current Burst Progress**: Cycle 3 of 5 (Milestone 2.2 Completed; Diagnostic Report Authoring)
+- **Current Burst Progress**: Cycle 3 of 5 (Milestone 2.2 Verified Complete; Ready for Milestone 3.1 Inception)
 - **Milestone Cumulative Cycles**: 1 cycle completed on Milestone 2.2
 - **Campaign Cumulative Cycles**: 9 cycles completed across all milestones (Cycle 9 completed)
 - **Branch Depth Limit**: Max 2 consecutive runs on a single mechanism/branch
 - **Current Branch Depth**: Run 1 of 2
-- **Active Hypothesis / Mechanism**: Milestone 2.2: Sequential State Tracking via Coupled Resonant Attractor Basins for Deterministic Finite Automata (DFA). Coupling bistable resonant loops with synchronized gating/transition logic lines (synthesized from Tier 1.2 logic and Tier 2.1 resonant latches under ADR-0001) to implement state transitions driven by streaming binary inputs. Target tasks: Streaming parity tracking (2-state DFA) and canonical regular language recognition (e.g., regex `(10)+1`) over streaming sequence lengths $L \in [10, 100]$ tokens with 0% classification error and zero crosstalk.
+- **Active Hypothesis / Mechanism**: Milestone 2.2: Sequential State Tracking via Coupled Resonant Attractor Basins for Deterministic Finite Automata (DFA). Coupling bistable resonant loops with synchronized gating/transition logic lines (synthesized from Tier 1.2 logic and Tier 2.1 resonant latches under ADR-0001) to implement state transitions driven by streaming binary inputs. Target tasks: Streaming parity tracking (2-state DFA) and canonical regular language recognition (e.g., regex `(10)+1`) over streaming sequence lengths $L \in [10, 100]$ tokens with 0% classification error and zero crosstalk. Verified complete in `EXP-2026-009a-01`.
 - **Escalation Triggers**: Stop and request operator input ONLY on:
   1. *Multi-path ambiguity* (competing hypotheses with no clear theoretical winner)
   2. *2-strike paradigm stall* (2 distinct ideas fail consecutively to show signal)
@@ -41,10 +41,10 @@
 | :--- | :--- | :--- | :--- |
 | Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md`, `docs/architecture/adr-0001-substrate-connectivity-topology.md` | COMPLETED |
 | Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-009.md`, `docs/research/protocols/EXP-2026-009a.md` | COMPLETED |
-| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | COMPLETED |
+| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | COMPLETED (APPROVED) |
 | Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | COMPLETED |
-| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-009a.md`) | COMPLETED |
-| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PENDING |
+| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-009a.md`) | COMPLETED (VERIFY_COMPLETE) |
+| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | COMPLETED (APPROVED - Advance to Tier 3) |
 
 ---
 
@@ -57,7 +57,7 @@
 | **Tier 1** | 1.2 Multi-Gate Composition | 1-bit Full Adder / 2-bit Multiplier, zero crosstalk | VERIFIED | 1 | [`DIAG-2026-007a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-007a.md) |
 | **Tier 2** | 2.1 Bistable Latching | Dynamic bit retention over $\Delta t \ge 10^3$ steps | VERIFIED | 1 | [`DIAG-2026-008a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-008a.md) |
 | **Tier 2** | 2.2 Finite State Automata | Regular expression DFA streaming recognition | VERIFIED | 1 | [`DIAG-2026-009a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-009a.md) |
-| **Tier 3** | 3.1 Pushdown Memory | Dyck-1 / Dyck-2 balanced parentheses recognition | LOCKED | - | Requires Tier 2 |
+| **Tier 3** | 3.1 Pushdown Memory | Dyck-1 / Dyck-2 balanced parentheses recognition | UNLOCKED | - | Ready for Inception |
 | **Tier 3** | 3.2 Associative Retrieval | Key-Value variable binding retrieval ($N \ge 16$) | LOCKED | - | Requires 3.1 |
 
 ---
@@ -83,7 +83,7 @@
 - **Total Allocated Compute Budget**: 100 Compute-Hours
 - **Compute Consumed to Date**: < 0.02 Compute-Hours
 - **Remaining Compute Budget**: ~100 Compute-Hours
-- **Autonomous Checkpoint Horizon**: 5 cycles per burst (Current Burst: Cycle 2 of 5 completed)
+- **Autonomous Checkpoint Horizon**: 5 cycles per burst (Current Burst: Cycle 3 of 5 completed)
 
 ---
 
