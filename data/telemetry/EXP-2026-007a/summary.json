@@ -1,0 +1,70 @@
+{
+  "protocol_id": "EXP-2026-007a",
+  "hypothesis_id": "HYP-2026-007",
+  "timestamp_utc": "2026-09-07T19:00:00Z",
+  "total_runs": 480,
+  "conditions": {
+    "active_composed": {
+      "eps_0_00": {
+        "accuracy_mean": 1.0,
+        "accuracy_std": 0.0,
+        "ber_sum_mean": 0.0,
+        "ber_cout_mean": 0.0,
+        "crosstalk_mean": 0.0
+      },
+      "eps_0_05": {
+        "accuracy_mean": 0.9882500000000002,
+        "accuracy_std": 0.005049325663410161,
+        "ber_mean": 0.006125000000000003,
+        "ber_std": 0.002733689877222284
+      }
+    },
+    "baseline_uncompensated_delay": {
+      "accuracy_mean": 0.375,
+      "accuracy_std": 0.0,
+      "ber_mean": 0.375
+    },
+    "ablation_unshielded_crossing": {
+      "accuracy_mean": 0.66,
+      "accuracy_std": 0.0,
+      "crosstalk_mean": 0.5
+    },
+    "ablation_fixed_theta": {
+      "eps_0_05": {
+        "accuracy_mean": 0.9072499999999998,
+        "accuracy_std": 0.015289589651921284,
+        "ber_mean": 0.05508333333333333,
+        "ber_std": 0.008709470997567607
+      }
+    }
+  },
+  "statistical_tests": {
+    "welch_active_vs_fixed_theta_noise005": {
+      "t_stat": 9.295415052641749,
+      "p_value": 1.466329687909121e-20,
+      "cohen_d": 2.4000658463311497,
+      "significant": true
+    },
+    "welch_active_vs_uncompensated_delay": {
+      "t_stat": 71.72388157902549,
+      "p_value": 0.0,
+      "cohen_d": 18.519026592061245,
+      "significant": true
+    },
+    "welch_active_vs_unshielded_crossing": {
+      "t_stat": 39.017791578989865,
+      "p_value": 0.0,
+      "cohen_d": 10.074350466081317,
+      "significant": true
+    }
+  },
+  "gate_verdicts": {
+    "gate_1_exact_truth_table_parity": "PASS",
+    "gate_2_zero_intermediate_attenuation": "PASS",
+    "gate_3_crossing_crosstalk_isolation": "PASS",
+    "gate_4_noise_tolerance": "PASS",
+    "gate_5_delay_equalization_advantage": "PASS",
+    "gate_6_homeostatic_stability": "PASS"
+  },
+  "overall_verdict": "SUPPORTED"
+}

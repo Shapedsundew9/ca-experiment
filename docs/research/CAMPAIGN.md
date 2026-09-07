@@ -1,24 +1,24 @@
 # Scientific Research Campaign: Multi-Scale Self-Organizing Computational Substrate
 
 - **Campaign Identifier**: CAMPAIGN-2026-MVA-SUBSTRATE
-- **Current Status**: ACTIVE (Milestone 1.1 Verified; Ready for Milestone 1.2)
+- **Current Status**: ACTIVE (Targeting Tier 1, Milestone 1.2: Multi-Gate Composition & Wire Crossing)
 - **Roadmap Reference**: `docs/vision.md` (Milestone Tiers)
-- **Active Milestone**: Milestone 1.1: Signal Transport & Fan-Out (VERIFIED) -> Advancing to Milestone 1.2
+- **Active Milestone**: Milestone 1.2: Multi-Gate Composition & Wire Crossing
 - **Target Paradigm**: Autopoietic, thermodynamically bounded computational substrate via discrete bit-stream cellular automata and homeostatic self-organized criticality
 - **Parent Lineage**: `src/experiments/exp_2026_006a_mva_signal_transport/` (Tag: `exp/EXP-2026-006a-01`)
-- **Last Updated**: 2026-09-07 17:40:00 UTC
+- **Last Updated**: 2026-09-07 17:42:00 UTC
 
 ---
 
 ## 1. Autonomous Exploration & Checkpoint Guardrails
 
 - **Autonomous Checkpoint Horizon**: 5 cycles  <!-- SINGLE POINT OF CONFIGURATION: change to 3, 5, 10, etc. based on oversight budget -->
-- **Current Burst Progress**: Cycle 1 of 5 (Milestone 1.1 Complete: All 6 Gates Passed)
-- **Milestone Cumulative Cycles**: 1 cycle completed on Milestone 1.1
+- **Current Burst Progress**: Cycle 1 of 5 (Milestone 1.2 Inception: Theory & Protocol Formulation)
+- **Milestone Cumulative Cycles**: 0 cycles completed on Milestone 1.2 (Cycle 1 active)
 - **Campaign Cumulative Cycles**: 6 cycles completed across all milestones
 - **Branch Depth Limit**: Max 2 consecutive runs on a single mechanism/branch
 - **Current Branch Depth**: Run 1 of 2
-- **Active Hypothesis / Mechanism**: Milestone 1.1: Signal Transport & Fan-Out (Tier 1). Directed regenerative transmission tracks with refractory diode shielding and branching fan-out nodes under homeostatic threshold regulation for zero-attenuation propagation ($D \ge 30$) and 1-to-2 duplication under background noise and spatial jitter. Verified complete in `EXP-2026-006a-01`.
+- **Active Hypothesis / Mechanism**: Milestone 1.2: Multi-Gate Composition & Wire Crossing (Tier 1). Cascaded Boolean logic gates (AND, OR, NOT, XOR) and planar wire crossing mechanisms with delay equalization and refractory diode shielding for 100% truth-table parity on a 1-bit Full Adder without crosstalk or intermediate signal degradation.
 - **Escalation Triggers**: Stop and request operator input ONLY on:
   1. *Multi-path ambiguity* (competing hypotheses with no clear theoretical winner)
   2. *2-strike paradigm stall* (2 distinct ideas fail consecutively to show signal)
@@ -36,11 +36,11 @@
 | Stage | Active Agent | Active Artifact Reference | Status |
 | :--- | :--- | :--- | :--- |
 | Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md` | COMPLETED |
-| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-006.md`, `docs/research/protocols/EXP-2026-006a.md` | COMPLETED |
+| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-007.md`, `docs/research/protocols/EXP-2026-007a.md` | COMPLETED |
 | Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | APPROVED |
 | Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | COMPLETED |
-| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-006a.md`) | COMPLETED (VERIFY_COMPLETE) |
-| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | APPROVED (Milestone 1.1 Complete) |
+| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-007a.md`) | PENDING |
+| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PENDING |
 
 ---
 
