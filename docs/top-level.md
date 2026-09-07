@@ -51,13 +51,13 @@ The fundamental trap in unguided recurrent discrete networks is the **ergodic bo
 
 Do not start with an unconstrained graph or continuous signals. Constrain the design space to a tiny, deterministic testbed before allowing the coding to evolve open topologies.
 
-**1. The Signal Protocol (Bit-Streams)**
+#### 1. The Signal Protocol (Bit-Streams)
 
 * Use synchronous, discrete bit-streams where time $t \in \mathbb{N}$.
 * A track between node $i$ and node $j$ transmits a single bit $b \in \{0, 1\}$ per clock tick.
 * Information is encoded in **temporal pulse spacing** (inter-spike intervals) or **bit density** (Bernoulli rate coding). This natively mimics spike-timing-dependent computation and keeps arithmetic bitwise.
 
-**2. Node Architecture (The 4-Neighbor Micro-Core)**
+#### 2. Node Architecture (The 4-Neighbor Micro-Core)
 
 * **State:** Each node holds an internal register: a small $k$-bit ring buffer (e.g., $k = 4$ to $8$ bits) representing its local temporal history, plus an accumulated charge counter $V \in [0, V_{\text{thresh}}]$.
 * **Incoming Tracks:** Exactly 2 to 4 input tracks.
@@ -68,7 +68,8 @@ Do not start with an unconstrained graph or continuous signals. Constrain the de
 2. If the internal accumulator exceeds $V_{\text{thresh}}$, the node fires a `1` downstream and enters a refractory period ($N_{\text{ref}}$ ticks of forced `0`). Otherwise, it outputs `0`.
 3. The internal accumulator decays by a fixed leak factor $\lambda$ on idle ticks.
 
-**3. Homeostasis (The Anti-Chaos Shield)**
+#### 3. Homeostasis (The Anti-Chaos Shield)
+
 To prevent the network from blowing up into seizure-like saturation or freezing into silence:
 
 * Each node tracks its rolling firing rate $\bar{r}$.
