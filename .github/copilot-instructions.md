@@ -3,6 +3,9 @@
 ## Layout
 
 - This is a mixed Rust and Python experimentation workspace.
+- **Language Specialization**:
+  - Implement substrate simulations, cellular automata kernels, and core computational experiments in Rust (under `src/experiments/exp_yyyy_nnna_[slug]/`, `src/bin/`, and `tests/`) for high execution performance, bare-metal throughput, deterministic bitwise operations, and thermodynamic energy modeling.
+  - Implement tooling, telemetry reduction, empirical analysis, scientific figure generation, and diagramming in Python (under `python/src/tools/`, `python/scripts/`, `python/tests/`, and optional exploratory Python experiments in `python/experiments/`).
 - Put Rust code in `src/` and Rust integration tests in `tests/`.
 - Put reusable Python code in `python/src/tools/`.
 - Put Python tests in `python/tests/`.
