@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1060" height="680" viewBox="0 0 1060 680">
+<defs>
+<marker markerWidth="7.6" markerHeight="4.0" viewBox="-1 -0.5 1.9 1.0" orient="auto" id="d0">
+<path d="M-1,-0.5 L-1,0.5 L0,0 Z" fill="#73c991" />
+</marker>
+<marker markerWidth="7.6" markerHeight="4.0" viewBox="-1 -0.5 1.9 1.0" orient="auto" id="d1">
+<path d="M-1,-0.5 L-1,0.5 L0,0 Z" fill="#e06c75" />
+</marker>
+<marker markerWidth="7.6" markerHeight="4.0" viewBox="-1 -0.5 1.9 1.0" orient="auto" id="d2">
+<path d="M-1,-0.5 L-1,0.5 L0,0 Z" fill="#61afef" />
+</marker>
+<marker markerWidth="7.6" markerHeight="4.0" viewBox="-1 -0.5 1.9 1.0" orient="auto" id="d3">
+<path d="M-1,-0.5 L-1,0.5 L0,0 Z" fill="#e5c07b" />
+</marker>
+</defs>
+<rect x="0" y="0" width="1060" height="680" fill="#161922" />
+<text x="530.0" y="34" font-size="20" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Cascaded Dynamical Stack Substrate for Pushdown Automata &amp; Dyck Languages</text>
+<text x="530.0" y="56" font-size="12" text-anchor="middle" fill="#94a3b8" font-family="monospace">Substrate Dynamics: Modular Resonant Latch Frames, Bidirectional Pointer Steering, and Coincidence Gating (k_in, k_out &lt;= 4)</text>
+<use xlink:href="#d0" />
+<use xlink:href="#d1" />
+<use xlink:href="#d2" />
+<use xlink:href="#d3" />
+<rect x="30" y="75" width="485" height="585" rx="8" ry="8" fill="#1e2230" stroke="#434c5e" stroke-width="1.0" />
+<text x="46" y="101" font-size="15" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Substrate Circuit: Modular Pushdown Ladder</text>
+<text x="46" y="119" font-size="11" fill="#94a3b8" font-family="sans-serif">Cascaded Latch Units C_k &amp; Bidirectional Pointer P_k</text>
+<rect x="45" y="140" width="445" height="100" rx="6" ry="6" fill="#13161f" stroke="#61afef" stroke-width="1.0" stroke-dasharray="3,3" />
+<text x="54" y="156" font-size="10" fill="#61afef" font-family="sans-serif" font-weight="bold">Stack Frame k = 1 (Depth 1 Storage)</text>
+<rect x="45" y="255" width="445" height="100" rx="6" ry="6" fill="#13161f" stroke="#73c991" stroke-width="1.0" stroke-dasharray="3,3" />
+<text x="54" y="271" font-size="10" fill="#73c991" font-family="sans-serif" font-weight="bold">Stack Frame k = 0 (Depth 0 Storage)</text>
+<circle cx="95" cy="310" r="16" fill="#1b3528" stroke="#73c991" stroke-width="1.5" />
+<text x="95" y="314" font-size="10" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">P_0</text>
+<circle cx="95" cy="195" r="16" fill="#222738" stroke="#61afef" stroke-width="1.5" />
+<text x="95" y="199" font-size="10" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">P_1</text>
+<circle cx="255" cy="310" r="15" fill="#222738" stroke="#73c991" stroke-width="1.5" />
+<text x="255" y="313" font-size="9" text-anchor="middle" fill="#73c991" font-family="monospace" font-weight="bold">R0,(</text>
+<circle cx="395" cy="310" r="15" fill="#222738" stroke="#73c991" stroke-width="1.5" />
+<text x="395" y="313" font-size="9" text-anchor="middle" fill="#73c991" font-family="monospace" font-weight="bold">R0,[</text>
+<circle cx="255" cy="195" r="15" fill="#222738" stroke="#61afef" stroke-width="1.5" />
+<text x="255" y="198" font-size="9" text-anchor="middle" fill="#61afef" font-family="monospace" font-weight="bold">R1,(</text>
+<circle cx="395" cy="195" r="15" fill="#222738" stroke="#61afef" stroke-width="1.5" />
+<text x="395" y="198" font-size="9" text-anchor="middle" fill="#61afef" font-family="monospace" font-weight="bold">R1,[</text>
+<path d="M89,292 L89,213" stroke="#e5c07b" stroke-width="1.5" marker-end="url(#d3)" />
+<text x="75" y="255.5" font-size="8" text-anchor="middle" fill="#e5c07b" font-family="sans-serif" font-weight="bold">PUSH</text>
+<path d="M101,213 L101,292" stroke="#e06c75" stroke-width="1.5" marker-end="url(#d1)" />
+<text x="113" y="255.5" font-size="8" text-anchor="middle" fill="#e06c75" font-family="sans-serif" font-weight="bold">POP</text>
+<rect x="45" y="385" width="445" height="65" rx="6" ry="6" fill="#1c2130" stroke="#434c5e" stroke-width="1.0" />
+<text x="54" y="403" font-size="10" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Token Ingress Demultiplexing Ports (Cadence T_token = 16 ticks)</text>
+<rect x="50" y="417" width="90" height="24" rx="4" ry="4" fill="#13161f" stroke="#73c991" stroke-width="1.2" />
+<text x="95" y="432" font-size="8" text-anchor="middle" fill="#73c991" font-family="monospace" font-weight="bold">v_( : PUSH '('</text>
+<rect x="160" y="417" width="90" height="24" rx="4" ry="4" fill="#13161f" stroke="#61afef" stroke-width="1.2" />
+<text x="205" y="432" font-size="8" text-anchor="middle" fill="#61afef" font-family="monospace" font-weight="bold">v_[ : PUSH '['</text>
+<rect x="270" y="417" width="90" height="24" rx="4" ry="4" fill="#13161f" stroke="#e06c75" stroke-width="1.2" />
+<text x="315" y="432" font-size="8" text-anchor="middle" fill="#e06c75" font-family="monospace" font-weight="bold">v_) : POP ')'</text>
+<rect x="380" y="417" width="90" height="24" rx="4" ry="4" fill="#13161f" stroke="#e5c07b" stroke-width="1.2" />
+<text x="425" y="432" font-size="8" text-anchor="middle" fill="#e5c07b" font-family="monospace" font-weight="bold">v_] : POP ']'</text>
+<rect x="45" y="475" width="445" height="165" rx="6" ry="6" fill="#13161f" stroke="#434c5e" stroke-width="1.0" />
+<text x="54" y="493" font-size="10" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Coincidence Gating &amp; Violation Detection Subsystem</text>
+<rect x="60" y="511" width="170" height="48" rx="5" ry="5" fill="#1e2230" stroke="#73c991" stroke-width="1.2" />
+<text x="145" y="527" font-size="9" text-anchor="middle" fill="#73c991" font-family="sans-serif" font-weight="bold">PUSH Gate G_push,k</text>
+<text x="145" y="541" font-size="8" text-anchor="middle" fill="#94a3b8" font-family="monospace">P_k ∧ v_open (W=0.6, θ=1.10)</text>
+<text x="145" y="553" font-size="8" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif">Sets C_k &amp; Advances P_k -&gt; P_k+1</text>
+<rect x="280" y="511" width="170" height="48" rx="5" ry="5" fill="#1e2230" stroke="#61afef" stroke-width="1.2" />
+<text x="365" y="527" font-size="9" text-anchor="middle" fill="#61afef" font-family="sans-serif" font-weight="bold">POP Match Gate G_pop,k</text>
+<text x="365" y="541" font-size="8" text-anchor="middle" fill="#94a3b8" font-family="monospace">P_k ∧ C_k-1 ∧ v_close (3-Way θ=1.1)</text>
+<text x="365" y="553" font-size="8" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif">Quenches C_k-1 &amp; Drops P_k -&gt; P_k-1</text>
+<rect x="60" y="590" width="195" height="36" rx="4" ry="4" fill="#2e1a1e" stroke="#e06c75" stroke-width="1.2" />
+<text x="157" y="605" font-size="8" text-anchor="middle" fill="#e06c75" font-family="sans-serif" font-weight="bold">Underflow / Mismatch Trap v_trap</text>
+<text x="157" y="618" font-size="8" text-anchor="middle" fill="#94a3b8" font-family="monospace">Absorbing Attractor A_reject</text>
+<rect x="280" y="590" width="195" height="36" rx="4" ry="4" fill="#1a2e22" stroke="#73c991" stroke-width="1.2" />
+<text x="377" y="605" font-size="8" text-anchor="middle" fill="#73c991" font-family="sans-serif" font-weight="bold">Acceptance Readout v_accept</text>
+<text x="377" y="618" font-size="8" text-anchor="middle" fill="#94a3b8" font-family="monospace">Empty Stack (P_0) ∧ v_eos -&gt; A_accept</text>
+<rect x="545" y="75" width="485" height="585" rx="8" ry="8" fill="#1e2230" stroke="#434c5e" stroke-width="1.0" />
+<text x="561" y="101" font-size="15" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Dynamical Phase Space &amp; LIFO Trajectory</text>
+<text x="561" y="119" font-size="11" fill="#94a3b8" font-family="sans-serif">Trace of Stack Evolution for Valid vs Mismatched Streams</text>
+<rect x="560" y="130" width="455" height="220" rx="6" ry="6" fill="#13161f" stroke="#434c5e" stroke-width="1.0" />
+<text x="570" y="148" font-size="10" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Step-by-Step Dyck-2 LIFO Trace: Sequence '[' '(' ')' ']'</text>
+<text x="575" y="169" font-size="9" fill="#94a3b8" font-family="monospace">t = 0</text>
+<text x="640" y="169" font-size="9" fill="#73c991" font-family="monospace" font-weight="bold">Initial Ground</text>
+<text x="760" y="169" font-size="9" fill="#e2e8f0" font-family="sans-serif">Stack: [] (Empty)</text>
+<text x="925" y="169" font-size="8" fill="#94a3b8" font-family="monospace">Pointer: P_0 active</text>
+<path d="M570,178 L1000,178" stroke="#33394a" stroke-width="0.8" stroke-dasharray="2,2" />
+<text x="575" y="199" font-size="9" fill="#94a3b8" font-family="monospace">t = 16</text>
+<text x="640" y="199" font-size="9" fill="#61afef" font-family="monospace" font-weight="bold">Token 1: '['</text>
+<text x="760" y="199" font-size="9" fill="#e2e8f0" font-family="sans-serif">PUSH '[', C_0 holds '['</text>
+<text x="925" y="199" font-size="8" fill="#94a3b8" font-family="monospace">P_0 -&gt; P_1 active</text>
+<path d="M570,208 L1000,208" stroke="#33394a" stroke-width="0.8" stroke-dasharray="2,2" />
+<text x="575" y="229" font-size="9" fill="#94a3b8" font-family="monospace">t = 32</text>
+<text x="640" y="229" font-size="9" fill="#61afef" font-family="monospace" font-weight="bold">Token 2: '('</text>
+<text x="760" y="229" font-size="9" fill="#e2e8f0" font-family="sans-serif">PUSH '(', C_1 holds '('</text>
+<text x="925" y="229" font-size="8" fill="#94a3b8" font-family="monospace">P_1 -&gt; P_2 active</text>
+<path d="M570,238 L1000,238" stroke="#33394a" stroke-width="0.8" stroke-dasharray="2,2" />
+<text x="575" y="259" font-size="9" fill="#94a3b8" font-family="monospace">t = 48</text>
+<text x="640" y="259" font-size="9" fill="#73c991" font-family="monospace" font-weight="bold">Token 3: ')'</text>
+<text x="760" y="259" font-size="9" fill="#e2e8f0" font-family="sans-serif">POP ')': Matches C_1 '(', quench C_1</text>
+<text x="925" y="259" font-size="8" fill="#94a3b8" font-family="monospace">P_2 -&gt; P_1 active</text>
+<path d="M570,268 L1000,268" stroke="#33394a" stroke-width="0.8" stroke-dasharray="2,2" />
+<text x="575" y="289" font-size="9" fill="#94a3b8" font-family="monospace">t = 64</text>
+<text x="640" y="289" font-size="9" fill="#73c991" font-family="monospace" font-weight="bold">Token 4: ']'</text>
+<text x="760" y="289" font-size="9" fill="#e2e8f0" font-family="sans-serif">POP ']': Matches C_0 '[', quench C_0</text>
+<text x="925" y="289" font-size="8" fill="#94a3b8" font-family="monospace">P_1 -&gt; P_0 active</text>
+<path d="M570,298 L1000,298" stroke="#33394a" stroke-width="0.8" stroke-dasharray="2,2" />
+<text x="575" y="319" font-size="9" fill="#94a3b8" font-family="monospace">t = 80</text>
+<text x="640" y="319" font-size="9" fill="#e5c07b" font-family="monospace" font-weight="bold">EOS Probe</text>
+<text x="760" y="319" font-size="9" fill="#e2e8f0" font-family="sans-serif">P_0 active ∧ Zero Traps -&gt; FIRE</text>
+<text x="925" y="319" font-size="8" fill="#94a3b8" font-family="monospace">State: A_accept (1.000)</text>
+<rect x="560" y="360" width="455" height="100" rx="6" ry="6" fill="#20151a" stroke="#e06c75" stroke-width="1.0" />
+<text x="570" y="378" font-size="10" fill="#e06c75" font-family="sans-serif" font-weight="bold">Cross-Bracket Violation Trap: Sequence '[' '(' ']' ')' (Non-LIFO)</text>
+<text x="570" y="398" font-size="9" fill="#e2e8f0" font-family="sans-serif">1. Tokens '[' then '(' arrive -&gt; Stack: [ '[', '(' ] at Depth k=2 (Pointer P_2 active).</text>
+<text x="570" y="416" font-size="9" fill="#e2e8f0" font-family="sans-serif">2. Token ']' arrives at t=48: Top of stack C_1 holds '(', but token is ']'.</text>
+<text x="570" y="434" font-size="9" fill="#e06c75" font-family="monospace" font-weight="bold">3. Mismatch Gate fires: (P_2 ∧ C_1,( ∧ v_]) = (0.4 + 0.4 + 0.4 = 1.20 &gt;= 1.10) -&gt; v_trap.</text>
+<text x="570" y="452" font-size="9" fill="#94a3b8" font-family="sans-serif">4. v_trap enters self-exciting loop A_reject, hyperpolarizing v_accept permanently.</text>
+<rect x="560" y="470" width="455" height="188" rx="6" ry="6" fill="#13161f" stroke="#434c5e" stroke-width="1.0" />
+<text x="574" y="490" font-size="12" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Mathematical &amp; Architectural Invariants</text>
+<text x="574" y="512" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Bounded Degree:</text>
+<text x="574" y="527" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   max(k_in, k_out) &lt;= 4 via modular 1D tiling.</text>
+<text x="574" y="546" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Modular Depth Scaling:</text>
+<text x="574" y="561" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   Calibrated on D &lt;= 4; scales to D in [1, 8] with zero retuning.</text>
+<text x="574" y="580" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Refractory Diode Shielding:</text>
+<text x="574" y="595" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   N_ref = 2 prevents standing waves and retrograde crosstalk.</text>
+<text x="574" y="614" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Homeostatic Criticality:</text>
+<text x="574" y="629" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   Dynamic threshold adaptation bounds rho in [0.01, 0.25].</text>
+</svg>
