@@ -111,3 +111,40 @@ Never commit an unscripted image asset. Every figure must have a corresponding P
 3. **Author**: Create a new modular generator script if a novel visual concept is required.
 4. **Register**: Add an entry to `python/scripts/figures/README.md`.
 5. **Validate**: Run `.venv/bin/python .agents/skills/scientific-figures/scripts/validate_figure.py <figure-path>`.
+
+---
+
+## 7. Mathematical Typography & Layout Overflow Invariants
+
+To guarantee publication-grade visual and mathematical quality, all figure generator scripts must strictly adhere to the following invariants:
+
+### Rule 1: No Raw Programming Syntax in Labels
+
+Never place raw code identifiers or programming variable names with underscores into user-facing diagram labels:
+
+| ❌ Avoid in Diagrams | ✅ Use in DrawSVG (Unicode) | ✅ Use in Matplotlib (LaTeX) | Rendered Meaning |
+| :--- | :--- | :--- | :--- |
+| `v_0`, `v_15` | `v₀`, `v₁₅` | `$v_0$`, `$v_{15}$` | Node indexing |
+| `W_ij ≡ 1.0` | `Wᵢⱼ ≡ 1.0` | `$W_{ij} \equiv 1.0$` | Synaptic weight |
+| `d_in = d_out = 4` | `dᵢₙ = dₒᵤₜ = 4` | `$d_{\mathrm{in}} = d_{\mathrm{out}} = 4$` | Node degrees |
+| `Z_4 x Z_4` | `ℤ₄ × ℤ₄` | `$\mathbb{Z}_4 \times \mathbb{Z}_4$` | Toroidal discrete manifold |
+| `(T^2)` | `𝕋²` | `$\mathbb{T}^2$` | Continuous torus |
+| `D_diam = 4` | `D_diam = 4` or `D_diam = 4` | `$D_{\mathrm{diam}} = 4$` | Topological diameter |
+| `p < 1e-12`, `1e-32` | `p < 10⁻¹²`, `10⁻³²` | `$p < 10^{-12}$`, `$10^{-32}$` | Statistical significance |
+| `R_i = N_ref` | `Rᵢ = Nᵣₑf` | `$R_i = N_{\mathrm{ref}}$` | Refractory counter |
+
+### Rule 2: Container Width Budgeting & Text Wrapping
+
+SVG `<text>` does NOT auto-wrap. Unbounded strings will overflow container cards and spill off the canvas frame:
+
+- **Card Budgeting**: Calculate `max_chars = int(box_width_px / 7.5)` for proportional fonts and `/ 8.5` for monospace.
+- **Auto-Wrapping Helper**: Use `from tools.viz import draw_card_with_bullets, wrap_text` to automatically wrap descriptions into clean multi-line bullet entries.
+- **Canvas Margins**: Ensure all text elements have at least 15px clearance from outer canvas borders.
+
+### Rule 3: Automated Linter Enforcement
+
+Before committing any figure, run `validate_figure.py`. It inspects SVG XML for:
+
+- Raw code underscores in text elements (`\b[A-Za-z]+_[A-Za-z0-9]+\b`).
+- Raw scientific notation (`\b\d+e-\d+\b`).
+- Horizontal boundary overflow (`x + estimated_width > canvas_width`).

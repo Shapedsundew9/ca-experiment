@@ -7,7 +7,15 @@ matching the repository design specification.
 from __future__ import annotations
 
 from tools.viz import palette
+from tools.viz.draw_utils import draw_card_with_bullets, draw_multiline_text, wrap_text
 from tools.viz.export import save_figure
+from tools.viz.math_format import (
+    MATH_SYMBOLS,
+    format_scientific_notation,
+    format_subscript,
+    to_subscript,
+    to_superscript,
+)
 from tools.viz.palette import (
     AMBER,
     AMBER_FILL,
@@ -58,4 +66,12 @@ __all__ = [
     "AMBER_FILL",
     "AMBER_TEXT",
     "DARK_COLOR_CYCLE",
+    "format_subscript",
+    "to_subscript",
+    "to_superscript",
+    "format_scientific_notation",
+    "MATH_SYMBOLS",
+    "draw_multiline_text",
+    "draw_card_with_bullets",
+    "wrap_text",
 ]

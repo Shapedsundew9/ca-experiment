@@ -136,7 +136,22 @@ Validate the generated asset using the skill's validation script:
 
 ---
 
-## 5. Technical Palette Reference
+## 5. Quality & Mathematical Typography Invariants
+
+All figure authoring agents must enforce the following invariants:
+
+1. **No Raw Code Identifiers in Labels**:
+   Never use raw programming syntax with underscores (`v_0`, `W_ij`, `d_in`, `R_i`, `N_ref`) or raw exponential strings (`1e-12`, `1e-32`).
+   - In DrawSVG: Use Unicode subscripts (`v₀, v₁, ..., v₁₅`, `Wᵢⱼ`, `dᵢₙ`) and Unicode math symbols (`ℤ₄ × ℤ₄`, `𝕋²`, `10⁻¹²`).
+   - In Matplotlib: Use LaTeX mathtext (`$v_0$`, `$W_{ij}$`, `$\mathbb{Z}_4 \times \mathbb{Z}_4$`, `$\mathbb{T}^2$`, `$10^{-12}$`).
+2. **Container Width Budgeting & Multi-Line Text**:
+   SVG `<text>` does NOT wrap. Never place long text strings into fixed-width cards. Always wrap descriptions into structured multi-line entries using `draw_card_with_bullets` or `wrap_text` from `tools.viz`. Ensure minimum 15px canvas margin.
+3. **Automated Linter Enforcement**:
+   Always run `.venv/bin/python .agents/skills/scientific-figures/scripts/validate_figure.py <path>`. The script checks for syntax, palette, size, unescaped underscores, and text frame overflow.
+
+---
+
+## 6. Technical Palette Reference
 
 All figures MUST import and use the repo's dark theme palette from `tools.viz`:
 

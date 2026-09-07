@@ -6,7 +6,7 @@ Output: docs/research/assets/fig-hyp-001-torus-manifold.svg
 
 Visualizes the discrete 2D torus cellular automaton lattice (N = 16),
 flat indexing i = 4y + x, regular von Neumann 4-neighborhood channels,
-periodic wrap-around boundary conditions, and the continuous 3D toroidal manifold.
+periodic wrap-around boundary conditions, and the continuous 3D toroidal manifold (𝕋²).
 """
 
 from __future__ import annotations
@@ -31,19 +31,21 @@ from tools.viz import (
     TERTIARY_BLUE_FILL,
     TEXT,
     TEXT_MUTED,
+    draw_card_with_bullets,
+    format_subscript,
     save_figure,
 )
 
 
 def build_torus_manifold_figure(output_path: str) -> None:
-    width = 960
-    height = 560
+    width = 1040
+    height = 580
 
     d = draw.Drawing(width, height)
     # Dark canvas
     d.append(draw.Rectangle(0, 0, width, height, fill=DARK_CANVAS))
 
-    # Master Title & Subtitle
+    # Master Title & Mathematical Subtitle
     d.append(
         draw.Text(
             "16-Node Discrete Torus Substrate Manifold & Neighborhood Stencil",
@@ -58,7 +60,7 @@ def build_torus_manifold_figure(output_path: str) -> None:
     )
     d.append(
         draw.Text(
-            "Topology: V = Z_4 x Z_4,  |V| = 16,  d_in = d_out = 4,  |E| = 64 Tracks,  Diameter D = 4",
+            "Topology: 𝒱 = ℤ₄ × ℤ₄,  |𝒱| = 16,  dᵢₙ = dₒᵤₜ = 4,  |ℰ| = 64 Tracks,  Topological Diameter D = 4",
             13,
             width / 2,
             60,
@@ -88,14 +90,13 @@ def build_torus_manifold_figure(output_path: str) -> None:
     # ==========================================
     # LEFT PANEL: 4x4 Torus Lattice & Stencil
     # ==========================================
-    margin_x = 90
-    margin_y = 110
-    cell_size = 86
+    margin_x = 80
+    margin_y = 105
+    cell_size = 88
     cols, rows = 4, 4
 
-    # Background panel container
     panel_w = cols * cell_size + 140
-    panel_h = rows * cell_size + 120
+    panel_h = rows * cell_size + 130
     d.append(
         draw.Rectangle(
             margin_x - 70,
@@ -111,7 +112,7 @@ def build_torus_manifold_figure(output_path: str) -> None:
     )
     d.append(
         draw.Text(
-            "Flat Torus Coordinate Grid (Z_4 x Z_4)",
+            "Flat Torus Coordinate Grid (ℤ₄ × ℤ₄)",
             14,
             margin_x - 50,
             margin_y - 6,
@@ -123,36 +124,36 @@ def build_torus_manifold_figure(output_path: str) -> None:
 
     # Target node is (1, 1) -> Node 5
     tx, ty = 1, 1
-    target_id = 5
     von_neumann = {
-        ((tx, (ty - 1) % rows)): ("North (j=1)", (0, -1)),
-        (((tx + 1) % cols, ty)): ("East (j=6)", (1, 0)),
-        ((tx, (ty + 1) % rows)): ("South (j=9)", (0, 1)),
-        (((tx - 1) % cols, ty)): ("West (j=4)", (-1, 0)),
+        ((tx, (ty - 1) % rows)): ("North (v₁)", (0, -1)),
+        (((tx + 1) % cols, ty)): ("East (v₆)", (1, 0)),
+        ((tx, (ty + 1) % rows)): ("South (v₉)", (0, 1)),
+        (((tx - 1) % cols, ty)): ("West (v₄)", (-1, 0)),
     }
 
-    # Draw all 16 nodes
+    # Draw all 16 nodes with proper Unicode subscripts
     for y in range(rows):
         for x in range(cols):
             cx = margin_x + x * cell_size + cell_size / 2
             cy = margin_y + y * cell_size + cell_size / 2
             node_id = y * cols + x
+            subscript_label = format_subscript(f"v_{node_id}")
 
             if (x, y) == (tx, ty):
                 fill_color = PRIMARY_RED_FILL
                 stroke_color = PRIMARY_RED
                 stroke_w = 2.5
-                badge = "Target i"
+                badge = "Target vᵢ"
             elif (x, y) in von_neumann:
                 fill_color = SECONDARY_GREEN_FILL
                 stroke_color = SECONDARY_GREEN
                 stroke_w = 2.0
                 badge = von_neumann[(x, y)][0].split()[0]
             else:
-                fill_color=DARK_CANVAS
-                stroke_color=BORDER
-                stroke_w=1.2
-                badge=None
+                fill_color = DARK_CANVAS
+                stroke_color = BORDER
+                stroke_w = 1.2
+                badge = None
 
             r = cell_size * 0.40
             d.append(
@@ -169,16 +170,16 @@ def build_torus_manifold_figure(output_path: str) -> None:
                 )
             )
 
-            # Node label v_i
+            # Node label vᵢ with proper Unicode subscript
             d.append(
                 draw.Text(
-                    f"v_{node_id}",
-                    14,
+                    subscript_label,
+                    15,
                     cx,
                     cy - 3,
                     text_anchor="middle",
                     fill=TEXT,
-                    font_family="monospace",
+                    font_family="sans-serif",
                     font_weight="bold",
                 )
             )
@@ -199,12 +200,13 @@ def build_torus_manifold_figure(output_path: str) -> None:
                 d.append(
                     draw.Text(
                         badge,
-                        9,
+                        9.5,
                         cx,
                         cy + 25,
                         text_anchor="middle",
                         fill=AMBER if (x, y) == (tx, ty) else SECONDARY_GREEN,
                         font_family="sans-serif",
+                        font_weight="bold",
                     )
                 )
 
@@ -228,10 +230,10 @@ def build_torus_manifold_figure(output_path: str) -> None:
         d.append(p)
 
     # ==========================================
-    # RIGHT PANEL: Continuous Torus & Equations
+    # RIGHT PANEL: Continuous Torus & Properties
     # ==========================================
-    right_x = margin_x + panel_w + 30
-    right_w = width - right_x - 25
+    right_x = margin_x + panel_w + 25
+    right_w = width - right_x - 20
     d.append(
         draw.Rectangle(
             right_x,
@@ -247,7 +249,7 @@ def build_torus_manifold_figure(output_path: str) -> None:
     )
     d.append(
         draw.Text(
-            "Continuous Toroidal Embedding (T^2)",
+            "Continuous Toroidal Embedding (𝕋²)",
             14,
             right_x + 20,
             margin_y - 6,
@@ -257,59 +259,53 @@ def build_torus_manifold_figure(output_path: str) -> None:
         )
     )
 
-    # Torus schematic graphic (drawn with concentric ellipses)
+    # 3D Torus Graphic with Isometric Depth
     tc_x = right_x + right_w / 2
-    tc_y = margin_y + 110
+    tc_y = margin_y + 115
 
-    # Outer torus ring
-    d.append(draw.Ellipse(tc_x, tc_y, 140, 75, fill=TERTIARY_BLUE_FILL, stroke=TERTIARY_BLUE, stroke_width=2.0))
+    # Shaded outer toroidal silhouette
+    d.append(draw.Ellipse(tc_x, tc_y, 160, 85, fill=TERTIARY_BLUE_FILL, stroke=TERTIARY_BLUE, stroke_width=2.0))
     # Inner hole
-    d.append(draw.Ellipse(tc_x, tc_y, 50, 25, fill=DARK_PANEL, stroke=BORDER, stroke_width=1.5))
-    # Toroidal coordinate loops
-    loop1 = draw.Path(stroke=AMBER, stroke_width=2.0, fill="none", stroke_dasharray="4,2")
-    loop1.M(tc_x - 140, tc_y)
-    loop1.A(140, 75, 0, 0, 0, tc_x + 140, tc_y)
-    d.append(loop1)
+    d.append(draw.Ellipse(tc_x, tc_y, 60, 30, fill=DARK_PANEL, stroke=BORDER, stroke_width=1.8))
 
-    # Coordinates labels
-    d.append(draw.Text("Poloidal Angle θ (Row Periodicity)", 11, tc_x, tc_y + 95, text_anchor="middle", fill=AMBER, font_family="sans-serif"))
-    d.append(draw.Text("Toroidal Angle φ (Col Periodicity)", 11, tc_x, tc_y - 85, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif"))
+    # Toroidal coordinate equator circle φ (Green dashed ring)
+    loop_phi = draw.Path(stroke=SECONDARY_GREEN, stroke_width=2.0, fill="none", stroke_dasharray="4,3")
+    loop_phi.M(tc_x - 160, tc_y)
+    loop_phi.A(160, 85, 0, 0, 0, tc_x + 160, tc_y)
+    d.append(loop_phi)
 
-    # Mathematical Properties Callout Card
-    card_y = margin_y + 230
+    # Poloidal coordinate meridian circle θ (Amber dashed ring)
+    loop_theta = draw.Path(stroke=AMBER, stroke_width=2.0, fill="none", stroke_dasharray="4,3")
+    loop_theta.M(tc_x + 60, tc_y)
+    loop_theta.A(50, 60, 0, 1, 0, tc_x + 160, tc_y)
+    d.append(loop_theta)
+
+    # Coordinates labels with Greek mathematical typography
+    d.append(draw.Text("Poloidal Angle θ (Row Periodicity: y + 1 mod 4)", 11, tc_x, tc_y + 105, text_anchor="middle", fill=AMBER, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Toroidal Angle φ (Col Periodicity: x + 1 mod 4)", 11, tc_x, tc_y - 95, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
+
+    # Mathematical Properties Card (Auto-wrapped, zero overflow!)
+    card_y = margin_y + 240
     card_h = panel_h - 265
-    d.append(
-        draw.Rectangle(
-            right_x + 15,
-            card_y,
-            right_w - 30,
-            card_h,
-            rx=6,
-            ry=6,
-            fill=DARK_CANVAS,
-            stroke=BORDER,
-            stroke_width=1.0,
-        )
-    )
-
     bullets = [
-        "• Periodic Closure: Node (x, y) coordinates wrap modulo 4.",
-        "• Graph Regularity: Every node has exactly 4 incoming and 4 outgoing tracks.",
-        "• Total Transmission Capacity: 4 * 16 = 64 directed bit channels.",
-        "• Topological Diameter: D_diam = 2 + 2 = 4 (Max Manhattan distance).",
-        "• Boundary Invariant: Zero edge reflections or boundary damping.",
+        ("Periodic Closure", "Node coordinates (x, y) wrap modulo 4 across boundaries."),
+        ("Graph Regularity", "Every node has exactly 4 incoming and 4 outgoing tracks."),
+        ("Transmission Channels", "64 directed bit tracks with unit delay (latency τ = 1)."),
+        ("Topological Diameter", "D = 2 + 2 = 4 (Maximum Manhattan graph distance)."),
+        ("Boundary Invariant", "Zero edge reflections or artificial boundary damping."),
     ]
-    for idx, b in enumerate(bullets):
-        d.append(
-            draw.Text(
-                b,
-                11,
-                right_x + 25,
-                card_y + 24 + idx * 22,
-                fill=TEXT_MUTED,
-                font_family="monospace",
-            )
-        )
+    draw_card_with_bullets(
+        d,
+        right_x + 15,
+        card_y,
+        right_w - 30,
+        card_h,
+        bullets,
+        title="Toroidal Substrate Invariants",
+        max_chars=44,
+        bg_fill=DARK_CANVAS,
+        border_color=BORDER,
+    )
 
     # Footer note
     d.append(

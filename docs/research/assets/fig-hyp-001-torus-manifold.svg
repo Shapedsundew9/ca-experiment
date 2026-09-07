@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="960" height="560" viewBox="0 0 960 560">
+     width="1040" height="580" viewBox="0 0 1040 580">
 <defs>
 <marker markerWidth="7.6" markerHeight="4.0" viewBox="-1 -0.5 1.9 1.0" orient="auto" id="d0">
 <path d="M-1,-0.5 L-1,0.5 L0,0 Z" fill="#8892b0" />
@@ -15,88 +15,100 @@
 <path d="M-1,-0.5 L-1,0.5 L0,0 Z" fill="#e5c07b" />
 </marker>
 </defs>
-<rect x="0" y="0" width="960" height="560" fill="#161922" />
-<text x="480.0" y="36" font-size="20" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">16-Node Discrete Torus Substrate Manifold &amp; Neighborhood Stencil</text>
-<text x="480.0" y="60" font-size="13" text-anchor="middle" fill="#94a3b8" font-family="monospace">Topology: V = Z_4 x Z_4,  |V| = 16,  d_in = d_out = 4,  |E| = 64 Tracks,  Diameter D = 4</text>
+<rect x="0" y="0" width="1040" height="580" fill="#161922" />
+<text x="520.0" y="36" font-size="20" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">16-Node Discrete Torus Substrate Manifold &amp; Neighborhood Stencil</text>
+<text x="520.0" y="60" font-size="13" text-anchor="middle" fill="#94a3b8" font-family="monospace">Topology: 𝒱 = ℤ₄ × ℤ₄,  |𝒱| = 16,  dᵢₙ = dₒᵤₜ = 4,  |ℰ| = 64 Tracks,  Topological Diameter D = 4</text>
 <use xlink:href="#d0" />
 <use xlink:href="#d1" />
 <use xlink:href="#d2" />
 <use xlink:href="#d3" />
-<rect x="20" y="85" width="484" height="464" rx="10" ry="10" fill="#1e2230" stroke="#434c5e" stroke-width="1.0" />
-<text x="40" y="104" font-size="14" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Flat Torus Coordinate Grid (Z_4 x Z_4)</text>
-<rect x="98.6" y="118.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="133.0" y="150.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_0</text>
-<text x="133.0" y="166.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(0,0)</text>
-<rect x="184.6" y="118.6" width="68.8" height="68.8" rx="6" ry="6" fill="#1b3528" stroke="#73c991" stroke-width="2.0" />
-<text x="219.0" y="150.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_1</text>
-<text x="219.0" y="166.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(1,0)</text>
-<text x="219.0" y="178.0" font-size="9" text-anchor="middle" fill="#73c991" font-family="sans-serif">North</text>
-<rect x="270.6" y="118.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="305.0" y="150.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_2</text>
-<text x="305.0" y="166.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(2,0)</text>
-<rect x="356.6" y="118.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="391.0" y="150.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_3</text>
-<text x="391.0" y="166.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(3,0)</text>
-<rect x="98.6" y="204.6" width="68.8" height="68.8" rx="6" ry="6" fill="#1b3528" stroke="#73c991" stroke-width="2.0" />
-<text x="133.0" y="236.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_4</text>
-<text x="133.0" y="252.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(0,1)</text>
-<text x="133.0" y="264.0" font-size="9" text-anchor="middle" fill="#73c991" font-family="sans-serif">West</text>
-<rect x="184.6" y="204.6" width="68.8" height="68.8" rx="6" ry="6" fill="#422026" stroke="#e06c75" stroke-width="2.5" />
-<text x="219.0" y="236.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_5</text>
-<text x="219.0" y="252.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(1,1)</text>
-<text x="219.0" y="264.0" font-size="9" text-anchor="middle" fill="#e5c07b" font-family="sans-serif">Target i</text>
-<rect x="270.6" y="204.6" width="68.8" height="68.8" rx="6" ry="6" fill="#1b3528" stroke="#73c991" stroke-width="2.0" />
-<text x="305.0" y="236.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_6</text>
-<text x="305.0" y="252.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(2,1)</text>
-<text x="305.0" y="264.0" font-size="9" text-anchor="middle" fill="#73c991" font-family="sans-serif">East</text>
-<rect x="356.6" y="204.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="391.0" y="236.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_7</text>
-<text x="391.0" y="252.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(3,1)</text>
-<rect x="98.6" y="290.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="133.0" y="322.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_8</text>
-<text x="133.0" y="338.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(0,2)</text>
-<rect x="184.6" y="290.6" width="68.8" height="68.8" rx="6" ry="6" fill="#1b3528" stroke="#73c991" stroke-width="2.0" />
-<text x="219.0" y="322.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_9</text>
-<text x="219.0" y="338.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(1,2)</text>
-<text x="219.0" y="350.0" font-size="9" text-anchor="middle" fill="#73c991" font-family="sans-serif">South</text>
-<rect x="270.6" y="290.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="305.0" y="322.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_10</text>
-<text x="305.0" y="338.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(2,2)</text>
-<rect x="356.6" y="290.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="391.0" y="322.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_11</text>
-<text x="391.0" y="338.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(3,2)</text>
-<rect x="98.6" y="376.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="133.0" y="408.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_12</text>
-<text x="133.0" y="424.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(0,3)</text>
-<rect x="184.6" y="376.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="219.0" y="408.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_13</text>
-<text x="219.0" y="424.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(1,3)</text>
-<rect x="270.6" y="376.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="305.0" y="408.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_14</text>
-<text x="305.0" y="424.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(2,3)</text>
-<rect x="356.6" y="376.6" width="68.8" height="68.8" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
-<text x="391.0" y="408.0" font-size="14" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-weight="bold">v_15</text>
-<text x="391.0" y="424.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(3,3)</text>
-<path d="M425.4,147.0 C455.4,128.0,68.6,128.0,98.6,147.0" stroke="#8892b0" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d0)" />
-<path d="M425.4,233.0 C455.4,214.0,68.6,214.0,98.6,233.0" stroke="#8892b0" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d0)" />
-<path d="M425.4,319.0 C455.4,300.0,68.6,300.0,98.6,319.0" stroke="#8892b0" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d0)" />
-<path d="M425.4,405.0 C455.4,386.0,68.6,386.0,98.6,405.0" stroke="#8892b0" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d0)" />
-<path d="M139.0,445.4 C158.0,475.4,158.0,88.6,139.0,118.6" stroke="#e5c07b" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d3)" />
-<path d="M225.0,445.4 C244.0,475.4,244.0,88.6,225.0,118.6" stroke="#e5c07b" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d3)" />
-<path d="M311.0,445.4 C330.0,475.4,330.0,88.6,311.0,118.6" stroke="#e5c07b" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d3)" />
-<path d="M397.0,445.4 C416.0,475.4,416.0,88.6,397.0,118.6" stroke="#e5c07b" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d3)" />
-<rect x="604" y="85" width="331" height="464" rx="10" ry="10" fill="#1e2230" stroke="#434c5e" stroke-width="1.0" />
-<text x="624" y="104" font-size="14" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Continuous Toroidal Embedding (T^2)</text>
-<ellipse cx="769.5" cy="220" rx="140" ry="75" fill="#1d2c44" stroke="#61afef" stroke-width="2.0" />
-<ellipse cx="769.5" cy="220" rx="50" ry="25" fill="#1e2230" stroke="#434c5e" stroke-width="1.5" />
-<path d="M629.5,220 A140,75,0,0,0,909.5,220" stroke="#e5c07b" stroke-width="2.0" fill="none" stroke-dasharray="4,2" />
-<text x="769.5" y="315" font-size="11" text-anchor="middle" fill="#e5c07b" font-family="sans-serif">Poloidal Angle θ (Row Periodicity)</text>
-<text x="769.5" y="135" font-size="11" text-anchor="middle" fill="#73c991" font-family="sans-serif">Toroidal Angle φ (Col Periodicity)</text>
-<rect x="619" y="340" width="301" height="199" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.0" />
-<text x="629" y="364" font-size="11" fill="#94a3b8" font-family="monospace">• Periodic Closure: Node (x, y) coordinates wrap modulo 4.</text>
-<text x="629" y="386" font-size="11" fill="#94a3b8" font-family="monospace">• Graph Regularity: Every node has exactly 4 incoming and 4 outgoing tracks.</text>
-<text x="629" y="408" font-size="11" fill="#94a3b8" font-family="monospace">• Total Transmission Capacity: 4 * 16 = 64 directed bit channels.</text>
-<text x="629" y="430" font-size="11" fill="#94a3b8" font-family="monospace">• Topological Diameter: D_diam = 2 + 2 = 4 (Max Manhattan distance).</text>
-<text x="629" y="452" font-size="11" fill="#94a3b8" font-family="monospace">• Boundary Invariant: Zero edge reflections or boundary damping.</text>
-<text x="480.0" y="548" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">Figure FIG-HYP-001 | ca-experiment | Generated via python/scripts/figures/fig_hyp_001_torus_manifold.py</text>
+<rect x="10" y="80" width="492" height="482" rx="10" ry="10" fill="#1e2230" stroke="#434c5e" stroke-width="1.0" />
+<text x="30" y="99" font-size="14" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Flat Torus Coordinate Grid (ℤ₄ × ℤ₄)</text>
+<rect x="88.8" y="113.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="124.0" y="146.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₀</text>
+<text x="124.0" y="162.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(0,0)</text>
+<rect x="176.8" y="113.8" width="70.4" height="70.4" rx="6" ry="6" fill="#1b3528" stroke="#73c991" stroke-width="2.0" />
+<text x="212.0" y="146.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₁</text>
+<text x="212.0" y="162.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(1,0)</text>
+<text x="212.0" y="174.0" font-size="9.5" text-anchor="middle" fill="#73c991" font-family="sans-serif" font-weight="bold">North</text>
+<rect x="264.8" y="113.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="300.0" y="146.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₂</text>
+<text x="300.0" y="162.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(2,0)</text>
+<rect x="352.8" y="113.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="388.0" y="146.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₃</text>
+<text x="388.0" y="162.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(3,0)</text>
+<rect x="88.8" y="201.8" width="70.4" height="70.4" rx="6" ry="6" fill="#1b3528" stroke="#73c991" stroke-width="2.0" />
+<text x="124.0" y="234.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₄</text>
+<text x="124.0" y="250.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(0,1)</text>
+<text x="124.0" y="262.0" font-size="9.5" text-anchor="middle" fill="#73c991" font-family="sans-serif" font-weight="bold">West</text>
+<rect x="176.8" y="201.8" width="70.4" height="70.4" rx="6" ry="6" fill="#422026" stroke="#e06c75" stroke-width="2.5" />
+<text x="212.0" y="234.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₅</text>
+<text x="212.0" y="250.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(1,1)</text>
+<text x="212.0" y="262.0" font-size="9.5" text-anchor="middle" fill="#e5c07b" font-family="sans-serif" font-weight="bold">Target vᵢ</text>
+<rect x="264.8" y="201.8" width="70.4" height="70.4" rx="6" ry="6" fill="#1b3528" stroke="#73c991" stroke-width="2.0" />
+<text x="300.0" y="234.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₆</text>
+<text x="300.0" y="250.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(2,1)</text>
+<text x="300.0" y="262.0" font-size="9.5" text-anchor="middle" fill="#73c991" font-family="sans-serif" font-weight="bold">East</text>
+<rect x="352.8" y="201.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="388.0" y="234.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₇</text>
+<text x="388.0" y="250.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(3,1)</text>
+<rect x="88.8" y="289.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="124.0" y="322.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₈</text>
+<text x="124.0" y="338.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(0,2)</text>
+<rect x="176.8" y="289.8" width="70.4" height="70.4" rx="6" ry="6" fill="#1b3528" stroke="#73c991" stroke-width="2.0" />
+<text x="212.0" y="322.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₉</text>
+<text x="212.0" y="338.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(1,2)</text>
+<text x="212.0" y="350.0" font-size="9.5" text-anchor="middle" fill="#73c991" font-family="sans-serif" font-weight="bold">South</text>
+<rect x="264.8" y="289.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="300.0" y="322.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₁₀</text>
+<text x="300.0" y="338.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(2,2)</text>
+<rect x="352.8" y="289.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="388.0" y="322.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₁₁</text>
+<text x="388.0" y="338.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(3,2)</text>
+<rect x="88.8" y="377.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="124.0" y="410.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₁₂</text>
+<text x="124.0" y="426.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(0,3)</text>
+<rect x="176.8" y="377.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="212.0" y="410.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₁₃</text>
+<text x="212.0" y="426.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(1,3)</text>
+<rect x="264.8" y="377.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="300.0" y="410.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₁₄</text>
+<text x="300.0" y="426.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(2,3)</text>
+<rect x="352.8" y="377.8" width="70.4" height="70.4" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.2" />
+<text x="388.0" y="410.0" font-size="15" text-anchor="middle" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">v₁₅</text>
+<text x="388.0" y="426.0" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">(3,3)</text>
+<path d="M423.2,143.0 C453.2,124.0,58.8,124.0,88.8,143.0" stroke="#8892b0" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d0)" />
+<path d="M423.2,231.0 C453.2,212.0,58.8,212.0,88.8,231.0" stroke="#8892b0" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d0)" />
+<path d="M423.2,319.0 C453.2,300.0,58.8,300.0,88.8,319.0" stroke="#8892b0" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d0)" />
+<path d="M423.2,407.0 C453.2,388.0,58.8,388.0,88.8,407.0" stroke="#8892b0" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d0)" />
+<path d="M130.0,448.2 C149.0,478.2,149.0,83.8,130.0,113.8" stroke="#e5c07b" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d3)" />
+<path d="M218.0,448.2 C237.0,478.2,237.0,83.8,218.0,113.8" stroke="#e5c07b" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d3)" />
+<path d="M306.0,448.2 C325.0,478.2,325.0,83.8,306.0,113.8" stroke="#e5c07b" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d3)" />
+<path d="M394.0,448.2 C413.0,478.2,413.0,83.8,394.0,113.8" stroke="#e5c07b" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#d3)" />
+<rect x="597" y="80" width="423" height="482" rx="10" ry="10" fill="#1e2230" stroke="#434c5e" stroke-width="1.0" />
+<text x="617" y="99" font-size="14" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Continuous Toroidal Embedding (𝕋²)</text>
+<ellipse cx="808.5" cy="220" rx="160" ry="85" fill="#1d2c44" stroke="#61afef" stroke-width="2.0" />
+<ellipse cx="808.5" cy="220" rx="60" ry="30" fill="#1e2230" stroke="#434c5e" stroke-width="1.8" />
+<path d="M648.5,220 A160,85,0,0,0,968.5,220" stroke="#73c991" stroke-width="2.0" fill="none" stroke-dasharray="4,3" />
+<path d="M868.5,220 A50,60,0,1,0,968.5,220" stroke="#e5c07b" stroke-width="2.0" fill="none" stroke-dasharray="4,3" />
+<text x="808.5" y="325" font-size="11" text-anchor="middle" fill="#e5c07b" font-family="sans-serif" font-weight="bold">Poloidal Angle θ (Row Periodicity: y + 1 mod 4)</text>
+<text x="808.5" y="125" font-size="11" text-anchor="middle" fill="#73c991" font-family="sans-serif" font-weight="bold">Toroidal Angle φ (Col Periodicity: x + 1 mod 4)</text>
+<rect x="612" y="345" width="393" height="217" rx="6" ry="6" fill="#161922" stroke="#434c5e" stroke-width="1.0" />
+<text x="626" y="365" font-size="12" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">Toroidal Substrate Invariants</text>
+<text x="626" y="387" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Periodic Closure</text>
+<text x="626" y="402" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   Node coordinates (x, y) wrap modulo 4 across</text>
+<text x="626" y="417" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   boundaries.</text>
+<text x="626" y="436" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Graph Regularity</text>
+<text x="626" y="451" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   Every node has exactly 4 incoming and 4</text>
+<text x="626" y="466" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   outgoing tracks.</text>
+<text x="626" y="485" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Transmission Channels</text>
+<text x="626" y="500" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   64 directed bit tracks with unit delay</text>
+<text x="626" y="515" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   (latency τ = 1).</text>
+<text x="626" y="534" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Topological Diameter</text>
+<text x="626" y="549" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   D = 2 + 2 = 4 (Maximum Manhattan graph</text>
+<text x="626" y="564" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   distance).</text>
+<text x="626" y="583" font-size="11.0" fill="#e2e8f0" font-family="sans-serif" font-weight="bold">• Boundary Invariant</text>
+<text x="626" y="598" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   Zero edge reflections or artificial boundary</text>
+<text x="626" y="613" font-size="10.5" fill="#94a3b8" font-family="sans-serif">   damping.</text>
+<text x="520.0" y="568" font-size="10" text-anchor="middle" fill="#94a3b8" font-family="monospace">Figure FIG-HYP-001 | ca-experiment | Generated via python/scripts/figures/fig_hyp_001_torus_manifold.py</text>
 </svg>
