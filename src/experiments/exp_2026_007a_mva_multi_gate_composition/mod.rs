@@ -11,9 +11,9 @@ pub mod substrate;
 
 pub use circuit::build_full_adder_circuit;
 pub use config::{Condition, EvaluationMode, ExperimentConfig};
-pub use metrics::{expected_cout, expected_sum, sample_mean, sample_std, welch_t_test, RunMetrics};
+pub use metrics::{RunMetrics, expected_cout, expected_sum, sample_mean, sample_std, welch_t_test};
 pub use runner::{
-    build_experiment_plan, execute_single_run, run_experiment_sweep, EvaluationSummaryManifest,
-    RunTelemetryRecord,
+    EvaluationSummaryManifest, RunTelemetryRecord, build_experiment_plan, execute_single_run,
+    run_experiment_sweep,
 };
 pub use substrate::{CircuitNode, CircuitSubstrate, FastRng};

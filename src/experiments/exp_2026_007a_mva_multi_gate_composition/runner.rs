@@ -3,12 +3,12 @@
 use super::circuit::build_full_adder_circuit;
 use super::config::{Condition, EvaluationMode, ExperimentConfig};
 use super::metrics::{
-    expected_cout, expected_sum, sample_mean, sample_std, welch_t_test, RunMetrics,
+    RunMetrics, expected_cout, expected_sum, sample_mean, sample_std, welch_t_test,
 };
 
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
-use std::fs::{create_dir_all, File};
+use std::fs::{File, create_dir_all};
 use std::io::{BufWriter, Write};
 use std::path::Path;
 
