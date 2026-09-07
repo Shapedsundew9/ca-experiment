@@ -1,24 +1,24 @@
 # Scientific Research Campaign: Multi-Scale Self-Organizing Computational Substrate
 
 - **Campaign Identifier**: CAMPAIGN-2026-MVA-SUBSTRATE
-- **Current Status**: ACTIVE (Tier 3: Milestone 3.1 Pushdown Memory Protocol Design & Execution)
+- **Current Status**: ACTIVE (Tier 3: Milestone 3.1 Pushdown Memory Complete; Transitioning to Milestone 3.2)
 - **Roadmap Reference**: `docs/vision.md` (Milestone Tiers)
-- **Active Milestone**: Milestone 3.1: Pushdown Memory (Dyck Languages)
+- **Active Milestone**: Milestone 3.2: Associative Key-Value Retrieval ("Needle in a Haystack")
 - **Target Paradigm**: Autopoietic, thermodynamically bounded computational substrate via discrete bit-stream cellular automata and homeostatic self-organized criticality
-- **Parent Lineage**: `src/experiments/exp_2026_009a_mva_finite_state_automata/` (Tag: `exp/EXP-2026-009a-01`)
-- **Last Updated**: 2026-09-07 21:15:00 UTC
+- **Parent Lineage**: `src/experiments/exp_2026_010a_mva_pushdown_memory/` (Tag: `exp/EXP-2026-010a-01`)
+- **Last Updated**: 2026-09-07 21:40:00 UTC
 
 ---
 
 ## 1. Autonomous Exploration & Checkpoint Guardrails
 
 - **Autonomous Checkpoint Horizon**: 5 cycles  <!-- SINGLE POINT OF CONFIGURATION: change to 3, 5, 10, etc. based on oversight budget -->
-- **Current Burst Progress**: Cycle 4 of 5 (Milestone 3.1 Protocol Design & Dispatch)
-- **Milestone Cumulative Cycles**: 0 cycles completed on Milestone 3.1 (Cycle 1 in progress)
-- **Campaign Cumulative Cycles**: 9 cycles completed across all milestones (Cycle 10 in progress)
+- **Current Burst Progress**: Cycle 4 of 5 (Milestone 3.1 Verified Complete; Ready for Milestone 3.2 Inception)
+- **Milestone Cumulative Cycles**: 1 cycle completed on Milestone 3.1
+- **Campaign Cumulative Cycles**: 10 cycles completed across all milestones (Cycle 10 completed)
 - **Branch Depth Limit**: Max 2 consecutive runs on a single mechanism/branch
 - **Current Branch Depth**: Run 1 of 2
-- **Active Hypothesis / Mechanism**: Milestone 3.1: Pushdown Memory via Cascaded Dynamical Stack Cells for Context-Free Dyck Languages. Realizing a spatial/recurrent cellular pushdown store that implements LIFO stack dynamics (PUSH / POP operations) using cascaded bistable resonant latch units, bidirectional depth steering, and top-of-stack coincidence gating in excitable MVA cellular automata under ADR-0001. Target tasks: Dyck-1 (single-bracket balanced parentheses verification) and Dyck-2 (multi-bracket nested matching `([{}])`) evaluating generalization to nesting depths $2\times$ deeper than calibration depth (e.g. depth $D \in [1, 8]$) with zero classification error and robust under channel noise.
+- **Active Hypothesis / Mechanism**: Milestone 3.1: Pushdown Memory via Cascaded Dynamical Stack Cells for Context-Free Dyck Languages. Evaluated hierarchical LIFO working memory with a bidirectional pointer ladder and dual resonant stack frames under ADR-0001, achieving 100% accuracy on Dyck-1 and Dyck-2, generalizing $2\times$ out-of-distribution across depths $D \in [1, 8]$, 100% error rejection fidelity, and decisive advantage over finite-state controls ($d = 5.9634, p < 10^{-30}$). Verified complete in `EXP-2026-010a-01`.
 - **Escalation Triggers**: Stop and request operator input ONLY on:
   1. *Multi-path ambiguity* (competing hypotheses with no clear theoretical winner)
   2. *2-strike paradigm stall* (2 distinct ideas fail consecutively to show signal)
@@ -40,11 +40,11 @@
 | Stage | Active Agent | Active Artifact Reference | Status |
 | :--- | :--- | :--- | :--- |
 | Strategic Assessment | Sci: Orchestrator | `docs/research/CAMPAIGN.md`, `docs/vision.md`, `docs/architecture/adr-0001-substrate-connectivity-topology.md` | COMPLETED |
-| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-010.md`, `docs/research/protocols/EXP-2026-010a.md` | IN_PROGRESS |
-| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | PENDING |
-| Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | PENDING |
-| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-010a.md`) | PENDING |
-| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | PENDING |
+| Theory & Protocol | Sci: Theory & Protocol | `docs/research/hypotheses/HYP-2026-010.md`, `docs/research/protocols/EXP-2026-010a.md` | COMPLETED |
+| Protocol & Budget Check | Sci: Orchestrator / Operator | **Gate H/P**: Pre-execution validation | COMPLETED (APPROVED) |
+| Execution & Analysis | Sci: Execution & Analysis | Rust implementation, Run Manifest, Diagnostic Report | COMPLETED |
+| Iteration Decision | Sci: Orchestrator | Iteration Directive (`DIAG-2026-010a.md`) | COMPLETED (VERIFY_COMPLETE) |
+| Iteration Check | Sci: Orchestrator / Operator | **Gate I**: Post-analysis checkpoint | COMPLETED (APPROVED - Advance to Milestone 3.2) |
 
 ---
 
@@ -57,8 +57,8 @@
 | **Tier 1** | 1.2 Multi-Gate Composition | 1-bit Full Adder / 2-bit Multiplier, zero crosstalk | VERIFIED | 1 | [`DIAG-2026-007a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-007a.md) |
 | **Tier 2** | 2.1 Bistable Latching | Dynamic bit retention over $\Delta t \ge 10^3$ steps | VERIFIED | 1 | [`DIAG-2026-008a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-008a.md) |
 | **Tier 2** | 2.2 Finite State Automata | Regular expression DFA streaming recognition | VERIFIED | 1 | [`DIAG-2026-009a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-009a.md) |
-| **Tier 3** | 3.1 Pushdown Memory | Dyck-1 / Dyck-2 balanced parentheses recognition | IN_PROGRESS | 0 | Inception & Protocol Design |
-| **Tier 3** | 3.2 Associative Retrieval | Key-Value variable binding retrieval ($N \ge 16$) | LOCKED | - | Requires 3.1 |
+| **Tier 3** | 3.1 Pushdown Memory | Dyck-1 / Dyck-2 balanced parentheses recognition | VERIFIED | 1 | [`DIAG-2026-010a`](file:///workspaces/ca-experiment/docs/research/diagnostics/DIAG-2026-010a.md) |
+| **Tier 3** | 3.2 Associative Retrieval | Key-Value variable binding retrieval ($N \ge 16$) | UNLOCKED | - | Ready for Inception |
 
 ---
 
@@ -75,15 +75,16 @@
 | 7 | `HYP-2026-007` | `EXP-2026-007a` | `src/experiments/exp_2026_007a_mva_multi_gate_composition/` | `RUN-EXP-2026-007a-01` | `exp/EXP-2026-007a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Tier 1 Complete; Advance to Tier 2) | Autonomous (Gate I) |
 | 8 | `HYP-2026-008` | `EXP-2026-008a` | `src/experiments/exp_2026_008a_mva_bistable_latching/` | `RUN-EXP-2026-008a-01` | `exp/EXP-2026-008a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Milestone 2.1 Complete; Advance to Milestone 2.2) | Autonomous (Gate I) |
 | 9 | `HYP-2026-009` | `EXP-2026-009a` | `src/experiments/exp_2026_009a_mva_finite_state_automata/` | `RUN-EXP-2026-009a-01` | `exp/EXP-2026-009a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Milestone 2.2 Complete; Advance to Tier 3) | Autonomous (Gate I) |
+| 10 | `HYP-2026-010` | `EXP-2026-010a` | `src/experiments/exp_2026_010a_mva_pushdown_memory/` | `RUN-EXP-2026-010a-01` | `exp/EXP-2026-010a-01` | Supported (All 6 Gates Pass) | VERIFY_COMPLETE (Milestone 3.1 Complete; Advance to Milestone 3.2) | Autonomous (Gate I) |
 
 ---
 
 ## 5. Resource & Compute Accounting
 
 - **Total Allocated Compute Budget**: 100 Compute-Hours
-- **Compute Consumed to Date**: < 0.02 Compute-Hours
+- **Compute Consumed to Date**: < 0.03 Compute-Hours
 - **Remaining Compute Budget**: ~100 Compute-Hours
-- **Autonomous Checkpoint Horizon**: 5 cycles per burst (Current Burst: Cycle 4 of 5 in progress)
+- **Autonomous Checkpoint Horizon**: 5 cycles per burst (Current Burst: Cycle 4 of 5 completed)
 
 ---
 
