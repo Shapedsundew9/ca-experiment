@@ -104,12 +104,27 @@ def to_superscript(text: str) -> str:
 
 
 def format_subscript(identifier: str) -> str:
-    """Convert code identifiers like 'v_0', 'W_ij', 'd_in' to 'v₀', 'Wᵢⱼ', 'dᵢₙ'."""
+    """Convert code identifiers like 'v_0', 'W_ij', 'd_in' to 'v₀', 'Wᵢⱼ', 'dᵢₙ', or LaTeX $W_{\\text{fb}}$."""
     match = re.match(r"^([A-Za-z]+)_([A-Za-z0-9]+)$", identifier)
     if match:
         base, sub = match.groups()
-        return f"{base}{to_subscript(sub)}"
+        # If all characters exist in Unicode subscript table, use Unicode:
+        if all(ch in SUBSCRIPTS for ch in sub):
+            return f"{base}{to_subscript(sub)}"
+        # Otherwise format as clean math span
+        return f"${base}_{{\\text{{{sub}}}}}$"
     return identifier
+
+
+def format_math_text(text: str) -> str:
+    """Sanitize a text string by converting all raw programming underscores into proper math notation."""
+    def _repl(m: re.Match) -> str:
+        ident = m.group(0)
+        if ident.endswith(".py") or ident.startswith("fig_"):
+            return ident
+        return format_subscript(ident)
+
+    return re.sub(r"\b[A-Za-z]+_[A-Za-z0-9]+\b", _repl, text)
 
 
 def format_scientific_notation(val_str: str) -> str:

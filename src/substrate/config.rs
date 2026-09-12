@@ -6,6 +6,8 @@ use serde::{Deserialize, Serialize};
 pub struct SubstrateConfig {
     pub seed: u64,
     pub noise_rate: f64,
+    pub noise_mean: f64,
+    pub noise_std: f64,
     pub leak: f64,
     pub n_ref: usize,
     pub alpha_rho: f64,
@@ -22,6 +24,8 @@ impl Default for SubstrateConfig {
         Self {
             seed: 42,
             noise_rate: 0.0,
+            noise_mean: 0.923,
+            noise_std: 0.0274,
             leak: 0.10,
             n_ref: 2,
             alpha_rho: 0.02,

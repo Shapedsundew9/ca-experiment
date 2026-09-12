@@ -95,7 +95,10 @@ impl NetworkSubstrate {
                 && self.is_noisy_node[i]
                 && self.rng.bernoulli(self.config.noise_rate)
             {
-                noise_amp = self.rng.normal(0.923, 0.0274).max(0.0);
+                noise_amp = self
+                    .rng
+                    .normal(self.config.noise_mean, self.config.noise_std)
+                    .max(0.0);
             }
 
             // Somatic integration and Heaviside thresholding
@@ -174,6 +177,42 @@ impl NetworkSubstrate {
             0.0
         } else {
             self.eval_spikes as f64 / (self.nodes.len() as f64 * self.eval_steps as f64)
+        }
+    }
+
+    /// Mark a list of node indices as noisy (susceptible to channel noise).
+    pub fn mark_noisy_nodes(&mut self, indices: &[usize]) {
+        for &idx in indices {
+            if idx < self.is_noisy_node.len() {
+                self.is_noisy_node[idx] = true;
+            }
+        }
+    }
+
+    /// Count how many nodes in the given slice emitted a spike in the current step.
+    pub fn count_spikes_in_nodes(&self, indices: &[usize]) -> usize {
+        let mut count = 0;
+        for &idx in indices {
+            if idx < self.nodes.len() && self.nodes[idx].spike > 0.0 {
+                count += 1;
+            }
+        }
+        count
+    }
+
+    /// Check if any node in the given slice emitted a spike in the current step.
+    pub fn any_spike_in_nodes(&self, indices: &[usize]) -> bool {
+        indices
+            .iter()
+            .any(|&idx| idx < self.nodes.len() && self.nodes[idx].spike > 0.0)
+    }
+
+    /// Retrieve the current spike state (0.0 or 1.0) of a node.
+    pub fn spike_of(&self, node_idx: usize) -> f64 {
+        if node_idx < self.nodes.len() {
+            self.nodes[node_idx].spike
+        } else {
+            0.0
         }
     }
 }

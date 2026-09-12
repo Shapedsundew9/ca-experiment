@@ -17,11 +17,13 @@ from tools.viz.draw_utils import (
 from tools.viz.export import save_figure
 from tools.viz.math_format import (
     MATH_SYMBOLS,
+    format_math_text,
     format_scientific_notation,
     format_subscript,
     to_subscript,
     to_superscript,
 )
+from tools.viz.schematic import SchematicCard, draw_directed_connection
 from tools.viz.palette import (
     AMBER,
     AMBER_FILL,
@@ -76,10 +78,13 @@ __all__ = [
     "to_subscript",
     "to_superscript",
     "format_scientific_notation",
+    "format_math_text",
     "MATH_SYMBOLS",
     "draw_multiline_text",
     "draw_card_with_bullets",
     "measure_card_with_bullets",
     "auto_size_canvas",
     "wrap_text",
+    "SchematicCard",
+    "draw_directed_connection",
 ]

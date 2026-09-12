@@ -150,7 +150,7 @@ def build_associative_retrieval_figure(output_path: str) -> None:
     d.append(draw.Line(r0_cx + n_offset, r0_cy - 5, r0_cx + n_offset, r0_cy + 21, stroke=SECONDARY_GREEN, stroke_width=1.2, marker_end=arrow_fwd))
     d.append(draw.Line(r0_cx + n_offset - 11, r0_cy + 32, r0_cx - n_offset + 11, r0_cy + 32, stroke=SECONDARY_GREEN, stroke_width=1.2, marker_end=arrow_fwd))
     d.append(draw.Line(r0_cx - n_offset, r0_cy + 21, r0_cx - n_offset, r0_cy - 5, stroke=SECONDARY_GREEN, stroke_width=1.2, marker_end=arrow_fwd))
-    d.append(draw.Text("Period = 4 ticks, W_fb = 1.0", 8, r0_cx, r0_cy + 55, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
+    d.append(draw.Text("Period = 4 ticks, $W_{\\text{fb}} = 1.0$", 8, r0_cx, r0_cy + 55, text_anchor="middle", fill=TEXT_MUTED, font_family="sans-serif"))
 
     # Ring 1 (Value = 1)
     r1_cx = lp_x + 375
@@ -171,12 +171,12 @@ def build_associative_retrieval_figure(output_path: str) -> None:
     d.append(draw.Line(r1_cx + n_offset, r1_cy - 5, r1_cx + n_offset, r1_cy + 21, stroke=TERTIARY_BLUE, stroke_width=1.2, marker_end=arrow_blue))
     d.append(draw.Line(r1_cx + n_offset - 11, r1_cy + 32, r1_cx - n_offset + 11, r1_cy + 32, stroke=TERTIARY_BLUE, stroke_width=1.2, marker_end=arrow_blue))
     d.append(draw.Line(r1_cx - n_offset, r1_cy + 21, r1_cx - n_offset, r1_cy - 5, stroke=TERTIARY_BLUE, stroke_width=1.2, marker_end=arrow_blue))
-    d.append(draw.Text("Period = 4 ticks, W_fb = 1.0", 8, r1_cx, r1_cy + 55, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
+    d.append(draw.Text("Period = 4 ticks, $W_{\\text{fb}} = 1.0$", 8, r1_cx, r1_cy + 55, text_anchor="middle", fill=TEXT_MUTED, font_family="sans-serif"))
 
     # Mutual cross-inhibition arrows
     d.append(draw.Line(r0_cx + 100, r0_cy - 10, r1_cx - 100, r0_cy - 10, stroke=PRIMARY_RED, stroke_width=1.5, marker_end=arrow_inh))
     d.append(draw.Line(r1_cx - 100, r0_cy + 10, r0_cx + 100, r0_cy + 10, stroke=PRIMARY_RED, stroke_width=1.5, marker_end=arrow_inh))
-    d.append(draw.Text("W_inh = -1.50 (Quench)", 8, (r0_cx + r1_cx) / 2, r0_cy - 16, text_anchor="middle", fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("$W_{\\text{inh}} = -1.50$ (Quench)", 8, (r0_cx + r1_cx) / 2, r0_cy - 16, text_anchor="middle", fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
 
     # Coincidence Gating & Control Subsystem
     cg_y = panel_y + 395
@@ -188,7 +188,7 @@ def build_associative_retrieval_figure(output_path: str) -> None:
     wg_x = lp_x + 140
     wg_y = cg_y + 68
     d.append(draw.Rectangle(wg_x - 105, wg_y - 36, 210, 72, rx=5, ry=5, fill="#1c2230", stroke=SECONDARY_GREEN, stroke_width=1.2))
-    d.append(draw.Text("Write Coincidence Gate G_write,j", 9.5, wg_x, wg_y - 20, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Write Coincidence Gate $G_{\\text{write},j}$", 9.5, wg_x, wg_y - 20, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
     d.append(draw.Text("Inputs: Key Kⱼ (0.60) ∧ Value V (0.60)", 8.5, wg_x, wg_y - 6, text_anchor="middle", fill=TEXT, font_family="monospace"))
     d.append(draw.Text("Sum = 1.20 >= θ_write = 1.10", 8.5, wg_x, wg_y + 8, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
     d.append(draw.Text("Ignites target ring & quenches opposite", 8, wg_x, wg_y + 22, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif"))
@@ -197,7 +197,7 @@ def build_associative_retrieval_figure(output_path: str) -> None:
     qg_x = lp_x + 375
     qg_y = cg_y + 68
     d.append(draw.Rectangle(qg_x - 105, qg_y - 36, 210, 72, rx=5, ry=5, fill="#1c2230", stroke=TERTIARY_BLUE, stroke_width=1.2))
-    d.append(draw.Text("Interrogation Gate G_query,j", 9.5, qg_x, qg_y - 20, text_anchor="middle", fill=TERTIARY_BLUE, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Interrogation Gate $G_{\\text{query},j}$", 9.5, qg_x, qg_y - 20, text_anchor="middle", fill=TERTIARY_BLUE, font_family="sans-serif", font_weight="bold"))
     d.append(draw.Text("Inputs: Query Q(Kⱼ) (0.60) ∧ Sense (0.60)", 8.5, qg_x, qg_y - 6, text_anchor="middle", fill=TEXT, font_family="monospace"))
     d.append(draw.Text("Sum = 1.20 >= θ_query = 1.10", 8.5, qg_x, qg_y + 8, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
     d.append(draw.Text("Gates circulating pulse to readout bus", 8, qg_x, qg_y + 22, text_anchor="middle", fill=TERTIARY_BLUE, font_family="sans-serif"))
@@ -210,12 +210,12 @@ def build_associative_retrieval_figure(output_path: str) -> None:
     # Dual-rail Readout Ports
     d.append(draw.Rectangle(lp_x + 35, br_y + 14, 205, 42, rx=4, ry=4, fill="#1a2e22", stroke=SECONDARY_GREEN, stroke_width=1.2))
     d.append(draw.Text("Dual-Rail Readout Ports", 9, lp_x + 137, br_y + 28, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("v_out,0 (Bit 0)  |  v_out,1 (Bit 1)", 8.5, lp_x + 137, br_y + 45, text_anchor="middle", fill=TEXT, font_family="monospace"))
+    d.append(draw.Text("$v_{\\text{out},0}$ (Bit 0)  |  $v_{\\text{out},1}$ (Bit 1)", 8.5, lp_x + 137, br_y + 45, text_anchor="middle", fill=TEXT, font_family="sans-serif"))
 
     # Distractor Sink Box
     d.append(draw.Rectangle(lp_x + 255, br_y + 14, 240, 42, rx=4, ry=4, fill="#2e271a", stroke=AMBER, stroke_width=1.2))
     d.append(draw.Text("Distractor Dissipation Sink Line", 9, lp_x + 375, br_y + 28, text_anchor="middle", fill=AMBER, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("W_dist <= 0.30 << θ, λ = 0.05 (Subthreshold)", 8.5, lp_x + 375, br_y + 45, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
+    d.append(draw.Text("$W_{\\text{dist}} \\le 0.30 \\ll \\theta, \\lambda = 0.05$ (Subthreshold)", 8.5, lp_x + 375, br_y + 45, text_anchor="middle", fill=TEXT_MUTED, font_family="sans-serif"))
 
     # =========================================================================
     # RIGHT PANEL: Associative Retrieval Dynamics ("Needle in a Haystack")
@@ -243,13 +243,12 @@ def build_associative_retrieval_figure(output_path: str) -> None:
         ("···", TEXT_MUTED),
         ("K₁₂→1", TERTIARY_BLUE),
         ("D₄", AMBER),
-        ("···", TEXT_MUTED),
         ("Q(K₇)", PRIMARY_RED),
     ]
 
-    bx_start = rp_x + 30
-    bw = 43
-    gap = 5.0
+    bx_start = rp_x + 28
+    bw = 40
+    gap = 12.0
     for i, (tok, col) in enumerate(tokens_meta):
         bx = bx_start + i * (bw + gap)
         by = tl_y + 42
@@ -266,18 +265,18 @@ def build_associative_retrieval_figure(output_path: str) -> None:
 
     # Retention Arrow across Haystack
     haystack_x1 = needle_bx + 75
-    haystack_x2 = bx_start + 9 * (bw + gap) - 10
+    haystack_x2 = bx_start + 8 * (bw + gap) - 10
     d.append(draw.Line(haystack_x1, tl_y + 140, haystack_x2, tl_y + 140, stroke=AMBER, stroke_width=1.5, marker_end=arrow_amber))
     d.append(draw.Text("Distractor Horizon (L >= 256 ticks)", 8.5, (haystack_x1 + haystack_x2) / 2, tl_y + 132, text_anchor="middle", fill=AMBER, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Indefinite Retention (No Decay, W_fb=1.0)", 8, (haystack_x1 + haystack_x2) / 2, tl_y + 152, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
+    d.append(draw.Text("Indefinite Retention (No Decay, $W_{\\text{fb}}=1.0$)", 8, (haystack_x1 + haystack_x2) / 2, tl_y + 152, text_anchor="middle", fill=TEXT_MUTED, font_family="sans-serif"))
 
     # Query Callout
-    query_bx = bx_start + 9 * (bw + gap) + bw / 2
+    query_bx = bx_start + 8 * (bw + gap) + bw / 2
     d.append(draw.Line(query_bx, tl_y + 70, query_bx, tl_y + 175, stroke=PRIMARY_RED, stroke_width=1.5, stroke_dasharray="2,2"))
     d.append(draw.Rectangle(query_bx - 120, tl_y + 175, 140, 48, rx=5, ry=5, fill="#2e1a1e", stroke=PRIMARY_RED, stroke_width=1.0))
     d.append(draw.Text("Query Probe Q(K₇)", 9, query_bx - 50, tl_y + 190, text_anchor="middle", fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Triggers G_query,7", 8, query_bx - 50, tl_y + 204, text_anchor="middle", fill=TEXT, font_family="monospace"))
-    d.append(draw.Text("v_out,0 = 1 (Match)", 8, query_bx - 50, tl_y + 216, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Triggers $G_{\\text{query},7}$", 8, query_bx - 50, tl_y + 204, text_anchor="middle", fill=TEXT, font_family="sans-serif"))
+    d.append(draw.Text("$v_{\\text{out},0} = 1$ (Match)", 8, query_bx - 50, tl_y + 216, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
 
     # Phase Space / State Evolution Trajectory Box
     traj_y = panel_y + 312

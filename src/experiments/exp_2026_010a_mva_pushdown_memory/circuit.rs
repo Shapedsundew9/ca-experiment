@@ -773,10 +773,26 @@ pub fn build_circuit(config: ExperimentConfig) -> CircuitSubstrate {
     );
     builder.add_edge(a0, v_out, w_fwd);
 
+    let sub_cfg = crate::substrate::config::SubstrateConfig {
+        seed: config.seed.wrapping_add(0xCA_2026_010A),
+        noise_rate: config.noise_rate,
+        noise_mean: 0.923,
+        noise_std: 0.0274,
+        leak: config.leak,
+        n_ref: config.n_ref,
+        alpha_rho: config.alpha_rho,
+        rho_target: config.rho_target,
+        beta_theta: config.beta_theta,
+        theta_min: config.theta_floor,
+        theta_max: config.theta_max,
+        theta_floor: config.theta_floor,
+        theta_init: config.theta_init,
+    };
+    let net = crate::substrate::NetworkSubstrate::new(sub_cfg, builder.nodes, builder.in_neighbors);
+
     CircuitSubstrate::new(
         config,
-        builder.nodes,
-        builder.in_neighbors,
+        net,
         in_rnd_open,
         in_rnd_close,
         in_sqr_open,

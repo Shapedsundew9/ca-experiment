@@ -15,6 +15,7 @@ pub mod network;
 pub mod node;
 pub mod primitives;
 pub mod rng;
+pub mod runner;
 pub mod stats;
 
 pub use builder::CircuitBuilder;
@@ -22,6 +23,7 @@ pub use config::SubstrateConfig;
 pub use network::NetworkSubstrate;
 pub use node::CircuitNode;
 pub use rng::FastRng;
+pub use runner::*;
 
 pub mod prelude {
     pub use super::builder::CircuitBuilder;
@@ -30,5 +32,6 @@ pub mod prelude {
     pub use super::node::CircuitNode;
     pub use super::primitives::*;
     pub use super::rng::FastRng;
+    pub use super::runner::*;
     pub use super::stats::*;
 }

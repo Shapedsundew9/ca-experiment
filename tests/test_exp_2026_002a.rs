@@ -58,11 +58,13 @@ fn test_distance_metrics() {
 
 #[test]
 fn test_single_run_active_settling() {
-    let mut config = ExperimentConfig::default();
-    config.pattern = InputPatternId::PatternA;
-    config.t_relax = 200;
-    config.mode = HomeostaticMode::Active;
-    config.seed = 42;
+    let config = ExperimentConfig {
+        pattern: InputPatternId::PatternA,
+        t_relax: 200,
+        mode: HomeostaticMode::Active,
+        seed: 42,
+        ..Default::default()
+    };
 
     let res = execute_single_run(config);
     assert!(

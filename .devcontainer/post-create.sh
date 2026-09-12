@@ -22,5 +22,5 @@ fi
 
 # Add alias for antigravity CLI (agy) with automatic edit and command approvals
 if ! grep -q 'alias agy=' "${HOME}/.bashrc" 2>/dev/null; then
-    echo 'alias agy="agy --mode accept-edits --dangerously-skip-permissions"' >> "${HOME}/.bashrc"
+    echo 'alias agy="agy --mode accept-edits"' >> "${HOME}/.bashrc"
 fi

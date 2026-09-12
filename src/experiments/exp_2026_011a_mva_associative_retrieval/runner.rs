@@ -8,9 +8,10 @@ use super::substrate::{FastRng, IngressInputs};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use std::fs::{File, create_dir_all};
-use std::io::{BufWriter, Write};
 use std::path::Path;
 use std::thread;
+
+use crate::substrate::runner::{create_csv_writer, recommended_concurrency};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Token {
@@ -416,9 +417,7 @@ pub fn execute_factorial_sweep(
 ) -> EvaluationSummaryManifest {
     create_dir_all(output_dir).expect("Failed to create output telemetry directory");
 
-    let num_cpus = thread::available_parallelism()
-        .map(|n| n.get())
-        .unwrap_or(4);
+    let num_cpus = recommended_concurrency();
 
     println!(
         "Starting EXP-2026-011a factorial sweep: {} conditions, {} noise rates, {} lengths, {} seeds across {} threads",
@@ -509,32 +508,30 @@ pub fn execute_factorial_sweep(
 
     // Write trials.csv
     let trials_csv_path = output_dir.join("trials.csv");
-    let trials_file = File::create(&trials_csv_path).expect("Failed to create trials.csv");
-    let mut writer = BufWriter::new(trials_file);
-    writeln!(
-        writer,
-        "seed,condition,seq_length,noise_rate,seq_id,queried_key,target_value,predicted_value,correct,distractor_leakage_events,mutex_violation_ticks,mean_firing_density"
+    let mut writer = create_csv_writer(
+        &trials_csv_path,
+        "seed,condition,seq_length,noise_rate,seq_id,queried_key,target_value,predicted_value,correct,distractor_leakage_events,mutex_violation_ticks,mean_firing_density",
     )
-    .expect("Failed to write CSV header");
+    .expect("Failed to create trials.csv");
 
     for t in &all_trials {
-        writeln!(
-            writer,
-            "{},{},{},{:.2},{},{},{},{},{},{},{},{:.6}",
-            t.seed,
-            t.condition,
-            t.seq_length,
-            t.noise_rate,
-            t.seq_id,
-            t.queried_key,
-            t.target_value,
-            t.predicted_value,
-            if t.correct { 1 } else { 0 },
-            t.distractor_leakage_events,
-            t.mutex_violation_ticks,
-            t.mean_firing_density
-        )
-        .expect("Failed to write CSV row");
+        writer
+            .write_row(&format!(
+                "{},{},{},{:.2},{},{},{},{},{},{},{},{:.6}",
+                t.seed,
+                t.condition,
+                t.seq_length,
+                t.noise_rate,
+                t.seq_id,
+                t.queried_key,
+                t.target_value,
+                t.predicted_value,
+                if t.correct { 1 } else { 0 },
+                t.distractor_leakage_events,
+                t.mutex_violation_ticks,
+                t.mean_firing_density
+            ))
+            .expect("Failed to write CSV row");
     }
     writer.flush().expect("Failed to flush trials.csv");
 

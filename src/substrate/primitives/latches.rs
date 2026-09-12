@@ -74,3 +74,13 @@ pub fn attach_ring_inhibition(
         builder.add_edge(inhibitory_node, r_idx, inhibitory_weight);
     }
 }
+
+/// Add retrograde (reverse) synaptic edges across a 4-node resonant ring:
+/// `R_1 -> R_0`, `R_2 -> R_1`, `R_3 -> R_2`, `R_0 -> R_3`.
+/// Used to model unshielded reflection and ablation conditions.
+pub fn add_retrograde_coupling(builder: &mut CircuitBuilder, ring_nodes: &[usize; 4], weight: f64) {
+    builder.add_edge(ring_nodes[1], ring_nodes[0], weight);
+    builder.add_edge(ring_nodes[2], ring_nodes[1], weight);
+    builder.add_edge(ring_nodes[3], ring_nodes[2], weight);
+    builder.add_edge(ring_nodes[0], ring_nodes[3], weight);
+}

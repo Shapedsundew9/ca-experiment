@@ -45,62 +45,7 @@ impl Default for TorusConfig {
         }
     }
 }
-
-/// Fast, deterministic PRNG based on Xoshiro256++
-#[derive(Debug, Clone)]
-pub struct FastRng {
-    s: [u64; 4],
-}
-
-impl FastRng {
-    pub fn seed_from_u64(seed: u64) -> Self {
-        let mut sm = seed;
-        let mut next_sm = || {
-            sm = sm.wrapping_add(0x9e3779b97f4a7c15);
-            let mut z = sm;
-            z = (z ^ (z >> 30)).wrapping_mul(0xbf58476d1ce4e5b9);
-            z = (z ^ (z >> 27)).wrapping_mul(0x94d049bb133111eb);
-            z ^ (z >> 31)
-        };
-        Self {
-            s: [next_sm(), next_sm(), next_sm(), next_sm()],
-        }
-    }
-
-    #[inline]
-    pub fn next_u64(&mut self) -> u64 {
-        let result = (self.s[0].wrapping_add(self.s[3]))
-            .rotate_left(23)
-            .wrapping_add(self.s[0]);
-        let t = self.s[1] << 17;
-        self.s[2] ^= self.s[0];
-        self.s[3] ^= self.s[1];
-        self.s[1] ^= self.s[2];
-        self.s[0] ^= self.s[3];
-        self.s[2] ^= t;
-        self.s[3] = self.s[3].rotate_left(45);
-        result
-    }
-
-    #[inline]
-    pub fn next_f64(&mut self) -> f64 {
-        (self.next_u64() >> 11) as f64 * (1.0 / (1u64 << 53) as f64)
-    }
-
-    #[inline]
-    pub fn bernoulli(&mut self, p: f64) -> bool {
-        self.next_f64() < p
-    }
-
-    #[inline]
-    pub fn coin_flip(&mut self) -> f64 {
-        if (self.next_u64() & 1) == 0 {
-            1.0
-        } else {
-            -1.0
-        }
-    }
-}
+pub use crate::substrate::FastRng;
 
 pub struct TorusNetwork {
     pub config: TorusConfig,

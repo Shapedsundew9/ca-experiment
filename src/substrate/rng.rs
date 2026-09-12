@@ -76,4 +76,20 @@ impl FastRng {
         let z0 = (-2.0 * u1.ln()).sqrt() * (2.0 * std::f64::consts::PI * u2).cos();
         mean + z0 * std_dev
     }
+
+    /// Sample standard normal distribution with mean 0.0 and std_dev 1.0.
+    #[inline]
+    pub fn next_gaussian(&mut self) -> f64 {
+        self.normal(0.0, 1.0)
+    }
+
+    /// Sample random sign (+1.0 or -1.0) with equal probability.
+    #[inline]
+    pub fn coin_flip(&mut self) -> f64 {
+        if (self.next_u64() & 1) == 0 {
+            1.0
+        } else {
+            -1.0
+        }
+    }
 }

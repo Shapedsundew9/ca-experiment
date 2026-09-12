@@ -41,6 +41,7 @@ impl CircuitBuilder {
             beta_theta,
             n_ref,
             self.config.rho_target,
+            self.config.leak,
         );
         self.nodes.push(node);
         self.in_neighbors.push(Vec::new());

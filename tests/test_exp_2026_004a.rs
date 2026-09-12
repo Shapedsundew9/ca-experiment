@@ -29,9 +29,11 @@ fn test_patterns_distinctness_and_noise() {
 
 #[test]
 fn test_synaptic_budget_conservation_invariant() {
-    let mut config = ExperimentConfig::default();
-    config.exposure_ticks = 500;
-    config.plasticity_rate = 0.05; // aggressive rate to test clamping
+    let config = ExperimentConfig {
+        exposure_ticks: 500,
+        plasticity_rate: 0.05, // aggressive rate to test clamping
+        ..Default::default()
+    };
     let substrate = TorusSubstrate::new(config);
 
     let (_, peak, budget_conserved) = substrate.plasticity.compute_weight_stats();

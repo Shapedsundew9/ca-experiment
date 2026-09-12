@@ -50,6 +50,26 @@ impl CircuitBuilder {
         id
     }
 
+    /// Add an excitable node with standard default thresholds and adaptation rates from config.
+    pub fn add_node_simple(
+        &mut self,
+        name: &str,
+        theta_init: f64,
+        n_ref: usize,
+        leak: f64,
+    ) -> usize {
+        self.add_node(
+            name,
+            theta_init,
+            self.config.theta_floor,
+            self.config.theta_max,
+            self.config.beta_theta,
+            n_ref,
+            self.config.rho_target,
+            leak,
+        )
+    }
+
     /// Add a directed synaptic edge with weight from node `from` to node `to`.
     pub fn add_edge(&mut self, from: usize, to: usize, weight: f64) {
         if to < self.in_neighbors.len() {
@@ -96,6 +116,22 @@ impl CircuitBuilder {
         }
 
         (first, prev)
+    }
+
+    /// Verify bounded degree invariants across all nodes in the graph.
+    pub fn verify_degree_invariants(&self, max_degree: usize) -> Result<(), String> {
+        for (i, in_edges) in self.in_neighbors.iter().enumerate() {
+            if in_edges.len() > max_degree {
+                return Err(format!(
+                    "Node {} ({}) exceeds max fan-in k_in <= {} (got {})",
+                    i,
+                    self.nodes[i].name,
+                    max_degree,
+                    in_edges.len()
+                ));
+            }
+        }
+        Ok(())
     }
 
     /// Finalize and build into a `NetworkSubstrate`.

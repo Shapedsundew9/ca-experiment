@@ -469,7 +469,8 @@ pub fn evaluate_sequence_trial(
     let mut circuit = build_circuit(config.clone());
 
     // Initial state seeding: seed solitary circulating pulse into Pointer P0
-    circuit.force_spike(circuit.pointer_rings[0][0]);
+    let p0 = circuit.pointer_rings[0][0];
+    circuit.force_spike(p0);
 
     // Warmup phase: let Pointer P0 circulate to establish clean limit cycle
     for _ in 0..t_warmup {

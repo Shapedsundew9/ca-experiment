@@ -158,12 +158,14 @@ fn test_threshold_compactness_invariant() {
 
 #[test]
 fn test_active_homeostasis_survival_short() {
-    let mut config = TorusConfig::default();
-    config.ticks = 2000;
-    config.mode = AdaptationMode::Active;
-    config.leak = 0.05;
-    config.seed = 42;
-    config.v_init = 1.0;
+    let config = TorusConfig {
+        ticks: 2000,
+        mode: AdaptationMode::Active,
+        leak: 0.05,
+        seed: 42,
+        v_init: 1.0,
+        ..Default::default()
+    };
 
     let mut net = TorusNetwork::new(config);
     let mut total_spikes = 0usize;

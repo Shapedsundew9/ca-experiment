@@ -5,8 +5,10 @@
 
 pub mod gates;
 pub mod latches;
+pub mod memory;
 pub mod transmission;
 
 pub use gates::*;
 pub use latches::*;
+pub use memory::*;
 pub use transmission::*;
