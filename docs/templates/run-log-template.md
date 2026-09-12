@@ -25,7 +25,7 @@ Save completed run logs to `docs/implementation/RUN-YYYYMMDD-[slug].md`.
 | # | Task Description | Target Files | Primary Worker | Validator | Status |
 |---|---|---|---|---|---|
 | 1 | [Task title] | `src/path/to/file.rs` | Code: SWE | Code: QA Lite | PASS |
-| 2 | [Task title] | `python/src/tools/module.py` | Code: SWE | Code: QA | PASS |
+| 2 | [Task title] | `python/src/tools/module.py` | Code: SWE | Code: QA Lite | PASS |
 
 ---
 
@@ -79,7 +79,7 @@ If an upstream requirement proved technically infeasible, contradictory, or arch
 - Unwanted debug code / TODOs: None found.
 - Scope discipline: Confirmed only specified files touched.
 
-### 5.2 Automated Test & Linter Execution (Code: QA)
+### 5.2 Automated Test & Linter Execution (Code: QA Lite / Toolchain)
 
 - **Rust Toolchain**:
   - `cargo fmt --check`: [PASS]
@@ -87,6 +87,12 @@ If an upstream requirement proved technically infeasible, contradictory, or arch
   - `cargo test`: [PASS - N tests run, 0 failures]
 - **Python Toolchain**:
   - `.venv/bin/python -m unittest discover -s python/tests -v`: [PASS - N tests run, 0 failures]
+
+### 5.3 User-Directed Adversarial Testing (Code: QA / qa - Optional)
+
+- **Execution Status**: [Executed by operator / Skipped]
+- **Adversarial Test Suite**: [Document boundary tests, hostile fuzzing, or stress test results if executed]
+- **Defects Identified**: [None, or list of bugs caught during user-directed hostile QA]
 
 ---
 

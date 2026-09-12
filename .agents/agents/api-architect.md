@@ -42,7 +42,7 @@ Your mission is to translate high-level domain requirements (from Tier 0 PRDs an
 5. **Authentication & Authorization Schemes**:
    - Specify header formats (e.g., `Authorization: Bearer <token>`), token exchange schemas, required scopes/claims, and RBAC matrix per endpoint.
 6. **Contract Test Verification Criteria**:
-   - Define contract test assertions and schema validation recipes (e.g., Schemathesis, Pact, or JSON Schema validation assertions) that [`swe`](swe.md) and [`qa`](qa.md) must verify against.
+   - Define contract test assertions and schema validation recipes (e.g., Schemathesis, Pact, or JSON Schema validation assertions) that [`swe`](swe.md), [`qa-lite`](qa-lite.md), and user-directed [`qa`](qa.md) must verify against.
 
 ---
 

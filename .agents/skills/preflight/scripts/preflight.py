@@ -422,7 +422,7 @@ def check_subagent_definitions(root: Path) -> List[CheckResult]:
             flagged_agents.append((agent_name, "Missing explicit 'tools:' declaration in frontmatter (defaults to read-only)"))
 
         fm_lower = frontmatter.lower()
-        is_orchestrator = "mainagent: true" in fm_lower or "orchestrat" in agent_name.lower()
+        is_orchestrator = any(k in agent_name.lower() for k in orchestrator_keywords)
         is_exec_role = any(k in agent_name.lower() for k in ["swe", "debug", "execution", "developer", "engineer", "fix"])
         is_author_role = any(k in agent_name.lower() for k in ["write", "author", "generator", "protocol", "specification", "prd"])
 

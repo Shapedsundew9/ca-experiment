@@ -37,7 +37,7 @@ Different software workflows have fundamentally divergent operational goals. Thi
 | Track | Engineering Intent | Workflow Nature | Verification Model | Subagent Topology |
 | :--- | :--- | :--- | :--- | :--- |
 | **Specification Track (`Spec:*`)** | Formal domain invariants, OpenAPI schemas, ADRs, realization profiles | **Convergent & Deliberate**: Infrequent, multi-tier refinement | Explicit human gates (Gate 0, UX, Gate 1, Gate 2) | 1-level: `Spec: Orchestrator` $\rightarrow$ drafting & auditing specialists |
-| **Production Code Track (`Code:*`)** | Memory-safe Rust core, production services, clean APIs, database migrations | **Convergent & Zero-Drift**: Enterprise software engineering | Strict **Repeat Until Good (RUG)**, independent QA, complete test suites (`cargo test`, `unittest`) | 1-level: `Code: RUG Orchestrator` $\rightarrow$ `swe`, `debug`, `qa-lite`, `qa` |
+| **Production Code Track (`Code:*`)** | Memory-safe Rust core, production services, clean APIs, database migrations | **Convergent & Zero-Drift**: Enterprise software engineering | Strict **Repeat Until Good (RUG)**, independent QA, complete test suites (`cargo test`, `unittest`) | 1-level: `Code: RUG Orchestrator` $\rightarrow$ `swe`, `debug`, `qa-lite` (plus user-directed `qa`) |
 | **Scientific Research Track (`Sci:*`)** | Hypothesis testing, parameter sweeps, dynamical diagnostics, discovery loops | **Divergent & Evolutionary**: Rapid iteration, controlled exploration ("wandering") | Pre-registered metrics, automated telemetry reduction, Gate H/P & Gate I steering | 1-level: `Sci: Orchestrator` $\rightarrow$ `Sci: Theory & Protocol`, `Sci: Execution & Analysis` |
 
 #### Resolving the Science-to-Code Orchestration Dilemma
@@ -111,8 +111,9 @@ flowchart TB
 
     subgraph CODE_TRACK["Implementation & Quality Track (Code:*)"]
         CODE_O["🎯 Code: RUG Orchestrator<br/><i>(Repeat-Until-Good Manager)</i>"]:::primary
-        CODE_SUBS["👥 Code Subagents<br/><i>(SWE, Debug, QA Lite, QA, Security)</i>"]:::secondary
+        CODE_SUBS["👥 Code Subagents<br/><i>(SWE, Debug, QA Lite, Security)</i>"]:::secondary
         CODE_PROD["💻 Production Code & Tests<br/><i>(src/, python/src/tools/, tests/)</i>"]:::tertiary
+        CODE_QA_USER["🧪 Code: QA / qa<br/><i>(User-Directed Adversarial Testing)</i>"]:::primary
         CODE_O <-->|"1-level dispatch"| CODE_SUBS
         CODE_SUBS -->|"Implements & Verifies"| CODE_PROD
     end
@@ -132,6 +133,7 @@ flowchart TB
     SPEC_ARTS -.->|"Approved Specs Handed to User"| USER
     USER -->|"2. Dispatches Specs for Implementation"| CODE_O
     CODE_PROD -.->|"Production Release Handed to User"| USER
+    USER <-->|"Adversarial Testing & Boundary Probing"| CODE_QA_USER
     CODE_O -.->|"3. Spec Change Proposal (Reverse Escalation)"| USER
     USER -.->|"4. Amends Specs on Blocker"| SPEC_O
 
@@ -329,7 +331,6 @@ flowchart TD
 
     subgraph VALIDATION["Validation Subagents (Independent Context)"]
         QA_LITE["⚡ Code: QA Lite<br/><i>(Default Task Validator: Fast diff inspection & sanity check)</i>"]:::secondary
-        QA_FULL["🧪 Code: QA<br/><i>(Strict Mode / High-Risk: Deep test suite execution & regressions)</i>"]:::secondary
         SEC["🛡️ Code: Security Reviewer<br/><i>(Optional / Triggered: OWASP, Zero Trust, LLM threats)</i>"]:::secondary
     end
 
@@ -342,10 +343,10 @@ flowchart TD
     SWE & DEBUG -->|"Produces Diff & Self-Report"| MODE_SELECT{"Validation Mode"}:::primary
 
     MODE_SELECT -->|"Default / Fast Mode"| QA_LITE
-    MODE_SELECT -->|"High-Risk Task / Strict Mode"| QA_FULL
+    MODE_SELECT -->|"Strict / Release Mode"| QA_STRICT["⚡ Code: QA Lite<br/><i>(Strict Mode: Full test suites & zero-defect check)</i>"]:::secondary
     MODE_SELECT -.->|"Security Surface (Optional)"| SEC
 
-    QA_LITE & QA_FULL & SEC --> VERDICT{"Validation Outcome"}:::primary
+    QA_LITE & QA_STRICT & SEC --> VERDICT{"Validation Outcome"}:::primary
 
     VERDICT -->|"FAIL (Code Defect)"| RETRY["🔁 Re-dispatch Worker with Defect Report"]:::primary
     RETRY --> SWE
@@ -359,18 +360,20 @@ flowchart TD
     ADVANCE --> MORE_TASKS{"More Tasks in Todo?"}:::primary
 
     MORE_TASKS -->|"Yes: Next Task"| RUG
-    MORE_TASKS -->|"No: All Tasks Done"| FINAL_GATE["🏁 Final Integration Gate<br/><i>(Code: QA full test suite run)</i>"]:::primary
+    MORE_TASKS -->|"No: All Tasks Done"| FINAL_GATE["🏁 Final Integration Gate<br/><i>(Code: QA Lite full test & lint run)</i>"]:::primary
     FINAL_GATE --> LOG["📝 Compile Run & Decision Log<br/><i>(docs/implementation/RUN-*.md)</i>"]:::tertiary
     LOG --> COMPLETE["🎉 Verified Working Solution"]:::tertiary
+    COMPLETE -.->|"Optional: Hostile Edge-Case Fuzzing"| QA_FULL["🧪 Code: QA / qa<br/><i>(User-Directed: Adversarial probing & hostile test suites)</i>"]:::primary
 ```
 
 ### Validation Modes & Flags
 
 The RUG Orchestrator controls automated verification rigor via mode flags:
 
-- **Default (Balanced)**: Dispatches `Code: QA Lite` for per-task static checks. Tasks modifying core invariants, security/auth, or public schemas escalate to full `Code: QA`. Runs full `Code: QA` at the final integration gate.
-- **Fast / Draft Mode (`--fast`, `--draft`)**: Uses `Code: QA Lite` for task-level checks and the final integration gate, maximizing iteration velocity.
-- **Strict / Release Mode (`--strict`, `--release`)**: Dispatches full `Code: QA` for **every** individual task and the final gate, executing complete test suites (`cargo test`, Python unittests) and linter passes.
+- **Default (Balanced)**: Dispatches `Code: QA Lite` for per-task static checks, criteria verification, and scope discipline. Runs full test suites (`cargo test`, `unittest`) and linters via `Code: QA Lite` at the final integration gate.
+- **Fast / Draft Mode (`--fast`, `--draft`)**: Uses `Code: QA Lite` for task-level checks and fast smoke validation, maximizing iteration velocity.
+- **Strict / Release Mode (`--strict`, `--release`)**: Runs full test suite passes and linter checks via `Code: QA Lite` on every task.
+- **Adversarial QA (User-Directed)**: Kept outside the automated loop. The operator can invoke `Code: QA` directly (`@Code: QA` in Copilot or `qa` in Antigravity) to execute aggressive edge-case hunting, concurrency fuzzing, and hostile boundary test suites.
 
 ### `Code:*` Subagents Catalog
 
@@ -379,8 +382,8 @@ The RUG Orchestrator controls automated verification rigor via mode flags:
 | **`Code: RUG Orchestrator`** | Execution Coordinator | **Orchestrator** | Feature request, task spec | Task decomposition, subagent prompts, iteration loop, run logs |
 | **`Code: SWE`** | Senior Software Engineer | **Mandatory Worker** | Standard implementation task | Clean code diffs, unit/integration tests, docstrings, technical decisions |
 | **`Code: Debug`** | Defect Diagnostician | **Optional / Conditional** | Bug report, failing tests | Reproduction recipe, root cause analysis, targeted fix |
-| **`Code: QA Lite`** | Fast Sanity Validator | **Default Task Auditor** | Routine task completion | Diff sanity verification, acceptance criteria checklist, defect classification |
-| **`Code: QA`** | Comprehensive QA Tester | **Strict / Integration Auditor** | High-risk tasks, final integration | Test suite logs (`cargo test`, `unittest`), boundary audit, regression proofs |
+| **`Code: QA Lite`** | Fast Sanity Validator | **Automated Task Validator** | Routine task completion | Diff sanity verification, acceptance criteria checklist, defect classification |
+| **`Code: QA`** | Comprehensive Adversarial Tester | **User-Directed Specialist** | Manual operator invocation | Adversarial test suites, boundary fuzzing, hostile edge-case analysis |
 | **`Code: Security Reviewer`** | Code Security Specialist | **Optional / Triggered** | Auth, crypto, external boundaries | OWASP Top 10 audit, Zero Trust verification, risk report |
 
 ---

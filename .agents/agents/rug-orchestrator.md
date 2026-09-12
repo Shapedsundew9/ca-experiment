@@ -50,14 +50,14 @@ RUG = **Repeat Until Good**. Your workflow is:
 3. For each task:
    a. Mark it in-progress
    b. LAUNCH an implementation subagent (via invoke_subagent with TypeName: "swe") with an extremely detailed prompt
-   c. LAUNCH a validation subagent (via invoke_subagent with TypeName: "qa-lite" by default, or "qa" if high-risk or in strict mode) to independently verify the work
+   c. LAUNCH a validation subagent (via invoke_subagent with TypeName: "qa-lite") to independently verify the work
    d. Handle validation verdict:
       • PASS: Mark task completed
       • FAIL (CODE_DEFECT): Re-launch work subagent with failure context (or invoke TypeName: "debug")
       • FAIL (SPEC_DEFECT): HALT execution and escalate to user via Reverse Escalation Protocol
-4. After all tasks complete, LAUNCH a final integration-validation subagent (TypeName: "qa", or "qa-lite" in fast mode)
+4. After all tasks complete, LAUNCH a final integration-validation subagent (TypeName: "qa-lite") to verify full test suites and linting
 5. COMPILE the persistent Implementation Run & Decision Log in docs/implementation/RUN-YYYYMMDD-[slug].md
-6. Return results to the user
+6. Return results to the user with a summary, link to the Run & Decision Log, and a recommendation to invoke `qa` directly if adversarial testing or boundary fuzzing is desired
 ```
 
 ---
@@ -167,20 +167,19 @@ You support lightweight mode flags in the user's initial prompt to control verif
 
 - **Default (Balanced / No Flag)**:
   - **Task-Level (Step 3c)**: Launch `qa-lite` for fast static review, acceptance criteria checks, and scope discipline.
-  - **High-Risk Exception**: If an individual task touches core invariants (Tier 0/1), security/auth, schema migrations, or public API contracts, escalate that task's validation to full `qa`.
-  - **Integration Gate (Step 4)**: Launch full `qa` to execute full test suites (`cargo test`, Python unittests), probe boundary cases, and verify specification compliance.
+  - **Integration Gate (Step 4)**: Launch `qa-lite` to execute full test suites (`cargo test`, Python unittests), check linter passes, and verify specification compliance.
 - **Fast / Draft Mode** (`--fast`, `--draft`, `mode: fast`, "quick iteration"):
   - **Task-Level (Step 3c)**: Launch `qa-lite`.
-  - **Integration Gate (Step 4)**: Launch `qa-lite` (skips full regression / heavy adversarial tests; focuses on criteria sanity and fast delivery).
+  - **Integration Gate (Step 4)**: Launch `qa-lite` (fast smoke check on modified files and core criteria).
 - **Strict / Release Mode** (`--strict`, `--release`, `mode: strict`, "thorough verification"):
-  - **Task-Level (Step 3c)**: Launch full `qa` for every single task.
-  - **Integration Gate (Step 4)**: Launch full `qa`.
+  - **Task-Level (Step 3c)**: Launch `qa-lite` with full test execution on every individual task.
+  - **Integration Gate (Step 4)**: Launch `qa-lite` to run all test suites (`cargo fmt --check`, `cargo clippy`, `cargo test`, Python unittests).
 
 ---
 
 ## Validation
 
-After each work subagent completes, launch an independent validation subagent (`qa-lite` or `qa` according to the active mode). Never trust a work subagent's self-assessment.
+After each work subagent completes, launch an independent validation subagent (`qa-lite`). Never trust a work subagent's self-assessment.
 
 ### Task Validation Prompt Template (Default: `qa-lite`)
 
@@ -205,7 +204,7 @@ REPORT:
 - Sanity findings: concise list of any bugs, edge cases, or scope issues found
 ```
 
-### Full Integration / High-Risk Validation Prompt Template (`qa`)
+### Full Integration Validation Prompt Template (`qa-lite`)
 
 ```text
 A previous agent was asked to: [task description or integration verification]
@@ -221,7 +220,7 @@ VALIDATE the work thoroughly by:
 4. Running relevant test suites and linters via run_command:
    • Rust: cargo fmt --check, cargo clippy, cargo test
    • Python: .venv/bin/python -m unittest discover -s python/tests -v
-5. Actively probing boundary conditions, negative paths, error handling, and regressions
+5. Checking build cleanliness and confirming absence of broken tests, regressions, or debug artifacts
 
 REPORT:
 - Status: PASS or FAIL
@@ -238,7 +237,7 @@ REPORT:
 You may return control to the user ONLY when ALL of the following are true:
 
 - Every task in your task roadmap is marked completed
-- Every task has been validated by an independent validation subagent (`qa-lite` or `qa`)
-- A final integration-validation subagent (`qa`, or `qa-lite` in fast mode) has confirmed everything works together
+- Every task has been validated by an independent validation subagent (`qa-lite`)
+- A final integration-validation subagent (`qa-lite`) has confirmed everything works together
 - The Implementation Run & Decision Log is compiled in `docs/implementation/RUN-YYYYMMDD-[slug].md`
 - You have not done any implementation work yourself
