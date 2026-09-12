@@ -9,6 +9,7 @@
 - Put Rust code in `src/` and Rust integration tests in `tests/`.
 - Put shared substrate simulation kernels, excitable node dynamics, pseudo-random generators, statistical metrics, and reusable circuit primitives in `src/substrate/` (exposed as `crate::substrate`).
 - When implementing experiments in `src/experiments/exp_yyyy_nnna_[slug]/`, do NOT copy or re-implement shared substrate simulation kernels, random number generators, or statistical metrics. Import shared components from `crate::substrate`.
+- For orchestrated research, apply the `research-lifecycle` skill. It is the canonical source for role ownership, depth-one handoffs, bounded local scaffolding, infrastructure gaps, and curation timing.
 - Put reusable Python code in `python/src/tools/`.
 - Put Python tests in `python/tests/`.
 - Put one-off Python programs in `python/scripts/`.
@@ -37,14 +38,8 @@
 ## Validation
 
 - Run `cargo fmt --check`, `cargo clippy`, and `cargo test` for Rust changes.
-- Run `.venv/bin/python -m unittest discover -s python/tests -v`
-  for Python changes.
-- After creating or editing Markdown, run `markdownlint-cli2 --fix "**/*.md"`,
-  inspect the resulting diff, and then run `markdownlint-cli2 "**/*.md"`.
-- Use the Markdownlint Fix All action from the Problems panel when working
-  interactively. The shared policy is defined in `.markdownlint-cli2.jsonc`.
-- Keep intentional Markdown exceptions narrow and document them with a
-  targeted configuration or inline suppression.
+- Run `.venv/bin/python -m unittest discover -s python/tests -v` for Python changes.
+- Keep intentional Markdown exceptions narrow and document them with a targeted configuration or inline suppression.
 - Validate only the services and language surfaces affected by an experiment.
 
 ## Diagramming & Scientific Visualization

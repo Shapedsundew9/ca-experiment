@@ -37,7 +37,7 @@ The investigation demonstrates that the multi-hour duration was not caused by su
 
 ## 1. Top 3 Time Sinks in the Trajectory
 
-Analyzing the 1,704 lines of `docs/chat.md` alongside git commit intervals identifies the following three primary drivers of session duration:
+Analyzing the 1,704 lines of the chat transcript alongside git commit intervals identifies the following three primary drivers of session duration:
 
 ```mermaid
 pie title Wall-Clock Session Time Distribution (~121 mins)
