@@ -30,8 +30,8 @@ def format_rust(root: Path, check_only: bool = False) -> bool:
     print("→ Checking/Formatting Rust codebase...")
     cargo_bin = shutil.which("cargo")
     if not cargo_bin:
-        print("  WARNING: cargo not found in PATH; skipping Rust formatting.", file=sys.stderr)
-        return True
+        print("  ERROR: cargo not found in PATH; Rust formatting was not validated.", file=sys.stderr)
+        return False
 
     cmd = [cargo_bin, "fmt"]
     if check_only:
@@ -39,7 +39,8 @@ def format_rust(root: Path, check_only: bool = False) -> bool:
 
     res = run_cmd(cmd, cwd=root)
     if res.returncode != 0:
-        print(f"  Rust formatting error:\n{res.stderr or res.stdout}", file=sys.stderr)
+        print(
+            f"  Rust formatting error:\n{res.stderr or res.stdout}", file=sys.stderr)
         return False
     print("  ✓ Rust formatting clean.")
     return True
@@ -50,8 +51,8 @@ def format_markdown(root: Path, check_only: bool = False) -> bool:
     print("→ Checking/Formatting Markdown documentation...")
     md_bin = shutil.which("markdownlint-cli2")
     if not md_bin:
-        print("  WARNING: markdownlint-cli2 not found in PATH; skipping Markdown linting.", file=sys.stderr)
-        return True
+        print("  ERROR: markdownlint-cli2 not found in PATH; Markdown was not validated.", file=sys.stderr)
+        return False
 
     cmd = [md_bin]
     if not check_only:
@@ -65,10 +66,12 @@ def format_markdown(root: Path, check_only: bool = False) -> bool:
             # Run check pass to report remaining issues
             verify_res = run_cmd([md_bin, "**/*.md"], cwd=root)
             if verify_res.returncode != 0:
-                print(f"  Markdownlint issues remain after --fix:\n{verify_res.stderr or verify_res.stdout}", file=sys.stderr)
+                print(
+                    f"  Markdownlint issues remain after --fix:\n{verify_res.stderr or verify_res.stdout}", file=sys.stderr)
                 return False
         else:
-            print(f"  Markdownlint check failed:\n{res.stderr or res.stdout}", file=sys.stderr)
+            print(
+                f"  Markdownlint check failed:\n{res.stderr or res.stdout}", file=sys.stderr)
             return False
 
     print("  ✓ Markdown documentation clean.")
@@ -78,18 +81,6 @@ def format_markdown(root: Path, check_only: bool = False) -> bool:
 def validate_figures(root: Path, strict: bool = True) -> bool:
     """Validate scientific SVG figures under docs/research/assets/."""
     print("→ Validating scientific figures...")
-    validator = root / ".agents" / "skills" / "scientific-figures" / "scripts" / "validate_figure.py"
-    if not validator.is_file():
-        # Fallback to .github
-        validator = root / ".github" / "skills" / "scientific-figures" / "scripts" / "validate_figure.py"
-        if not validator.is_file():
-            print("  NOTE: Scientific figure validator script not found; skipping.", file=sys.stderr)
-            return True
-
-    python_bin = root / ".venv" / "bin" / "python"
-    if not python_bin.is_file():
-        python_bin = Path(sys.executable)
-
     assets_dir = root / "docs" / "research" / "assets"
     if not assets_dir.is_dir():
         print("  No research assets directory found.")
@@ -100,6 +91,21 @@ def validate_figures(root: Path, strict: bool = True) -> bool:
         print("  No SVG assets to validate.")
         return True
 
+    validator = root / ".agents" / "skills" / \
+        "scientific-figures" / "scripts" / "validate_figure.py"
+    if not validator.is_file():
+        # Fallback to .github
+        validator = root / ".github" / "skills" / \
+            "scientific-figures" / "scripts" / "validate_figure.py"
+        if not validator.is_file():
+            print("  ERROR: Scientific figure validator script not found.",
+                  file=sys.stderr)
+            return False
+
+    python_bin = root / ".venv" / "bin" / "python"
+    if not python_bin.is_file():
+        python_bin = Path(sys.executable)
+
     all_passed = True
     for svg in svg_files:
         cmd = [str(python_bin), str(validator)]
@@ -108,7 +114,8 @@ def validate_figures(root: Path, strict: bool = True) -> bool:
         cmd.append(str(svg))
         res = run_cmd(cmd, cwd=root)
         if res.returncode != 0:
-            print(f"  Figure validation failed for {svg.name}:\n{res.stdout or res.stderr}", file=sys.stderr)
+            print(
+                f"  Figure validation failed for {svg.name}:\n{res.stdout or res.stderr}", file=sys.stderr)
             all_passed = False
         else:
             print(f"  ✓ {svg.name} valid.")
@@ -125,20 +132,27 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Check formatting without applying automatic fixes",
     )
-    parser.add_argument(
+    mode_group = parser.add_mutually_exclusive_group()
+    mode_group.add_argument(
         "--rust-only",
         action="store_true",
         help="Run only Rust formatting",
     )
-    parser.add_argument(
+    mode_group.add_argument(
         "--markdown-only",
         action="store_true",
         help="Run only Markdown linting",
     )
-    parser.add_argument(
+    figure_group = parser.add_mutually_exclusive_group()
+    figure_group.add_argument(
         "--figures",
         action="store_true",
-        help="Validate scientific SVG figures in docs/research/assets/",
+        help="Validate figures in addition to a selected --rust-only or --markdown-only pass",
+    )
+    figure_group.add_argument(
+        "--no-figures",
+        action="store_true",
+        help="Skip figure validation during a full formatting/linting run",
     )
     return parser.parse_args()
 
@@ -156,7 +170,8 @@ def main() -> None:
         if not format_markdown(root, check_only=args.check):
             success = False
 
-    if args.figures:
+    validate_figures_by_default = not args.rust_only and not args.markdown_only and not args.no_figures
+    if args.figures or validate_figures_by_default:
         if not validate_figures(root, strict=True):
             success = False
 

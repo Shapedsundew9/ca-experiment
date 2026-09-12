@@ -50,9 +50,33 @@ perform unrelated repository cleanup in this mode.
 5. **Verify**: rerun baseline comparisons and all checks required by the work
    package. Treat unexplained output movement as a failure.
 6. **Standardize**: apply repository formatting and presentation conventions
-   using existing automation.
+   using existing automation. A full run formats Rust and Markdown and validates
+   figures in strict mode:
+
+   ```bash
+   .venv/bin/python python/scripts/curation/format_and_lint.py
+   .venv/bin/python python/scripts/curation/format_and_lint.py --check
+   ```
+
+   Missing required formatters or validators are failures, not successful skips.
 7. **Record**: perform only the provenance operations authorized by the work
-   package, using repository automation where available.
+   package. Pass every authorized artifact file or directory explicitly; never
+   authorize the repository root:
+
+   ```bash
+   .venv/bin/python python/scripts/curation/record_run.py \
+     --manifest <run-manifest> \
+     --tag <run-tag> \
+     --message <execution-commit-message> \
+     --path <experiment-package> \
+     --path <test-or-telemetry-path> \
+     --path <diagnostic-path>
+   ```
+
+   The tool rejects dirty paths outside this scope, creates an execution commit,
+   records that immutable SHA in the manifest, creates a separate provenance
+   commit, and tags the provenance commit. This two-commit relationship avoids
+   the impossible requirement that a commit contain its own SHA.
 
 ## Factoring Decision
 

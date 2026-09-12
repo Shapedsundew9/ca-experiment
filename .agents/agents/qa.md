@@ -1,6 +1,6 @@
 ---
 name: qa
-description: Meticulous QA subagent for test planning, bug hunting, edge-case analysis, and independent implementation verification.
+description: Meticulous QA subagent for test planning, bug hunting, edge-case analysis, and independent implementation verification for explicit rigourous requirement validation only.
 subagent: true
 tools:
   - run_command

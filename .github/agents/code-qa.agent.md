@@ -1,6 +1,6 @@
 ---
 name: 'Code: QA'
-description: 'Meticulous QA subagent for test planning, bug hunting, edge-case analysis, and implementation verification.'
+description: 'Meticulous QA subagent for test planning, bug hunting, edge-case analysis and independent implementation verification for explicit rigorous requirement validation only.'
 tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
 ---
 
