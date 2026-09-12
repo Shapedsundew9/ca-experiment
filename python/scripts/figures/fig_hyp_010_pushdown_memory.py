@@ -14,15 +14,6 @@ Right Panel: Dynamical Phase Space & LIFO Execution Trajectory,
 """
 
 from __future__ import annotations
-
-import argparse
-import sys
-from pathlib import Path
-
-# Add python/src to sys.path for tools.viz imports
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-
-import drawsvg as draw
 from tools.viz import (
     AMBER,
     BORDER,
@@ -41,6 +32,14 @@ from tools.viz import (
     draw_card_with_bullets,
     save_figure,
 )
+import drawsvg as draw
+
+import argparse
+import sys
+from pathlib import Path
+
+# Add python/src to sys.path for tools.viz imports
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 
 def build_pushdown_memory_figure(output_path: str) -> None:
@@ -78,19 +77,23 @@ def build_pushdown_memory_figure(output_path: str) -> None:
 
     # Markers for directed edges
     arrow_fwd = draw.Marker(-1, -0.5, 0.9, 0.5, scale=4, orient="auto")
-    arrow_fwd.append(draw.Lines(-1, -0.5, -1, 0.5, 0, 0, fill=SECONDARY_GREEN, close=True))
+    arrow_fwd.append(draw.Lines(-1, -0.5, -1, 0.5, 0, 0,
+                     fill=SECONDARY_GREEN, close=True))
     d.append(arrow_fwd)
 
     arrow_inh = draw.Marker(-1, -0.5, 0.9, 0.5, scale=4, orient="auto")
-    arrow_inh.append(draw.Lines(-1, -0.5, -1, 0.5, 0, 0, fill=PRIMARY_RED, close=True))
+    arrow_inh.append(draw.Lines(-1, -0.5, -1, 0.5, 0,
+                     0, fill=PRIMARY_RED, close=True))
     d.append(arrow_inh)
 
     arrow_blue = draw.Marker(-1, -0.5, 0.9, 0.5, scale=4, orient="auto")
-    arrow_blue.append(draw.Lines(-1, -0.5, -1, 0.5, 0, 0, fill=TERTIARY_BLUE, close=True))
+    arrow_blue.append(draw.Lines(-1, -0.5, -1, 0.5, 0,
+                      0, fill=TERTIARY_BLUE, close=True))
     d.append(arrow_blue)
 
     arrow_amber = draw.Marker(-1, -0.5, 0.9, 0.5, scale=4, orient="auto")
-    arrow_amber.append(draw.Lines(-1, -0.5, -1, 0.5, 0, 0, fill=AMBER, close=True))
+    arrow_amber.append(draw.Lines(-1, -0.5, -1, 0.5,
+                       0, 0, fill=AMBER, close=True))
     d.append(arrow_amber)
 
     panel_y = 75
@@ -101,9 +104,12 @@ def build_pushdown_memory_figure(output_path: str) -> None:
     # =========================================================================
     lp_x = 30
     lp_w = 515
-    d.append(draw.Rectangle(lp_x, panel_y, lp_w, panel_h, rx=8, ry=8, fill=DARK_PANEL, stroke=BORDER, stroke_width=1.0))
-    d.append(draw.Text("Substrate Circuit: Modular Pushdown Ladder", 15, lp_x + 16, panel_y + 26, fill=TEXT, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Cascaded Latch Units Cₖ & Bidirectional Pointer Pₖ", 11, lp_x + 16, panel_y + 44, fill=TEXT_MUTED, font_family="sans-serif"))
+    d.append(draw.Rectangle(lp_x, panel_y, lp_w, panel_h, rx=8,
+             ry=8, fill=DARK_PANEL, stroke=BORDER, stroke_width=1.0))
+    d.append(draw.Text("Substrate Circuit: Modular Pushdown Ladder", 15, lp_x +
+             16, panel_y + 26, fill=TEXT, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Cascaded Latch Units Cₖ & Bidirectional Pointer Pₖ",
+             11, lp_x + 16, panel_y + 44, fill=TEXT_MUTED, font_family="sans-serif"))
 
     # Stack Level Frames: Level 0 (bottom) and Level 1 (top)
     frame_w = 475
@@ -115,49 +121,71 @@ def build_pushdown_memory_figure(output_path: str) -> None:
 
     # Level 1 Frame (Top)
     l1_y = panel_y + 65
-    d.append(draw.Rectangle(lp_x + 15, l1_y, frame_w, frame_h, rx=6, ry=6, fill="#13161f", stroke=TERTIARY_BLUE, stroke_width=1.0, stroke_dasharray="3,3"))
-    d.append(draw.Text("Stack Frame k = 1 (Depth 1 Storage)", 10, lp_x + 24, l1_y + 16, fill=TERTIARY_BLUE, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Rectangle(lp_x + 15, l1_y, frame_w, frame_h, rx=6, ry=6,
+             fill="#13161f", stroke=TERTIARY_BLUE, stroke_width=1.0, stroke_dasharray="3,3"))
+    d.append(draw.Text("Stack Frame k = 1 (Depth 1 Storage)", 10, lp_x + 24,
+             l1_y + 16, fill=TERTIARY_BLUE, font_family="sans-serif", font_weight="bold"))
 
     # Level 0 Frame (Bottom)
     l0_y = panel_y + 180
-    d.append(draw.Rectangle(lp_x + 15, l0_y, frame_w, frame_h, rx=6, ry=6, fill="#13161f", stroke=SECONDARY_GREEN, stroke_width=1.0, stroke_dasharray="3,3"))
-    d.append(draw.Text("Stack Frame k = 0 (Depth 0 Storage)", 10, lp_x + 24, l0_y + 16, fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Rectangle(lp_x + 15, l0_y, frame_w, frame_h, rx=6, ry=6,
+             fill="#13161f", stroke=SECONDARY_GREEN, stroke_width=1.0, stroke_dasharray="3,3"))
+    d.append(draw.Text("Stack Frame k = 0 (Depth 0 Storage)", 10, lp_x + 24, l0_y +
+             16, fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
 
     # Pointer Latch P0 (Empty Indicator / Level 0)
     p0_y = l0_y + 55
-    d.append(draw.Circle(ptr_cx, p0_y, 16, fill=SECONDARY_GREEN_FILL, stroke=SECONDARY_GREEN, stroke_width=1.5))
-    d.append(draw.Text("P₀", 10, ptr_cx, p0_y + 4, text_anchor="middle", fill=TEXT, font_family="monospace", font_weight="bold"))
+    d.append(draw.Circle(ptr_cx, p0_y, 16, fill=SECONDARY_GREEN_FILL,
+             stroke=SECONDARY_GREEN, stroke_width=1.5))
+    d.append(draw.Text("P₀", 10, ptr_cx, p0_y + 4, text_anchor="middle",
+             fill=TEXT, font_family="monospace", font_weight="bold"))
 
     # Pointer Latch P1 (Level 1)
     p1_y = l1_y + 55
-    d.append(draw.Circle(ptr_cx, p1_y, 16, fill="#222738", stroke=TERTIARY_BLUE, stroke_width=1.5))
-    d.append(draw.Text("P₁", 10, ptr_cx, p1_y + 4, text_anchor="middle", fill=TEXT, font_family="monospace", font_weight="bold"))
+    d.append(draw.Circle(ptr_cx, p1_y, 16, fill="#222738",
+             stroke=TERTIARY_BLUE, stroke_width=1.5))
+    d.append(draw.Text("P₁", 10, ptr_cx, p1_y + 4, text_anchor="middle",
+             fill=TEXT, font_family="monospace", font_weight="bold"))
 
     # Data Cell C0: Round Ring '(' & Square Ring '['
-    d.append(draw.Circle(data_round_cx, p0_y, 15, fill="#222738", stroke=SECONDARY_GREEN, stroke_width=1.5))
-    d.append(draw.Text("R0,(", 9, data_round_cx, p0_y + 3, text_anchor="middle", fill=SECONDARY_GREEN, font_family="monospace", font_weight="bold"))
+    d.append(draw.Circle(data_round_cx, p0_y, 15, fill="#222738",
+             stroke=SECONDARY_GREEN, stroke_width=1.5))
+    d.append(draw.Text("R0,(", 9, data_round_cx, p0_y + 3, text_anchor="middle",
+             fill=SECONDARY_GREEN, font_family="monospace", font_weight="bold"))
 
-    d.append(draw.Circle(data_sqr_cx, p0_y, 15, fill="#222738", stroke=SECONDARY_GREEN, stroke_width=1.5))
-    d.append(draw.Text("R0,[", 9, data_sqr_cx, p0_y + 3, text_anchor="middle", fill=SECONDARY_GREEN, font_family="monospace", font_weight="bold"))
+    d.append(draw.Circle(data_sqr_cx, p0_y, 15, fill="#222738",
+             stroke=SECONDARY_GREEN, stroke_width=1.5))
+    d.append(draw.Text("R0,[", 9, data_sqr_cx, p0_y + 3, text_anchor="middle",
+             fill=SECONDARY_GREEN, font_family="monospace", font_weight="bold"))
 
     # Data Cell C1: Round Ring '(' & Square Ring '['
-    d.append(draw.Circle(data_round_cx, p1_y, 15, fill="#222738", stroke=TERTIARY_BLUE, stroke_width=1.5))
-    d.append(draw.Text("R1,(", 9, data_round_cx, p1_y + 3, text_anchor="middle", fill=TERTIARY_BLUE, font_family="monospace", font_weight="bold"))
+    d.append(draw.Circle(data_round_cx, p1_y, 15, fill="#222738",
+             stroke=TERTIARY_BLUE, stroke_width=1.5))
+    d.append(draw.Text("R1,(", 9, data_round_cx, p1_y + 3, text_anchor="middle",
+             fill=TERTIARY_BLUE, font_family="monospace", font_weight="bold"))
 
-    d.append(draw.Circle(data_sqr_cx, p1_y, 15, fill="#222738", stroke=TERTIARY_BLUE, stroke_width=1.5))
-    d.append(draw.Text("R1,[", 9, data_sqr_cx, p1_y + 3, text_anchor="middle", fill=TERTIARY_BLUE, font_family="monospace", font_weight="bold"))
+    d.append(draw.Circle(data_sqr_cx, p1_y, 15, fill="#222738",
+             stroke=TERTIARY_BLUE, stroke_width=1.5))
+    d.append(draw.Text("R1,[", 9, data_sqr_cx, p1_y + 3, text_anchor="middle",
+             fill=TERTIARY_BLUE, font_family="monospace", font_weight="bold"))
 
     # Pointer Shift Edges between P0 and P1
-    d.append(draw.Line(ptr_cx - 6, p0_y - 18, ptr_cx - 6, p1_y + 18, stroke=AMBER, stroke_width=1.5, marker_end=arrow_amber))
-    d.append(draw.Text("PUSH", 8, ptr_cx - 20, (p0_y + p1_y) / 2 + 3, text_anchor="middle", fill=AMBER, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Line(ptr_cx - 6, p0_y - 18, ptr_cx - 6, p1_y + 18,
+             stroke=AMBER, stroke_width=1.5, marker_end=arrow_amber))
+    d.append(draw.Text("PUSH", 8, ptr_cx - 20, (p0_y + p1_y) / 2 + 3,
+             text_anchor="middle", fill=AMBER, font_family="sans-serif", font_weight="bold"))
 
-    d.append(draw.Line(ptr_cx + 6, p1_y + 18, ptr_cx + 6, p0_y - 18, stroke=PRIMARY_RED, stroke_width=1.5, marker_end=arrow_inh))
-    d.append(draw.Text("POP", 8, ptr_cx + 18, (p0_y + p1_y) / 2 + 3, text_anchor="middle", fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Line(ptr_cx + 6, p1_y + 18, ptr_cx + 6, p0_y - 18,
+             stroke=PRIMARY_RED, stroke_width=1.5, marker_end=arrow_inh))
+    d.append(draw.Text("POP", 8, ptr_cx + 18, (p0_y + p1_y) / 2 + 3, text_anchor="middle",
+             fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
 
     # Streaming Token Demux Ingress
     ing_y = panel_y + 310
-    d.append(draw.Rectangle(lp_x + 15, ing_y, frame_w, 65, rx=6, ry=6, fill="#1c2130", stroke=BORDER, stroke_width=1.0))
-    d.append(draw.Text("Token Ingress Demultiplexing Ports (Cadence $T_{\\text{token}} = 16$ ticks)", 10, lp_x + 24, ing_y + 18, fill=TEXT, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Rectangle(lp_x + 15, ing_y, frame_w, 65, rx=6,
+             ry=6, fill="#1c2130", stroke=BORDER, stroke_width=1.0))
+    d.append(draw.Text("Token Ingress Demultiplexing Ports (Cadence $T_{\\text{token}} = 16$ ticks)",
+             10, lp_x + 24, ing_y + 18, fill=TEXT, font_family="sans-serif", font_weight="bold"))
 
     token_ports = [
         ("$v_{(}$ : PUSH '('", lp_x + 70, ing_y + 44, SECONDARY_GREEN),
@@ -166,92 +194,136 @@ def build_pushdown_memory_figure(output_path: str) -> None:
         ("$v_{]}$ : POP ']'", lp_x + 420, ing_y + 44, AMBER),
     ]
     for label, px, py, col in token_ports:
-        d.append(draw.Rectangle(px - 45, py - 12, 90, 24, rx=4, ry=4, fill="#13161f", stroke=col, stroke_width=1.2))
-        d.append(draw.Text(label, 8, px, py + 3, text_anchor="middle", fill=col, font_family="monospace", font_weight="bold"))
+        d.append(draw.Rectangle(px - 45, py - 12, 90, 24, rx=4,
+                 ry=4, fill="#13161f", stroke=col, stroke_width=1.2))
+        d.append(draw.Text(label, 8, px, py + 3, text_anchor="middle",
+                 fill=col, font_family="monospace", font_weight="bold"))
 
     # Gating & Verification Subsystem
     gate_y = panel_y + 400
-    d.append(draw.Rectangle(lp_x + 15, gate_y, frame_w, 165, rx=6, ry=6, fill="#13161f", stroke=BORDER, stroke_width=1.0))
-    d.append(draw.Text("Coincidence Gating & Violation Detection Subsystem", 10, lp_x + 24, gate_y + 18, fill=TEXT, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Rectangle(lp_x + 15, gate_y, frame_w, 165, rx=6,
+             ry=6, fill="#13161f", stroke=BORDER, stroke_width=1.0))
+    d.append(draw.Text("Coincidence Gating & Violation Detection Subsystem", 10,
+             lp_x + 24, gate_y + 18, fill=TEXT, font_family="sans-serif", font_weight="bold"))
 
     # PUSH Gate Box
     g_push_x = lp_x + 120
     g_push_y = gate_y + 60
-    d.append(draw.Rectangle(g_push_x - 90, g_push_y - 24, 180, 48, rx=5, ry=5, fill="#1e2230", stroke=SECONDARY_GREEN, stroke_width=1.2))
-    d.append(draw.Text("PUSH Gate $G_{\\text{push},k}$", 9, g_push_x, g_push_y - 8, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Pₖ ∧ $v_{\\text{open}}$ (W=0.6, θ=1.10)", 8, g_push_x, g_push_y + 6, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
-    d.append(draw.Text("Sets Cₖ & Advances Pₖ → Pₖ₊₁", 8, g_push_x, g_push_y + 18, text_anchor="middle", fill=TEXT, font_family="sans-serif"))
+    d.append(draw.Rectangle(g_push_x - 90, g_push_y - 24, 180, 48, rx=5,
+             ry=5, fill="#1e2230", stroke=SECONDARY_GREEN, stroke_width=1.2))
+    d.append(draw.Text("PUSH Gate $G_{\\text{push},k}$", 9, g_push_x, g_push_y - 8,
+             text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Pₖ ∧ $v_{\\text{open}}$ (W=0.6, θ=1.10)", 8, g_push_x,
+             g_push_y + 6, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
+    d.append(draw.Text("Sets Cₖ & Advances Pₖ → Pₖ₊₁", 8, g_push_x, g_push_y +
+             18, text_anchor="middle", fill=TEXT, font_family="sans-serif"))
 
     # POP Gate Box
     g_pop_x = lp_x + 345
     g_pop_y = gate_y + 60
-    d.append(draw.Rectangle(g_pop_x - 90, g_pop_y - 24, 180, 48, rx=5, ry=5, fill="#1e2230", stroke=TERTIARY_BLUE, stroke_width=1.2))
-    d.append(draw.Text("POP Match Gate $G_{\\text{pop},k}$", 9, g_pop_x, g_pop_y - 8, text_anchor="middle", fill=TERTIARY_BLUE, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Pₖ ∧ Cₖ₋₁ ∧ $v_{\\text{close}}$ (3-Way θ=1.1)", 8, g_pop_x, g_pop_y + 6, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
-    d.append(draw.Text("Quenches Cₖ₋₁ & Drops Pₖ → Pₖ₋₁", 8, g_pop_x, g_pop_y + 18, text_anchor="middle", fill=TEXT, font_family="sans-serif"))
+    d.append(draw.Rectangle(g_pop_x - 90, g_pop_y - 24, 180, 48, rx=5,
+             ry=5, fill="#1e2230", stroke=TERTIARY_BLUE, stroke_width=1.2))
+    d.append(draw.Text("POP Match Gate $G_{\\text{pop},k}$", 9, g_pop_x, g_pop_y - 8,
+             text_anchor="middle", fill=TERTIARY_BLUE, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Pₖ ∧ Cₖ₋₁ ∧ $v_{\\text{close}}$ (3-Way θ=1.1)", 8, g_pop_x,
+             g_pop_y + 6, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
+    d.append(draw.Text("Quenches Cₖ₋₁ & Drops Pₖ → Pₖ₋₁", 8, g_pop_x,
+             g_pop_y + 18, text_anchor="middle", fill=TEXT, font_family="sans-serif"))
 
     # Trap & Acceptance Readouts
-    d.append(draw.Rectangle(lp_x + 25, gate_y + 115, 205, 36, rx=4, ry=4, fill="#2e1a1e", stroke=PRIMARY_RED, stroke_width=1.2))
-    d.append(draw.Text("Underflow / Mismatch Trap $v_{\\text{trap}}$", 8, lp_x + 127, gate_y + 130, text_anchor="middle", fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Absorbing Attractor $A_{\\text{reject}}$", 8, lp_x + 127, gate_y + 143, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
+    d.append(draw.Rectangle(lp_x + 25, gate_y + 115, 205, 36, rx=4,
+             ry=4, fill="#2e1a1e", stroke=PRIMARY_RED, stroke_width=1.2))
+    d.append(draw.Text("Underflow / Mismatch Trap $v_{\\text{trap}}$", 8, lp_x + 127, gate_y +
+             130, text_anchor="middle", fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Absorbing Attractor $A_{\\text{reject}}$", 8, lp_x + 127,
+             gate_y + 143, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
 
-    d.append(draw.Rectangle(lp_x + 245, gate_y + 115, 215, 36, rx=4, ry=4, fill="#1a2e22", stroke=SECONDARY_GREEN, stroke_width=1.2))
-    d.append(draw.Text("Acceptance Readout $v_{\\text{accept}}$", 8, lp_x + 352, gate_y + 130, text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Empty Stack (P₀) ∧ $v_{\\text{eos}}$ → $A_{\\text{accept}}$", 8, lp_x + 352, gate_y + 143, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
+    d.append(draw.Rectangle(lp_x + 245, gate_y + 115, 215, 36, rx=4,
+             ry=4, fill="#1a2e22", stroke=SECONDARY_GREEN, stroke_width=1.2))
+    d.append(draw.Text("Acceptance Readout $v_{\\text{accept}}$", 8, lp_x + 352, gate_y + 130,
+             text_anchor="middle", fill=SECONDARY_GREEN, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Empty Stack (P₀) ∧ $v_{\\text{eos}}$ → $A_{\\text{accept}}$", 8, lp_x +
+             352, gate_y + 143, text_anchor="middle", fill=TEXT_MUTED, font_family="monospace"))
 
     # =========================================================================
     # RIGHT PANEL: Dynamical Phase Space & LIFO Trajectory
     # =========================================================================
     rp_x = 570
     rp_w = 540
-    d.append(draw.Rectangle(rp_x, panel_y, rp_w, panel_h, rx=8, ry=8, fill=DARK_PANEL, stroke=BORDER, stroke_width=1.0))
-    d.append(draw.Text("Dynamical Phase Space & LIFO Trajectory", 15, rp_x + 16, panel_y + 26, fill=TEXT, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("Trace of Stack Evolution for Valid vs Mismatched Streams", 11, rp_x + 16, panel_y + 44, fill=TEXT_MUTED, font_family="sans-serif"))
+    d.append(draw.Rectangle(rp_x, panel_y, rp_w, panel_h, rx=8,
+             ry=8, fill=DARK_PANEL, stroke=BORDER, stroke_width=1.0))
+    d.append(draw.Text("Dynamical Phase Space & LIFO Trajectory", 15, rp_x + 16,
+             panel_y + 26, fill=TEXT, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("Trace of Stack Evolution for Valid vs Mismatched Streams",
+             11, rp_x + 16, panel_y + 44, fill=TEXT_MUTED, font_family="sans-serif"))
 
     # Execution Step Box
     exec_y = panel_y + 55
     exec_h = 220
-    d.append(draw.Rectangle(rp_x + 15, exec_y, 510, exec_h, rx=6, ry=6, fill="#13161f", stroke=BORDER, stroke_width=1.0))
-    d.append(draw.Text("Step-by-Step Dyck-2 LIFO Trace: Sequence '[' '(' ')' ']'", 10, rp_x + 25, exec_y + 18, fill=TEXT, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Rectangle(rp_x + 15, exec_y, 510, exec_h, rx=6,
+             ry=6, fill="#13161f", stroke=BORDER, stroke_width=1.0))
+    d.append(draw.Text("Step-by-Step Dyck-2 LIFO Trace: Sequence '[' '(' ')' ']'", 10,
+             rp_x + 25, exec_y + 18, fill=TEXT, font_family="sans-serif", font_weight="bold"))
 
     trace_steps = [
-        ("t = 0", "Initial Ground", "Stack: [] (Empty)", "Pointer: P₀ active", SECONDARY_GREEN),
-        ("t = 16", "Token 1: '['", "PUSH '[', C₀ holds '['", "P₀ → P₁ active", TERTIARY_BLUE),
-        ("t = 32", "Token 2: '('", "PUSH '(', C₁ holds '('", "P₁ → P₂ active", TERTIARY_BLUE),
-        ("t = 48", "Token 3: ')'", "POP ')': Matches C₁ '(', quench C₁", "P₂ → P₁ active", SECONDARY_GREEN),
-        ("t = 64", "Token 4: ']'", "POP ']': Matches C₀ '[', quench C₀", "P₁ → P₀ active", SECONDARY_GREEN),
-        ("t = 80", "EOS Probe", "P₀ active ∧ Zero Traps → FIRE", "State: $A_{\\text{acc}}$ (1.0)", AMBER),
+        ("t = 0", "Initial Ground", "Stack: [] (Empty)",
+         "Pointer: P₀ active", SECONDARY_GREEN),
+        ("t = 16", "Token 1: '['", "PUSH '[', C₀ holds '['",
+         "P₀ → P₁ active", TERTIARY_BLUE),
+        ("t = 32", "Token 2: '('",
+         "PUSH '(', C₁ holds '('", "P₁ → P₂ active", TERTIARY_BLUE),
+        ("t = 48", "Token 3: ')'", "POP ')': Matches C₁ '(', quench C₁",
+         "P₂ → P₁ active", SECONDARY_GREEN),
+        ("t = 64", "Token 4: ']'",
+         "POP ']': Matches C₀ '[', quench C₀", "P₁ → P₀ active", SECONDARY_GREEN),
+        ("t = 80", "EOS Probe", "P₀ active ∧ Zero Traps → FIRE",
+         "State: $A_{\\text{acc}}$ (1.0)", AMBER),
     ]
 
     for idx, (t_lbl, op_lbl, st_lbl, ptr_lbl, col) in enumerate(trace_steps):
         sy = exec_y + 36 + idx * 30
-        d.append(draw.Text(t_lbl, 8.5, rp_x + 25, sy + 3, fill=TEXT_MUTED, font_family="monospace"))
-        d.append(draw.Text(op_lbl, 8.5, rp_x + 85, sy + 3, fill=col, font_family="monospace", font_weight="bold"))
-        d.append(draw.Text(st_lbl, 8.5, rp_x + 205, sy + 3, fill=TEXT, font_family="sans-serif"))
-        d.append(draw.Text(ptr_lbl, 8, rp_x + 360, sy + 3, fill=TEXT_MUTED, font_family="sans-serif"))
+        d.append(draw.Text(t_lbl, 8.5, rp_x + 25, sy + 3,
+                 fill=TEXT_MUTED, font_family="monospace"))
+        d.append(draw.Text(op_lbl, 8.5, rp_x + 85, sy + 3, fill=col,
+                 font_family="monospace", font_weight="bold"))
+        d.append(draw.Text(st_lbl, 8.5, rp_x + 205, sy +
+                 3, fill=TEXT, font_family="sans-serif"))
+        d.append(draw.Text(ptr_lbl, 8, rp_x + 360, sy + 3,
+                 fill=TEXT_MUTED, font_family="sans-serif"))
         if idx < len(trace_steps) - 1:
-            d.append(draw.Line(rp_x + 20, sy + 12, rp_x + 505, sy + 12, stroke=GRID, stroke_width=0.8, stroke_dasharray="2,2"))
+            d.append(draw.Line(rp_x + 20, sy + 12, rp_x + 505, sy + 12,
+                     stroke=GRID, stroke_width=0.8, stroke_dasharray="2,2"))
 
     # Violation Path Demonstration: Cross-Bracket Mismatch
     viol_y = panel_y + 285
     viol_h = 100
-    d.append(draw.Rectangle(rp_x + 15, viol_y, 510, viol_h, rx=6, ry=6, fill="#20151a", stroke=PRIMARY_RED, stroke_width=1.0))
-    d.append(draw.Text("Cross-Bracket Violation Trap: Sequence '[' '(' ']' ')' (Non-LIFO)", 10, rp_x + 25, viol_y + 18, fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Rectangle(rp_x + 15, viol_y, 510, viol_h, rx=6,
+             ry=6, fill="#20151a", stroke=PRIMARY_RED, stroke_width=1.0))
+    d.append(draw.Text("Cross-Bracket Violation Trap: Sequence '[' '(' ']' ')' (Non-LIFO)", 10,
+             rp_x + 25, viol_y + 18, fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
 
-    d.append(draw.Text("1. Tokens '[' then '(' arrive → Stack: Depth 2 (Pointer P₂ active).", 8.5, rp_x + 25, viol_y + 38, fill=TEXT, font_family="sans-serif"))
-    d.append(draw.Text("2. Token ']' arrives at t=48: Top C₁ holds '(', mismatch with token ']'.", 8.5, rp_x + 25, viol_y + 56, fill=TEXT, font_family="sans-serif"))
-    d.append(draw.Text("3. Mismatch: (P₂ ∧ C₁,( ∧ $v_{]}$) = 1.20 ≥ 1.10 → $v_{\\text{trap}}$ fires.", 8.5, rp_x + 25, viol_y + 74, fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
-    d.append(draw.Text("4. $v_{\\text{trap}}$ enters trap loop, quenching $v_{\\text{accept}}$.", 8.5, rp_x + 25, viol_y + 92, fill=TEXT_MUTED, font_family="sans-serif"))
+    d.append(draw.Text("1. Tokens '[' then '(' arrive → Stack: Depth 2 (Pointer P₂ active).",
+             8.5, rp_x + 25, viol_y + 38, fill=TEXT, font_family="sans-serif"))
+    d.append(draw.Text("2. Token ']' arrives at t=48: Top C₁ holds '(', mismatch with token ']'.",
+             8.5, rp_x + 25, viol_y + 56, fill=TEXT, font_family="sans-serif"))
+    d.append(draw.Text("3. Mismatch: (P₂ ∧ C₁,( ∧ $v_{]}$) = 1.20 ≥ 1.10 → $v_{\\text{trap}}$ fires.",
+             8.5, rp_x + 25, viol_y + 74, fill=PRIMARY_RED, font_family="sans-serif", font_weight="bold"))
+    d.append(draw.Text("4. $v_{\\text{trap}}$ enters trap loop, quenching $v_{\\text{accept}}$.",
+             8.5, rp_x + 25, viol_y + 92, fill=TEXT_MUTED, font_family="sans-serif"))
 
     # Summary Bullet Cards: Core Invariants & Depth Scaling
     card_y = panel_y + 395
     card_w = 510
 
     bullets = [
-        ("Bounded Degree:", "$k_{\\text{in}}, k_{\\text{out}} \\le 4$ via modular 1D tiling."),
-        ("Modular Depth Scaling:", "Calibrated on $D \\le 4$; scales to $D \\in [1, 8]$ with zero retuning."),
-        ("Refractory Diode Shielding:", "$N_{\\text{ref}} = 2$ prevents standing waves and retrograde crosstalk."),
-        ("Homeostatic Criticality:", "Dynamic threshold adaptation bounds $\\rho \\in [0.01, 0.25]$."),
+        ("Bounded Degree:",
+         "$k_{\\text{in}}, k_{\\text{out}} \\le 4$ via modular 1D tiling."),
+        ("Modular Depth Scaling:",
+         "Calibrated on $D \\le 4$; scales to $D \\in [1, 8]$ with zero retuning."),
+        ("Refractory Diode Shielding:",
+         "$N_{\\text{ref}} = 2$ prevents standing waves and retrograde crosstalk."),
+        ("Homeostatic Criticality:",
+         "Dynamic threshold adaptation bounds $\\rho \\in [0.01, 0.25]$."),
     ]
 
     draw_card_with_bullets(
@@ -271,12 +343,14 @@ def build_pushdown_memory_figure(output_path: str) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate Pushdown Memory Substrate Architecture Figure")
+    parser = argparse.ArgumentParser(
+        description="Generate Pushdown Memory Substrate Architecture Figure")
     parser.add_argument(
         "--output",
         "-o",
         type=str,
-        default=str(Path(__file__).resolve().parents[3] / "docs" / "research" / "assets" / "fig-hyp-010-pushdown-memory.svg"),
+        default=str(Path(__file__).resolve(
+        ).parents[3] / "docs" / "research" / "assets" / "fig-hyp-010-pushdown-memory.svg"),
         help="Output file path",
     )
     args = parser.parse_args()
