@@ -575,6 +575,12 @@ Also recorded honestly: at a 144-evaluation budget, DE and random search are ind
 
 WP-5b is not merely blocked, it is **the wrong action**. Re-running and re-tagging with calibrated parameters would publish a cleaner number over an uncorrected methodological defect. The required next steps are a diagnostic record of the confound and a protocol amendment deciding whether the ablation should be single-variable — an orchestrator and theory decision, not an execution one.
 
+#### Two things
+
+WP-6 just got more interesting. 010a was built by the same agent, in the same session, by the same hand-tuning loop. Its ablations are worth checking for the same compound-difference pattern before calibrating anything. I'd make that the first question of WP-6 rather than a footnote.
+
+And a governance question. Should the mechanical-search skill require that every ablation condition be verified as single-variable — a diffable check that conditions differ in exactly the field they claim to ablate? That would have caught this at authoring time, cheaply and mechanically. It feels like the same class of fix as the objective-completeness rule.
+
 ### Orchestration protocol
 
 To keep expensive reasoning out of mechanical work:
