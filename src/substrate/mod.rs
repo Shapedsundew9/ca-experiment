@@ -8,6 +8,7 @@
 //! - [`stats`]: Statistical hypothesis testing (`welch_t_test`, `sample_mean`, `sample_std`, `cohen_d`).
 //! - [`builder`]: Declarative [`CircuitBuilder`] for network topology assembly.
 //! - [`primitives`]: Reusable circuit building blocks (transmission tracks, logic gates, resonant rings).
+//! - [`search`]: Mechanical parameter calibration ([`SearchSpace`], [`Optimizer`], [`calibrate`]).
 
 pub mod builder;
 pub mod config;
@@ -16,6 +17,7 @@ pub mod node;
 pub mod primitives;
 pub mod rng;
 pub mod runner;
+pub mod search;
 pub mod stats;
 
 pub use builder::CircuitBuilder;
@@ -24,6 +26,7 @@ pub use network::NetworkSubstrate;
 pub use node::CircuitNode;
 pub use rng::FastRng;
 pub use runner::*;
+pub use search::{Objective, Optimizer, SearchSpace, calibrate};
 
 pub mod prelude {
     pub use super::builder::CircuitBuilder;
@@ -33,5 +36,6 @@ pub mod prelude {
     pub use super::primitives::*;
     pub use super::rng::FastRng;
     pub use super::runner::*;
+    pub use super::search::*;
     pub use super::stats::*;
 }

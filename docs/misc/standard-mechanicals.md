@@ -132,6 +132,9 @@ So Step 1 is not a detour from the assembly framework — it's a hard prerequisi
 | Assembly-index selection (Q4) | **Integer-bucketed Pareto archive** — one champion per assembly index, no $\lambda$. |
 | Pool admission (Q5) | **Mechanical predicate** (typed, characterised, non-redundant, earned); curator owns criteria, not entries. |
 | Atoms (Q8) | **Five fundamental operations** — `Const`, `Delay`, `Sum`, `Multiply`, `Compare`. Nodes and builders are derived compositions. |
+| `Multiply` arity | **Signal × signal**, not signal × parameter — keeps synaptic plasticity structurally expressible. |
+| Noise | **Exogenous boundary source at $a = 0$**, not a sixth atom. The basis stays deterministic. |
+| Equivalence certificate | **Statistical equivalence** over seeded runs is sufficient; bit-identical is not required. |
 
 #### Consequence of Q1 for Phase 2
 
@@ -314,7 +317,7 @@ Per Q8, **v0 is the five atoms and nothing else.** The eight verified builders a
 
 New, required by Q8. Compiles an atom graph into a flat evaluation schedule: topologically sort the delay-free subgraph, bind the `Delay` set as the state vector, emit a fixed instruction sequence once per topology rather than per tick. Standard synchronous-dataflow practice; recovers most of the interpretive overhead.
 
-Gated on a **behavioural equivalence certificate**: the atom composition `LifNode` must reproduce [`CircuitNode`](src/substrate/node.rs) under identical inputs and seeds. Until that certificate exists, `NetworkSubstrate` remains the sole production engine and the atom layer is analysis-only.
+Gated on a **behavioural equivalence certificate**: the atom composition `LifNode` must be statistically equivalent to [`CircuitNode`](src/substrate/node.rs) over seeded runs — matching spike rasters within tolerance rather than bit-identically, since floating-point association order differs. Until that certificate exists, `NetworkSubstrate` remains the sole production engine and the atom layer is analysis-only.
 
 #### 5.4 Structural search (`assembly/search.rs`)
 
@@ -484,14 +487,99 @@ Classical assembly index counts distinct sub-objects on the minimal construction
 
 ### Remaining decisions needed
 
-- **Q4:** ~~confirm~~ **agreed** — integer-bucketed Pareto archive.
-- **Q5:** ~~confirm~~ **agreed** — mechanical admission predicate, four criteria, deprecation not deletion.
-- **Q8:** **resolved** — five fundamental operations as atoms; nodes and builders become derived compositions.
+All resolved. See the decisions table above.
 
-Open items arising from Q8, all Phase 5 only:
+---
 
-1. **Confirm the five-atom basis.** Specifically whether `Multiply` should be signal × signal (my recommendation, keeps plasticity expressible) rather than the cheaper signal × parameter.
-2. **Confirm noise as an exogenous boundary source at $a = 0$** rather than a sixth atom.
-3. **Equivalence-certificate scope.** Does `LifNode` need to be bit-identical to `CircuitNode`, or is statistical equivalence over seeded runs sufficient? Bit-identical is stronger and probably achievable given the substrate is deterministic once noise is externalised — but floating-point association order may force a tolerance.
+## Work Packages
 
-Phases 1–4 remain fully specified and unblocked.
+The plan is restructured below into narrow, independently verifiable packages for delegation. Each package states its own acceptance criterion so it can be dispatched to a specialist agent and validated without re-reading the whole plan. **This document is the specification** — packages reference sections rather than restating them.
+
+| WP | Deliverable | Depends on | Agent | Acceptance criterion |
+| :--- | :--- | :--- | :--- | :--- |
+| **WP-1** | `src/substrate/search/` — space, objective, optimizers, calibration driver (§Phase 1) | — | `Code: SWE` | `cargo test` green; DE recovers known optima on sphere, Rastrigin and a plateaued step function; `SeedSplit::new` rejects intersecting sets; `cargo fmt --check` and `clippy` clean |
+| **WP-2** | `.agents/skills/mechanical-search/SKILL.md` + `.github/skills/` symlink | — | `Code: SWE` | Skill present and symlinked; markdownlint clean |
+| **WP-3** | Directive updates to `sci-theory-protocol`, `sci-execution-analysis`, `sci-substrate-curator` in **both** `.agents/agents/` and `.github/agents/` | WP-2 | `Code: SWE` | Tripwire appears in the Workflow section, not the principles list; the two trees are content-identical |
+| **WP-4** | Calibration sections in the protocol and run-manifest templates | WP-2 | `Code: SWE` | markdownlint clean; fields cover search space, optimizer, budget, evaluations, calibration vs held-out score, artifact path |
+| **WP-5** | EXP-2026-011a calibration, re-run, re-tag (§Phase 2) | WP-1 | `Sci: Execution & Analysis` | Held-out accuracy ≥ hand-tuned baseline; calibration completes < 60 s; superseding manifest cites the prior tag |
+| **WP-6** | EXP-2026-010a calibration, re-run, re-tag | WP-1, WP-5 | `Sci: Execution & Analysis` | As WP-5 |
+| **WP-7** | Deprecate `tools.tune` with a pointer to the Rust harness | WP-1 | `Code: SWE` | `test_tune.py` still passes; deprecation notice present |
+
+Phase 5 packages (typed ports, atom-graph execution engine, pool, structural search) are deferred until WP-1 through WP-7 are complete and the equivalence-certificate approach has been validated on `LifNode`.
+
+### WP-5a result — harness validated, and a scientific finding
+
+The 011a calibration ran. Against the hand-tuned baseline on identical held-out seeds:
+
+| | Held-out loss | Clean acc. | Noisy acc. ($\epsilon = 0.05$) |
+| :--- | ---: | ---: | ---: |
+| Differential evolution | **0.0000** | 1.0000 | **1.0000** |
+| Random search (equal budget) | 0.0547 | — | — |
+| Hand-tuned baseline | 0.0234 | 1.0000 | 0.9766 |
+
+DE strictly beat the hand-tuned parameters and beat random search at equal evaluation count, so the optimizer rather than sampling density is doing the work. **The optimum was reached at evaluation 48, roughly 3.8 seconds in** — against 27 `cargo test` cycles over ~45 minutes in the audited session. That is the ~700$\times$ figure the workstream was built to deliver, now measured rather than projected.
+
+Three issues surfaced, in increasing order of importance.
+
+**1. Budget overrun (harness defect, trivial).** DE has no stop-on-target rule and the budget is checked before each batch, so the run consumed the full 60 s and overran by 1.19 s on the final in-flight batch. Two small fixes: an optional target-loss early stop, and a batch-aware budget check.
+
+**2. Objective saturates (protocol defect).** At 128 sequences per noise level the loss bottoms out at exactly zero and stops discriminating, so DE had no gradient after evaluation 48 and the reported optimum is one of many zero-loss points. The workload must be hard enough that the objective retains resolution across the whole search.
+
+**3. The calibrated optimum may invalidate the experiment's mechanism claim.** This is the important one.
+
+The search drove `beta_theta` from $0.05$ to $0.001$ — effectively switching **off** somatic threshold adaptation — and still achieved perfect held-out accuracy, apparently by shortening the readout window `t_readout` from 16 to 7 instead. But threshold adaptation is precisely the mechanism EXP-2026-011a claims confers noise shielding; the `AblationFixedTheta` condition ($\beta_\theta = 0$) exists to demonstrate that claim.
+
+The cause is an **under-specified objective**, and it is exactly the failure mode identified in Part 1: the original test asserted both *"active must be accurate"* and *"active must beat fixed-theta"*, but the objective encoded only the first. Given only that term, the optimizer correctly found a region where the claimed mechanism is unnecessary.
+
+The lesson generalises and belongs in the protocol directive: **a pre-registered objective must encode every acceptance assertion, including comparative and ordering constraints between conditions.** An objective that omits an ablation ordering will be exploited by any competent optimizer.
+
+This is also the strongest available argument for the workstream. Hand-tuning reached a parameter set where the mechanism *appeared* necessary. Mechanical search found, in under four seconds, that it may not be. That question was invisible for as long as a human-paced loop was doing the searching.
+
+**WP-5b (re-run and re-tag) is blocked** pending a protocol-level decision on issue 3.
+
+### WP-5c result — the objective was fixed, and the mechanism claim did not survive intact
+
+The objective was completed to encode all eight acceptance assertions, including the ordering terms WP-5a omitted, using smooth hinge penalties $h(x, m) = \max(0, (m - x)/m)$ so orderings carry gradient rather than a pass/fail cliff. Workload rose from 256 to 1216 trials per evaluation, which removed the saturation: best loss anywhere is now $0.0391$, never exactly zero.
+
+Re-calibration recovered `beta_theta` from $0.001$ to $0.0153$, and the WP-5a parameters were confirmed to fail the shielding ordering outright ($\text{term} \approx 1.05$). So WP-5a was indeed an artifact of the incomplete objective, exactly as the completeness rule predicts.
+
+Then the $\beta_\theta$ sweep answered the scientific question, and the answer is not the comfortable one.
+
+**At the shipped hand-tuned parameters the ablated mechanism does nothing.** Sweeping $\beta_\theta$ across $[0, 0.20]$ — a 200$\times$ range including zero — moves the shielding margin not at all:
+
+| $\beta_\theta$ at hand-tuned params | Active acc. $\epsilon{=}0.05$ | Fixed-$\theta$ acc. | Margin |
+| ---: | ---: | ---: | ---: |
+| all 12 values, $0 \to 0.20$ | 0.9792 | 0.9792 | **0.0000** |
+
+Not a digit moves. Active and fixed-$\theta$ produce identical predictions on all 192 held-out sequences per noise level.
+
+`test_noise_percolation_shielding` nonetheless passes today, because the `AblationFixedTheta` condition is not a single-variable ablation. Inspection of [config.rs](src/experiments/exp_2026_011a_mva_associative_retrieval/config.rs#L108-L131) shows it differs from the active condition in **four** parameters simultaneously:
+
+| Field | Active | `AblationFixedTheta` | Intended? |
+| :--- | ---: | ---: | :--- |
+| `beta_theta` | 0.05 | 0.00 | yes — the ablation |
+| `theta_floor` | 1.02 | 0.50 | no |
+| `theta_gate_init` | 1.10 | 1.00 | no |
+| `w_fwd` / `w_fb` | 1.10 | 1.00 | no |
+
+**The published demonstration of noise shielding rests on a compound between-condition confound, not on the mechanism it names.** Equalising `theta_gate_init` alone collapses the margin from $0.1333$ to $0.0000$.
+
+Two secondary findings:
+
+- **At the newly calibrated optimum the mechanism is real but binary.** Margin $0.0000$ at $\beta_\theta = 0$, then $0.281$ at $\beta_\theta = 0.001$ and perfectly flat to $0.20$. Adaptation on-versus-off matters enormously; the *rate* is irrelevant across 200$\times$. Any claim resting on the magnitude of the adaptation rate is unsupported.
+- **`t_readout` is not the alternative explanation.** The margin holds at $0.25$–$0.35$ across `t_readout` $\in [6, 32]$. It governs clean accuracy, not shielding.
+
+Also recorded honestly: at a 144-evaluation budget, DE and random search are indistinguishable on held-out loss (both $0.0625$) and both are *worse* held-out than the 24-evaluation result. On this objective the extra budget bought overfitting. **DE's advantage over random search is not demonstrated here** — it was demonstrated under the WP-5a objective, which we now know was the wrong objective.
+
+#### Consequence
+
+WP-5b is not merely blocked, it is **the wrong action**. Re-running and re-tagging with calibrated parameters would publish a cleaner number over an uncorrected methodological defect. The required next steps are a diagnostic record of the confound and a protocol amendment deciding whether the ablation should be single-variable — an orchestrator and theory decision, not an execution one.
+
+### Orchestration protocol
+
+To keep expensive reasoning out of mechanical work:
+
+1. Each package is dispatched with a scope, the plan section that specifies it, and its acceptance criterion — nothing more.
+2. Subagents do not redesign. A package that cannot be completed as specified is returned as a gap report, not worked around.
+3. Validation after each package is `cargo fmt --check`, `cargo clippy`, `cargo test` for Rust, and markdownlint for documentation.
+4. Packages are dispatched one at a time so that a failure surfaces before dependent work begins.

@@ -1,7 +1,10 @@
 """Automated parameter optimization framework for excitable substrate simulations.
 
-Transfers the cognitive overhead of parameter search (thresholds, refractory timings,
-leak factors, and coupling weights) from interactive LLM turns to local mechanical compute.
+DEPRECATED. Superseded by the Rust harness in `src/substrate/search/`, which runs
+in-process against the simulation instead of across a language boundary, evaluates
+batches in parallel, handles integer and categorical parameters, and enforces the
+calibration/validation seed split. See the `mechanical-search` skill. Retained only
+until remaining callers are migrated.
 """
 
 from __future__ import annotations

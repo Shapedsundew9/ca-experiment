@@ -70,6 +70,8 @@ pub struct ExperimentConfig {
     pub noise_rate: f64,
     pub seq_length: usize,
     pub t_token: usize,
+    /// Number of ticks the dual-rail readout is integrated over after the query pulse.
+    pub t_readout: usize,
     pub n_slots: usize,
     pub leak: f64,
     pub n_ref: usize,
@@ -140,6 +142,7 @@ impl ExperimentConfig {
             noise_rate,
             seq_length,
             t_token: 16,
+            t_readout: 16,
             n_slots: 16,
             leak: 0.05,
             n_ref,

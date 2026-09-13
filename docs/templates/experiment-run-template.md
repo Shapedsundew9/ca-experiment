@@ -59,7 +59,29 @@ Document any difference between the pre-registered protocol and what was physica
 
 ---
 
-## 4. Inner-Loop Parameter Discovery & Search Trajectory
+## 4. Parameter Calibration (Mechanical Search)
+
+Complete this section whenever any executed constant was chosen by search rather than fixed by the protocol. Record `Not applicable` if every parameter was pre-registered as a fixed value.
+
+| Field | Value |
+| --- | --- |
+| Search Space | `theta_gate: Continuous[0.05, 0.95]`, `n_ref: Integer[1, 12]` |
+| Optimizer & Settings | `DifferentialEvolution` (pop 24, F 0.8, CR 0.9, seed `0xC0FFEE`) |
+| Budget | 10000 evaluations / 60 s wall clock |
+| Evaluations Used | 864 (wall clock 41.2 s) |
+| Best Parameters | `{ "theta_gate": 0.412, "n_ref": 4 }` |
+| Calibration Loss | 0.071 (seeds 0–23) |
+| Held-Out Validation Loss | 0.088 (seeds 1000–1023, disjoint) |
+| Calibration Artifact | `data/telemetry/EXP-014a/calibration.json` |
+| Frozen Parameters | `data/telemetry/EXP-014a/params.json` |
+| Pinned Objective SHA | `[40-character git commit hash of the committed objective]` |
+
+- Acceptance was evaluated on the held-out seeds only; the calibration score is reported for provenance and is not an acceptance claim.
+- Baseline comparison: [`RandomSearch` at equal evaluation count, or none].
+
+---
+
+## 5. Inner-Loop Parameter Discovery & Search Trajectory
 
 Document how the inner loop explored the parameter space (e.g. adaptive bisection, probe points, homing in on phase transitions):
 
@@ -69,7 +91,7 @@ Document how the inner loop explored the parameter space (e.g. adaptive bisectio
 
 ---
 
-## 5. Seed Inventory & Completion Matrix
+## 6. Seed Inventory & Completion Matrix
 
 | Seed Range | Scheduled | Completed | Aborted / Timed Out | Anomaly Notes |
 | --- | --- | --- | --- | --- |
@@ -82,7 +104,7 @@ Document how the inner loop explored the parameter space (e.g. adaptive bisectio
 
 ---
 
-## 6. Telemetry Artifacts & Checksums
+## 7. Telemetry Artifacts & Checksums
 
 All emitted telemetry files and their cryptographic checksums:
 
@@ -94,7 +116,7 @@ All emitted telemetry files and their cryptographic checksums:
 
 ---
 
-## 7. Telemetry Data Reduction Summary
+## 8. Telemetry Data Reduction Summary
 
 Summary computed programmatically by reduction tool before diagnostic evaluation:
 
@@ -104,7 +126,7 @@ Summary computed programmatically by reduction tool before diagnostic evaluation
 
 ---
 
-## 8. Execution Sign-Off
+## 9. Execution Sign-Off
 
 - [x] Run conforms to pre-registered protocol (or documented deviations above).
 - [x] Clean working tree verified (`git status --porcelain` is empty, Git Status Dirty is No).

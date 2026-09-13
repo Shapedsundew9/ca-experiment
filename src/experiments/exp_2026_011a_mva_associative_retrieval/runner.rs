@@ -274,7 +274,7 @@ pub fn evaluate_sequence_trial(
         seq.queried_key
     };
 
-    for t in 0..16 {
+    for t in 0..substrate.config.t_readout {
         let mut q_inputs = IngressInputs::default();
         // Query pulse active for duration of ring period P_ring = 4 ticks
         if t < 4 {
@@ -389,8 +389,9 @@ pub fn execute_run(
         distractor_ticks: total_distractor_ticks,
         mutex_violations: total_mutex_violations,
         settled_ticks: total_settled_ticks,
-        total_spikes: (density_sum * 272.0 * (config.seq_length * 16 + 16) as f64).round() as usize,
-        total_steps: n * (config.seq_length * 16 + 16),
+        total_spikes: (density_sum * 272.0 * (config.seq_length * 16 + config.t_readout) as f64)
+            .round() as usize,
+        total_steps: n * (config.seq_length * 16 + config.t_readout),
     };
 
     let record = RunTelemetryRecord {

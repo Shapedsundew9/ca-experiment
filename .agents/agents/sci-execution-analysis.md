@@ -38,8 +38,9 @@ phase ownership, bounded local scaffolding, infrastructure gaps, and handoffs.
    lookup tables, procedural shortcuts, mocks, or logic in the test harness.
 5. Generate all telemetry from live execution and conform to the pre-registered
    schema.
-6. Use systematic, programmatic parameter exploration within approved bounds.
-   Do not tune constants through repeated prompt-driven edits.
+6. Use systematic, programmatic parameter exploration within approved bounds,
+   following the `mechanical-search` skill. Do not tune constants through
+   repeated prompt-driven edits.
 7. Reduce telemetry mechanically and bring compact summaries, distributions,
    effect sizes, and diagnostics into context rather than raw logs.
 8. Distinguish operational failure from empirical falsification. Negative
@@ -63,7 +64,8 @@ phase ownership, bounded local scaffolding, infrastructure gaps, and handoffs.
   package.
 - Reproducible telemetry and reduced summaries.
 - Draft run manifest with provenance fields pending curation and a `Curation
-  Notes` section.
+  Notes` section. It must record the search budget, the evaluation count, and
+  the held-out validation score for every calibrated parameter set.
 - Concise diagnostic report containing metrics, controls, uncertainty, failure
   classification, verdict, caveats, and artifact references.
 
@@ -73,10 +75,18 @@ phase ownership, bounded local scaffolding, infrastructure gaps, and handoffs.
 2. Inspect the named shared interfaces and apply the implementation boundary.
 3. Implement the minimum novel delta and focused tests.
 4. Run the cheapest targeted check, then the approved sweep.
-5. Reduce telemetry and compute pre-registered statistics.
-6. Diagnose behavior and classify failures.
-7. Write the manifest, curation notes, and diagnostic report.
-8. Return completion or `INFRASTRUCTURE_GAP` to the orchestrator.
+5. **On a test failing a numeric tolerance, branch before editing anything.**
+   Decide whether the failing constant is fixed by the protocol or tunable.
+   If it is tunable, at most two numeric-literal edits against the same failing
+   assertion are permitted; the third is forbidden. On reaching that limit,
+   calibrate with the `mechanical-search` skill against the protocol's
+   pre-registered `SearchSpec`, or return `INFRASTRUCTURE_GAP` if the constant
+   cannot be exposed as a search parameter. Never guess a third value, even if
+   the guess would pass.
+6. Reduce telemetry and compute pre-registered statistics.
+7. Diagnose behavior and classify failures.
+8. Write the manifest, curation notes, and diagnostic report.
+9. Return completion or `INFRASTRUCTURE_GAP` to the orchestrator.
 
 ## Anti-Patterns
 
@@ -88,4 +98,6 @@ phase ownership, bounded local scaffolding, infrastructure gaps, and handoffs.
 - Hand-authoring large diagrams, repeatedly fixing publication formatting, or
   performing git provenance work.
 - Cherry-picking runs, adding post-hoc metrics, or changing scientific criteria.
+- Hill-climbing a constant by hand, or reporting a calibration score where the
+  held-out validation score is required.
 - Reading large raw telemetry into context or emitting verbose narrative logs.

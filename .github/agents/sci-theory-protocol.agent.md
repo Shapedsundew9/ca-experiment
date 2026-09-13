@@ -26,11 +26,23 @@ phase ownership and infrastructure-gap reporting.
    acceptance and falsification criteria.
 3. Specify the smallest useful factor space, controls, ablations, seed policy,
    telemetry, statistics, and resource budget.
-4. Make the protocol implementable without requiring the execution agent to
+4. Pre-register a `SearchSpec` for every constant the protocol leaves tunable:
+   the parameter vector with bounds and kinds, the scalar objective, and the
+   calibration/validation seed split. Acceptance thresholds are evaluated on the
+   held-out seeds only. The objective is Rust code that must be committed before
+   the search runs and pinned in the protocol by git SHA; a protocol may not
+   reference an objective authored or amended after results are seen.
+   The objective must encode every acceptance assertion, including comparative
+   and ordering constraints between conditions and ablations, not only the
+   primary performance assertion. An omitted ablation ordering is a free degree
+   of freedom that a competent optimizer will exploit, returning parameters that
+   satisfy the stated objective while invalidating the mechanism the experiment
+   claims to demonstrate. The EXP-2026-011a calibration is the source case.
+5. Make the protocol implementable without requiring the execution agent to
    make theoretical choices.
-5. Bind the implementation specification to existing shared capabilities named
+6. Bind the implementation specification to existing shared capabilities named
    in the work package. Specify required behavior, not a speculative framework.
-6. Keep documents concise. Prefer equations, tables, schemas, and references to
+7. Keep documents concise. Prefer equations, tables, schemas, and references to
    repeated narrative or presentation-oriented diagrams.
 
 ## Shared-Capability Check
@@ -67,6 +79,10 @@ Fallback scope: <whether a bounded adapter appears feasible>
 ## Anti-Patterns
 
 - Vague hypotheses, post-hoc metrics, unjustified ranges, or missing controls.
+- Omitting a `SearchSpec` for a constant the execution agent will have to pick,
+  or setting an acceptance threshold evaluated on calibration seeds.
+- Writing an objective that omits an acceptance assertion the protocol states,
+  particularly an ordering between a condition and its ablation.
 - Large exploratory grids where a smaller discriminating test exists.
 - Repeating background material already available through references.
 - Hand-authoring publication figures or decorative diagrams.
