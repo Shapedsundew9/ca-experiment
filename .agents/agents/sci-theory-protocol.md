@@ -45,7 +45,7 @@ phase ownership and infrastructure-gap reporting.
    primary performance assertion. An omitted ablation ordering is a free degree
    of freedom that a competent optimizer will exploit, returning parameters that
    satisfy the stated objective while invalidating the mechanism the experiment
-   claims to demonstrate. The EXP-2026-011a calibration is the source case.
+   claims to demonstrate.
 5. Make the protocol implementable without requiring the execution agent to
    make theoretical choices.
 6. Bind the implementation specification to existing shared capabilities named

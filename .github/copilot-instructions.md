@@ -4,11 +4,11 @@
 
 - This is a mixed Rust and Python experimentation workspace.
 - **Language Specialization**:
-  - Implement substrate simulations, cellular automata kernels, and core computational experiments in Rust (under `src/experiments/exp_yyyy_nnna_[slug]/`, `src/bin/`, and `tests/`) for high execution performance, bare-metal throughput, deterministic bitwise operations, and thermodynamic energy modeling.
+  - Implement substrate simulations, computational experiments, and core dynamical kernels in Rust (under `src/experiments/`, `src/bin/`, and `tests/`) for high execution performance and bare-metal throughput.
   - Implement tooling, telemetry reduction, empirical analysis, scientific figure generation, and diagramming in Python (under `python/src/tools/`, `python/scripts/`, `python/tests/`, and optional exploratory Python experiments in `python/experiments/`).
 - Put Rust code in `src/` and Rust integration tests in `tests/`.
-- Put shared substrate simulation kernels, excitable node dynamics, pseudo-random generators, statistical metrics, and reusable circuit primitives in `src/substrate/` (exposed as `crate::substrate`).
-- When implementing experiments in `src/experiments/exp_yyyy_nnna_[slug]/`, do NOT copy or re-implement shared substrate simulation kernels, random number generators, or statistical metrics. Import shared components from `crate::substrate`.
+- Put shared substrate infrastructure — simulation engines, pseudo-random generators, statistical metrics, parameter search, and reusable primitives — in `src/substrate/` (exposed as `crate::substrate`).
+- When implementing experiments in `src/experiments/`, do NOT copy or re-implement shared infrastructure (random number generators, statistical metrics, parameter search). Import shared components from `crate::substrate`.
 - For orchestrated research, apply the `research-lifecycle` skill. It is the canonical source for role ownership, depth-one handoffs, bounded local scaffolding, infrastructure gaps, and curation timing.
 - Put reusable Python code in `python/src/tools/`.
 - Put Python tests in `python/tests/`.
@@ -16,6 +16,7 @@
 - Put Python scientific experiment packages in `python/experiments/`.
 - Do not mix Python files into the Rust `src/` directory.
 - Do not assume Rust/Python FFI unless explicitly requested.
+- **Phase 1 Archival Notice**: Phase 1 (the Leaky Integrate-and-Fire spiking substrate exploration, experiments `exp_2026_001a` through `011a`) is completed and archived under `archive/phase1/`. Do NOT anchor on or extend the Phase 1 LIF substrate or the fan-in-4 constraint. Phase 2 starts from the hardware-anchored, approach-agnostic goals in `docs/vision.md`.
 
 ## Python
 

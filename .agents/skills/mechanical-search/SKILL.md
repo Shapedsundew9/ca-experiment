@@ -130,8 +130,7 @@ Before committing an objective, check it for completeness:
       primary performance assertion. An omitted ablation ordering is a free
       degree of freedom, and the optimizer will take it, returning parameters
       that satisfy the stated objective while invalidating the mechanism the
-      experiment claims to demonstrate. Source case: the EXP-2026-011a
-      calibration.
+      experiment claims to demonstrate.
 
 ## Budget
 
@@ -139,7 +138,7 @@ Before committing an objective, check it for completeness:
 halts on whichever limit binds first. If the search exhausts its budget without
 meeting the acceptance threshold, **stop and report**. Do not raise the budget,
 widen the bounds, or restart with a new seed — a search that needs more than
-60 s on this substrate is evidence about the substrate, not a scheduling
+60 s on the substrate under test is evidence about the substrate, not a scheduling
 problem.
 
 ## Artifacts

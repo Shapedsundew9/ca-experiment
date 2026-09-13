@@ -1,295 +1,293 @@
-# Multi-Scale Self-Organizing Computational Substrate
+# Adaptive Computational Substrate
 
-To transition from the current deep learning paradigm to a self-organizing, multi-scale computational substrate, the research program requires a precise formulation of what failure modes we are escaping, the target computational principles, and the empirical milestones that define progress.
+## The Problem
 
-## **The Foundational North Star**
+Modern deep learning is powerful but structurally rigid:
 
-> **The North Star:** *To engineer an autopoietic, thermodynamically bounded computational substrate wherein sequence modeling, persistent continual learning, and hierarchical abstraction emerge as the native physical relaxation of a decentralized, self-repairing dynamical system.*  
-In operational terms, this means replacing the **"train once, freeze forever, recompute everything"** lifecycle of digital Transformers with an **adaptive physical medium** that operates at biological levels of energy efficiency (the human brain consumes approximately $20\text{ W}$) by unifying inference, learning, and structural morphogenesis into a single continuous homeostatic process.
+- **Train once, freeze forever.** A model is optimised offline over a static dataset, then deployed as a fixed function. There is no mechanism for continuous adaptation to a changing world without retraining from scratch or fine-tuning that erases prior knowledge (catastrophic forgetting).
+- **Recompute everything, every time.** A transformer processes every token in the context window on every forward pass. There is no persistent state between calls — the entire "memory" is reconstructed from the KV cache on each invocation, and that cache is volatile.
+- **Brute-force attention.** Global all-to-all attention gives every token direct access to every other token. This is computationally convenient but scales quadratically, has no notion of locality, and bears no resemblance to how any physical or biological system processes information.
+- **Energy-oblivious.** Dense floating-point tensor contractions on GPUs operate orders of magnitude above the thermodynamic minimum. The human brain runs on ~20W; a single GPU training run can consume megawatt-hours.
 
-## **Core Research Goals: Current Limits vs. Proposed Advances**
+These are not incidental costs. They are structural consequences of the architecture: a monolithic parameter tensor, optimised by global gradient descent, with no local state, no temporal dynamics, and no self-repair.
 
-| Architectural Dimension | Existing Paradigm (Transformers & Deep Learning) | Multi-Scale Self-Organizing Alternative | Key Scientific Objective |
-| :---- | :---- | :---- | :---- |
-| **Operational Lifecycle** | Disconnected: Offline gradient descent over static weights, followed by inference-only execution. | Unified: Continuous, local energy-minimization where inference and learning occur simultaneously. | **Eliminate the training/inference divide.** The system continuously updates its organization on streaming data without explicit optimization phases. |
-| **Learning & Plasticity** | Ephemeral activation routing (In-Context Learning) or catastrophic forgetting / plasticity loss under continual fine-tuning. | Multi-scale structural plasticity, Hebbian turnover, and Conceptor subspace partitioning. | **Lifelong, non-interfering memory.** Novel sequence patterns carve out new, orthogonal attractor basins without overwriting historical competencies. |
-| **Hardware & Energetics** | Synchronous, dense floating-point tensor contractions (GEMM) operating orders of magnitude above the Landauer limit. | Asynchronous, physics-driven relaxation (analog dynamics, bitwise cellular Boolean operations, or thermodynamic compute). | **Orders-of-magnitude reduction in Energy-Delay Product (EDP)** by substituting digital simulation of math with native physical substrate kinetics. |
-| **Memory Topology** | Explicit $\mathcal{O}(1)$ attention matrices and volatile Key-Value (KV) caches scaling with sequence length. | Somatic attractor engrams, localized traveling waves (solitons/SLPs), and bioelectric-like setpoints. | **Bounded, topological state retention.** Sequence context is encoded in self-stabilizing spatio-temporal dynamics rather than growing memory buffers. |
-| **Representational Structure** | Monolithic parameter tensors optimized in an unconstrained, hyper-dimensional continuous search space. | Hierarchical Assembly Spaces: validated functional motifs (feedback loops, logic gates) cached in an Assembly Pool. | **Exponential search-space bounding.** Search scales via recursive composition of pre-adapted modules (symbiogenesis) rather than random point perturbations. |
+## The North Star
 
-## **Target Quantitative Metrics (Success Indicators)**
+> **Engineer an adaptive computational substrate where inference, learning, and structural reorganisation are a single continuous process — running efficiently on standard CPU/GPU hardware — and where the system's behaviour emerges from local temporal dynamics rather than global optimisation.**
 
-To evaluate this paradigm rigorously against mainstream AI benchmarks, experiments should measure:
+This is not a call to abandon deep learning. It is a call to explore whether there exists a qualitatively different computational paradigm that:
 
-1. **Continual Learning Efficiency (Plasticity vs. Stability)**:
+1. **Learns continuously** — new information is incorporated without destroying old knowledge, without replay buffers, and without retraining.
+2. **Maintains persistent state** — memory is a physical configuration of the system, not a volatile cache reconstructed on every inference.
+3. **Operates at the edge of chaos** — the system's dynamics are neither rigidly deterministic (like transformer feedforward passes) nor purely random, but occupy the critical regime where complex, adaptive behaviour emerges.
+4. **Runs on real hardware** — the target platform is standard CPU and GPU silicon, not hypothetical neuromorphic chips. Efficiency is measured against what this hardware actually does well.
 
- $$\text{Backward Transfer (BWT)} = \frac{1}{T - 1} \sum_{i=1}^{T - 1} (R_{T,i} - R_{i,i}) \ge 0$$
+## Stable Goals
 
- Unlike Transformers where $\text{BWT} \ll 0$ due to catastrophic forgetting, this system must maintain $\text{BWT} \approx 0$ or positive transfer without storing raw data replay buffers.
+These are the properties we are trying to achieve. They do not prescribe any particular mechanism.
 
-1. **Thermodynamic Arithmetic Intensity**:
+### G1 — Continuous adaptation without catastrophic forgetting
 
- $$\eta_{\text{thermo}} = \frac{\text{Information Bits Consolidated}}{\text{Joules Dissipated}}$$
+The system incorporates new sequential information into persistent internal state without overwriting or degrading previously acquired competencies.
 
- Quantifying how closely the physical or simulated substrate approaches the theoretical Landauer bound ($\Delta E \ge k_B T \ln 2$ per bit erasure) during lifelong sequence learning.
+**Measured by:** Backward Transfer (BWT) $\ge 0$ across a sequence of tasks presented over time:
 
-1. **Assembly Depth / Modularity Factor**:
+$$\text{BWT} = \frac{1}{T-1}\sum_{i=1}^{T-1}(R_{T,i} - R_{i,i})$$
 
- $$\text{Reuse Ratio} = \frac{\sum a_i(\mathcal{M}_{\text{reused}})}{\text{Total System Degrees of Freedom}}$$
+where $R_{T,i}$ is performance on task $i$ after learning tasks $1 \ldots T$.
 
- Tracking whether complex computational graphs are formed through the recursive combination of pre-adapted modules rather than unconstrained parameter growth.
+### G2 — Persistent, bounded memory
 
-Starting with discrete bit-train automata that settle into attractor basins connects directly to the formalisms of **Liquid State Machines (LSM)**, **Cellular Automata Reservoirs (ReCA)**, and **Stochastic Computing**.
+Information, once encoded, persists in the system's state without continuous re-stimulation. Memory does not grow linearly with sequence length — it is bounded by the system's physical capacity, not by the input history.
 
-The fundamental trap in unguided recurrent discrete networks is the **ergodic boundary**: without careful tuning, open-ended bit-passing topologies almost always collapse into either trivial extinction (all zeros / static fixpoints) or uncorrelated white noise (hyper-chaos). To make this computationally useful, the starting point must be designed around **Self-Organized Criticality (SOC)** at the smallest possible scale.
+**Measured by:** State retention fidelity over time, and the relationship between system size and memory capacity.
 
----
+### G3 — Local temporal dynamics
 
-## Getting Started
+Computation arises from the interaction of locally connected elements evolving over time. No element has global access to the full system state. Information propagates through the system at finite speed, mediated by local interactions.
 
-### Phase 0: The Minimal Viable Automaton (MVA)
+**Measured by:** Bounded connectivity per element, and the system's ability to perform non-trivial computation despite strict locality constraints.
 
-Do not start with an unconstrained graph or continuous signals. Constrain the design space to a tiny, deterministic testbed before allowing the coding to evolve open topologies.
+### G4 — Efficiency on standard hardware
 
-#### 1. The Signal Protocol (Bit-Streams)
+The system runs on CPUs and GPUs. It exploits the hardware's actual strengths: cache locality, SIMD vectorisation, parallel thread execution, and cheap digital memory. Operations that are trivially efficient on digital hardware (storing a value, looking up an address) should remain trivially efficient in the substrate — not be re-invented from more expensive primitives.
 
-* Use synchronous, discrete bit-streams where time $t \in \mathbb{N}$.
-* A track between node $i$ and node $j$ transmits a single bit $b \in \lbrace 0, 1 \rbrace$ per clock tick.
-* Information is encoded in **temporal pulse spacing** (inter-spike intervals) or **bit density** (Bernoulli rate coding). This natively mimics spike-timing-dependent computation and keeps arithmetic bitwise.
+**Measured by:** Wall-clock time and energy per operation, compared to conventional implementations of the same capability on the same hardware.
 
-#### 2. Node Architecture (The 4-Neighbor Micro-Core)
+### G5 — Self-organisation and homeostasis
 
-* **State:** Each node holds an internal register: a small $k$-bit ring buffer (e.g., $k = 4$ to $8$ bits) representing its local temporal history, plus an accumulated charge counter $V \in [0, V_{\text{thresh}}]$.
-* **Incoming Tracks:** Exactly 2 to 4 input tracks.
-* **Outgoing Tracks:** Exactly 2 to 4 output tracks.
-* **Transition Rule:** At each tick:
+The system regulates its own internal dynamics without centralised control. It avoids pathological regimes (extinction, saturation) through local feedback mechanisms. Its operating point is maintained near criticality — the boundary between order and chaos where computational capacity is maximised.
 
-1. Incoming bits are logically combined (e.g., bitwise parity, majority voting, or bitwise AND/XOR).
-2. If the internal accumulator exceeds $V_{\text{thresh}}$, the node fires a `1` downstream and enters a refractory period ($N_{\text{ref}}$ ticks of forced `0`). Otherwise, it outputs `0`.
-3. The internal accumulator decays by a fixed leak factor $\lambda$ on idle ticks.
+**Measured by:** Firing density / activity metrics remaining in a bounded operating band without external tuning, across a range of input conditions.
 
-#### 3. Homeostasis (The Anti-Chaos Shield)
+### G6 — Emergent computational capability
 
-To prevent the network from blowing up into seizure-like saturation or freezing into silence:
+The system's ability to perform complex tasks (sequence prediction, pattern completion, associative retrieval) is not hard-wired — it emerges from the collective dynamics of simple local elements. New capabilities arise from scaling, restructuring, or recombining existing components, not from designing bespoke circuits for each task.
 
-* Each node tracks its rolling firing rate $\bar{r}$.
-* If $\bar{r} > r_{\text{target}}$, dynamically increment $V_{\text{thresh}}$ (make it harder to fire).
-* If $\bar{r} < r_{\text{target}}$, decrement $V_{\text{thresh}}$ (make it more excitable).
-* *This single local rule forces the entire substrate toward the "edge of chaos" without centralized tuning.*
+**Measured by:** The challenge milestones below.
 
----
+## Hardware Constraint
 
-### Reading In, Settling, and Reading Out
+The target platform is **modern commodity CPU and GPU hardware**. This is a hard constraint, not an aspiration:
 
-```mermaid
-%%{init: {
-    'theme': 'base',
-    'themeVariables': {
-        'darkMode': true,
-        'background': '#161922',
-        'mainBkg': '#1e2230',
-        'nodeBorder': '#434c5e',
-        'textColor': '#e2e8f0',
-        'fontFamily': 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-        'fontSize': '14px',
-        'lineColor': '#8892b0',
-        'primaryColor': '#422026',
-        'primaryTextColor': '#fde8ec',
-        'primaryBorderColor': '#e06c75',
-        'secondaryColor': '#1b3528',
-        'secondaryTextColor': '#e6f7ee',
-        'secondaryBorderColor': '#73c991',
-        'tertiaryColor': '#1d2c44',
-        'tertiaryTextColor': '#e4f0fc',
-        'tertiaryBorderColor': '#61afef',
-        'clusterBkg': '#13161f',
-        'clusterBorder': '#373e51',
-        'noteBkgColor': '#2e271a',
-        'noteTextColor': '#fdf4db',
-        'noteBorderColor': '#e5c07b',
-        'edgeLabelBackground': '#1a1d27'
-    }
-}}%%
-flowchart LR
-        classDef primary fill:#422026,stroke:#e06c75,stroke-width:1.5px,color:#fde8ec;
-        classDef secondary fill:#1b3528,stroke:#73c991,stroke-width:1.5px,color:#e6f7ee;
-        classDef tertiary fill:#1d2c44,stroke:#61afef,stroke-width:1.5px,color:#e4f0fc;
-        classDef note fill:#2e271a,stroke:#e5c07b,stroke-width:1.5px,color:#fdf4db;
+- **Digital memory is cheap.** Storing a value in a register, a cache line, or a GPU shared memory cell costs effectively nothing. Any substrate design that re-implements basic storage from more expensive dynamical primitives (e.g., 272 spiking nodes to hold 16 bits) is failing at G4, regardless of how scientifically interesting it might be.
+- **SIMD and parallelism are the efficiency lever.** CPUs have AVX-512; GPUs have thousands of cores executing the same instruction. Designs that can be expressed as uniform parallel operations over arrays will run orders of magnitude faster than designs requiring irregular graph traversals with unpredictable branching.
+- **Cache locality matters.** Sequential memory access patterns are 100× faster than random access on modern hardware. Spatial locality in the substrate's state representation translates directly to performance.
+- **The baseline for comparison is conventional software.** If a transformer with 1M parameters can do next-token prediction at X tokens/second on a given GPU, the substrate must be compared against that benchmark, not against a hypothetical neuromorphic chip.
 
-        inputX["Bit Stream X"]:::tertiary
-        inputY["Bit Stream Y"]:::tertiary
+This does not mean the substrate must look like a transformer. It means the substrate must *run efficiently on the same hardware* that transformers run on. The innovation is in the computational model, not in the hardware.
 
-        subgraph substrate["Recurrent Substrate (16-32 Nodes)"]
-                direction TB
-                node0["Node 0"]:::secondary <--> node1["Node 1"]:::secondary <--> node2["Node 2"]:::secondary
-                node3["Node 3"]:::secondary <--> node4["Node 4"]:::secondary <--> node5["Node 5"]:::secondary
-                attractor["Attractor Basin"]:::note
-                node1 <--> node4
-                node1 --> attractor
-                node4 --> attractor
-        end
+## Approach: Open and Exploratory
 
-        readout["Bitwise Pooling / Linear Classifier"]:::primary
+Unlike the goals, the approach is explicitly **not fixed**. The following are directions worth exploring, not commitments:
 
-        inputX --> node0
-        inputY --> node3
-        node2 --> readout
-        node5 --> readout
-```
+### Temporal spiking and edge-of-chaos dynamics
 
-* **Read-In (Encoding):** Reserve 1 to 3 "sensory nodes." Clamp their incoming tracks to the input data bit-train for a fixed window $T_{\text{drive}}$ (e.g., 32 ticks).
-* **Dynamic Settling (Relaxation):** After $T_{\text{drive}}$, disconnect or clamp the inputs to a neutral carrier pattern (`0000...` or periodic clock `1010...`). Allow the network to run for $T_{\text{relax}}$ ticks.
-* **Settling Criterion:** Track Hamming distance between global network state snapshots $S_t$ and $S_{t-\tau}$. A "settled state" is either:
-* A point attractor: $H(S_t, S_{t-1}) = 0$.
-* A limit cycle: $H(S_t, S_{t-P}) = 0$ for small period $P$.
-* A bounded strange attractor: The trajectory stays within a bounded subspace (measured via state variance).
+Binary spike-based communication — where information is encoded in the timing and pattern of discrete events rather than continuous floating-point values — has appealing properties:
 
-* **Read-Out:** Extract the binary vector of the network state (either the instantaneous state at $T_{\text{relax}}$ or the time-averaged bit frequencies of all nodes over $T_{\text{relax}}$). Feed this state vector into a simple linear mapping (or majority vote logic) to determine the answer.
+- **Energy proportionality.** Silence is free; only activity costs compute. This is the opposite of dense tensor contractions where every element participates on every step.
+- **Natural temporal encoding.** Time is a first-class citizen, not something bolted on via positional embeddings.
+- **Edge-of-chaos dynamics.** Spiking networks with local homeostatic feedback can self-organise to the critical regime where computational capacity (separation property, memory capacity) is maximised. This is qualitatively different from the rigid deterministic computation of transformer feedforward passes.
 
-### The "Hello World" Task: 2-Bit Temporal XOR
+### Reservoir computing
 
-Do not give the agents sequence modeling or language modeling tasks yet. The network must first prove it has **non-linear mixing** and **fading memory**.
+The reservoir computing paradigm — a fixed or slowly adapting recurrent dynamical system with a trainable readout layer — separates the "rich dynamics" problem from the "learning" problem. The reservoir provides a high-dimensional temporal embedding of the input; the readout is a simple linear map. This is potentially a good fit for the substrate because:
 
-* **Input:** Feed a bit $x_t \in \lbrace 0, 1 \rbrace$ into the network at irregular intervals.
-* **Target:** Predict $y_t = x_t \oplus x_{t-\tau}$, where $\tau$ is a delay of 3 to 10 ticks.
-* **Evaluation:** A feedforward network or simple memoryless CA cannot solve this. The substrate *must* sustain the reverberation of $x_{t-\tau}$ in internal feedback loops while simultaneously performing the non-linear XOR separation with $x_t$.
+- The reservoir's dynamics provide the temporal memory and non-linear mixing (G1, G2, G3).
+- The readout provides a conventional optimisation target that can be trained efficiently (G4).
+- The reservoir can be implemented as a parallel array operation on GPU (G4).
 
-### Experimental Getting Started Staging Roadmap for Agents
+### Cellular automata on GPU grids
 
-| Phase | Scope | Core Question to Validate | Termination Gate |
-| --- | --- | --- | --- |
-| **Sprint 0** | 16-node 2D Torus / Small-World Graph | Can local homeostatic threshold adjustment keep bit activity within 5%--20% firing density? | Zero state extinctions; zero full-saturation runaways across $10^5$ ticks. |
-| **Sprint 1** | Fixed Topology + Attractor Mapping | Does different input history reliably guide the network into distinct, reproducible limit cycles / attractors? | High separation property: $D(S_A, S_B) > 0$ for distinct inputs $A \neq B$. |
-| **Sprint 2** | Temporal XOR Task | Can a simple linear readout extract $x_t \oplus x_{t-\tau}$ purely from the settled substrate dynamics? | $> 95$% accuracy on delayed XOR with $\tau \ge 5$ ticks. |
-| **Sprint 3** | Local Plasticity Rules | Can edges rewire or adjust delay tracks via a strictly local, bitwise Hebbian/anti-Hebbian rule without backprop? | Network autonomously improves attractor basin depth for recurring inputs. |
+Dense 1D or 2D cellular automata, operating on arrays that map directly to GPU memory layout, combine locality (G3) with hardware efficiency (G4). Rules can be expressed as lookup tables or small neural networks applied uniformly across the grid — ideal for SIMD execution. The challenge is whether such systems can develop sufficient computational depth.
+
+### Hybrid architectures
+
+The substrate need not be pure. A design might combine:
+
+- A **dynamical core** that provides temporal state, self-organisation, and edge-of-chaos behaviour
+- **Conventional digital memory** for efficient storage (respecting G4)
+- A **trainable interface** (readout/projection layers) that translates between the substrate's internal dynamics and external task requirements
+
+The only prohibition is on approaches that are *structurally incapable* of achieving the goals — e.g., any system that requires global gradient descent through the full state for learning (violates G1 and G3), or any system that requires bespoke hardware to run efficiently (violates G4).
 
 ---
 
-## Milestone Tiers
+## Challenge Milestones
 
-To scale an autonomous scientific agent team from a single non-linear logic primitive (an XOR gate) to modern LLM-level computation, the roadmap  avoids prescribing **implementations** (e.g., forcing a specific grid topology, cellular rule family, or emulated silicon architecture). Instead, it defines **capability gates**—functional, verifiable milestones where each level unlocks a new computational class on the path to sequence modeling and reasoning.
+These are **problems that any successful substrate must solve**. They are ordered roughly by complexity, but they are not a strict sequential ladder — a substrate might tackle them in a different order, or solve multiple simultaneously, depending on its architecture.
 
-```text
-[Isolated Gate] ──► [Cascaded Logic] ──► [Persistent State] ──► [Hierarchical Memory] ──► [Dynamic Routing] ──► [In-Context Learning] ──► [LLM Parity]
-   (Current)             Tier 1                Tier 2                  Tier 3                  Tier 4                 Tier 5               Tier 6
+The milestones are framed as **capabilities**, not implementations. They say *what* the system must do, never *how*.
 
-```
+> [!IMPORTANT]
+> Each milestone defines a **black-box interface contract**: `encode_input → run_dynamics → decode_output → metric`. The substrate's internal mechanism is unconstrained. Any approach that meets the metric on held-out evaluation is valid.
 
-### Tier 1: Spatial Routing & Compositionality (From Isolated Gate to Circuit)
+### C1 — Non-linear temporal mixing
 
-An XOR gate proves local non-linearity, but scalable computation requires signals to travel, branch, and interact without destructive interference.
+> Can the system perform a computation that requires both non-linear combination of inputs and memory of past inputs?
 
-#### Milestone 1.1: Signal Transport & Fan-Out
+**Task:** Delayed XOR — predict $y_t = x_t \oplus x_{t-\tau}$ for $\tau \ge 5$ time steps, where $x_t \in \lbrace 0, 1 \rbrace$.
 
-* **Capability:** Propagate a binary signal over distance $D$ with zero attenuation, and duplicate a single input into multiple independent downstream channels ($\text{Fan-Out} \ge 2$).
-* **Evaluation Task:** 1-to-2 Buffer over a minimum spatial distance (e.g., $D \ge 30$ cells).
-* **Success Metric:** $100\%$ transmission fidelity across both outputs under random background initialization or spatial jitter.
+**Why this matters:** A memoryless system cannot solve this (it requires remembering $x_{t-\tau}$). A linear system cannot solve this (XOR is non-linear). Any substrate that passes this gate has both memory and non-linearity — the two minimal ingredients for general computation.
 
-#### Milestone 1.2: Multi-Gate Composition & Wire Crossing
+**Success metric:** Accuracy $\ge 95\%$ on held-out sequences with $\tau \ge 5$.
 
-* **Capability:** Cascade multiple non-linear operations without intermediate signal degradation, including the resolution of non-planar signal crossings (two signal paths crossing without crosstalk).
-* **Evaluation Task:** 1-bit Full Adder (Inputs: $A, B, C_{\text{in}}$; Outputs: $\text{Sum}, C_{\text{out}}$) or 2-bit Multiplier.
-* **Success Metric:** Exact truth-table parity across all $2^n$ combinations, verified at steady-state or a fixed delay window.
-* **Note (post-verification, see `docs/architecture/adr-0001-substrate-connectivity-topology.md`):** The planar wire-crossing sub-problem verified here was an artifact of choosing a strict 2D planar, nearest-neighbor-only embedding, not a requirement of the substrate itself. Future milestones are not required to reproduce this constraint or its shielding machinery.
+### C2 — Persistent state retention
 
-### Tier 2: Temporal Dynamics & State Retention (From Static to Sequential Logic)
+> Can the system store a value and retain it indefinitely without continuous re-stimulation?
 
-Combinational circuits are memoryless. Natural language and sequence modeling require temporal state retention that persists independently of immediate input stimulation.
+**Task:** Write a binary value via an input signal, then remove all input. Read the value back after $\Delta t \ge 10^3$ time steps of autonomous evolution.
 
-#### Milestone 2.1: Bistable Latching (Dynamic Bit Storage)
+**Why this matters:** Sequence modelling requires working memory. If state decays, the system can only process local windows, not long-range dependencies.
 
-* **Capability:** A localized spatial basin or dynamic cycle that retains state ($0$ or $1$) indefinitely after the input stimulus is removed, supporting controlled Write and Read triggers.
-* **Evaluation Task:** Gated D-Latch or Set-Reset Flip-Flop.
-* **Success Metric:** State retention over $\Delta t \ge 10^3$ substrate update steps post-write, with read accuracy $100\%$.
+**Success metric:** Read accuracy $= 100\%$ after $10^3$ autonomous steps.
 
-#### Milestone 2.2: Finite State Automata (Regular Languages)
+### C3 — Sequential state tracking
 
-* **Capability:** Sequential state tracking driven by a streaming input signal. The substrate transitions between internal states and classifies regular expressions.
-* **Evaluation Task:** Deterministic Finite Automaton (DFA) recognition of a regular grammar (e.g., Even/Odd parity of an arbitrary-length bitstream, or recognizing the regex `(10)+1`).
-* **Success Metric:** Zero classification error on streaming sequences of length $L \in [10, 100]$ tokens.
+> Can the system maintain and update internal state based on a streaming input sequence?
 
-### Tier 3: Hierarchical Structure & Working Memory (Exceeding Finite State Limits)
+**Task:** Recognise a regular language — e.g., track the parity (even/odd count) of a streaming bitstream, or recognise the pattern `(10)+1`.
 
-Language is hierarchical, not merely Markovian. To reach LLM-grade capability, the system must navigate beyond Chomsky regular languages into context-free and associative dynamics.
+**Why this matters:** This is the minimum requirement for any system that processes sequences: it must track state that depends on the entire history, not just the most recent input.
 
-#### Milestone 3.1: Pushdown Memory (Dyck Languages)
+**Success metric:** Zero classification error on sequences of length $L \in [10, 100]$.
 
-* **Capability:** Unbounded or dynamically expanding state memory that can match nested, long-range dependencies (stack/queue behavior).
-* **Evaluation Task:** Dyck-1 (balanced parentheses `(()())`) and Dyck-2 (nested multi-bracket `([{}])`).
-* **Success Metric:** Generalization to nesting depths $2\times$ deeper than the maximum depth observed during agent optimization.
+### C4 — Hierarchical structure (context-free)
 
-#### Milestone 3.2: Associative Key-Value Retrieval ("Needle in a Haystack")
+> Can the system handle nested, recursive structure — not just flat sequential patterns?
 
-* **Capability:** Dynamic addressing. The substrate stores multiple variable bindings $(K_1 \to V_1, K_2 \to V_2)$ presented sequentially, ignores filler/distractor tokens, and extracts the target $V_i$ when probed with $K_i$.
-* **Evaluation Task:** Stream $N$ key-value pairs separated by noise tokens, followed by a query token $K_j$. Output must emit $V_j$.
-* **Success Metric:** Retrieval accuracy $\ge 99\%$ across variable context horizons ($N \ge 16$ pairs, sequence length $L \ge 256$).
+**Task:** Recognise Dyck languages — balanced parentheses `(()())` and nested multi-bracket patterns `([{}])`.
 
-### Tier 4: Statistical Sequence Modeling & Distributed Semantics
+**Why this matters:** Natural language has recursive structure (nested clauses, long-range agreement). Context-free languages are the simplest class that captures this. A system limited to regular languages (C3) cannot handle it — this requires stack-like or equivalent memory.
 
-Real-world language modeling requires moving from brittle, discrete bit logic to distributed representations and probabilistic next-token prediction.
+**Success metric:** Correct classification on nesting depths $2\times$ deeper than seen during any optimisation or calibration phase.
 
-#### Milestone 4.1: Distributed Representations & Fault-Tolerant Basins
+### C5 — Associative retrieval
 
-* **Capability:** Mapping discrete token spaces into distributed spatial configurations (hyperdimensional / semantic vector representations) where semantic proximity translates to attractor basin overlap.
-* **Evaluation Task:** Nearest-neighbor classification under bit-flip noise (e.g., classifying corrupted 64-bit vector embeddings).
-* **Success Metric:** Smooth degradation curve rather than catastrophic failure when noise increases from $5\%$ to $25\%$.
+> Can the system store multiple key-value bindings and retrieve any value on demand, even after intervening distractor inputs?
 
-#### Milestone 4.2: Probabilistic Next-Token Prediction (Synthetic Grammars)
+**Task:** Present $N \ge 16$ key-value pairs $(K_i, V_i)$ interspersed with distractor tokens over a long sequence ($L \ge 256$ tokens). Then query with $K_j$ and require the system to output $V_j$.
 
-* **Capability:** Estimating the conditional probability distribution $P(x_t \mid x_{<t})$ over a finite vocabulary.
-* **Evaluation Task:** Next-token prediction on a Probabilistic Context-Free Grammar (PCFG) or $k$-th order Hidden Markov model.
-* **Success Metric:** Substrate prediction perplexity approaching the theoretical Shannon entropy limit $H(X)$ of the generating grammar.
+**Why this matters:** This is the substrate analogue of attention / associative memory. A system that can do this has dynamic random access — a capability that transformers achieve via the KV cache but at $O(L)$ memory cost. The challenge is to achieve it with bounded state.
 
-### Tier 5: Attention-Like Dynamic Routing & In-Context Learning
+**Success metric:** Retrieval accuracy $\ge 99\%$ across variable context horizons.
 
-The defining capability of modern LLMs is not just executing a fixed pre-compiled program, but acting as a programmable substrate whose runtime behavior is steered by context.
+### C6 — Distributed representations and noise tolerance
 
-#### Milestone 5.1: The Induction Head Primitive
+> Can the system encode information in distributed, redundant patterns that degrade gracefully under noise?
 
-* **Capability:** Dynamic pattern completion on novel symbols. If the sequence has previously seen `[A] [B]` and later encounters `[A]`, the system routes internal information to predict `[B]`, even if `A` and `B` are random, unseen tokens.
-* **Evaluation Task:** Two-pass random sequence completion: `... [X] [Y] ... [X] -> ?` (Target: `[Y]`).
-* **Success Metric:** Dynamic copy accuracy $>95\%$ on completely novel, out-of-distribution token IDs.
+**Task:** Map tokens to distributed state configurations. Classify noisy or corrupted inputs by proximity to learned attractor basins.
 
-#### Milestone 5.2: In-Context Task Switching (Few-Shot Prompting)
+**Why this matters:** Brittle point-representations (one specific bit pattern = one meaning) don't scale. Distributed codes provide error correction, generalisation, and the basis for continuous semantic spaces.
 
-* **Capability:** The substrate dynamically reconfigures its effective input-output mapping based on a short sequence of demonstration examples without altering underlying cellular update rules.
-* **Evaluation Task:** Present 3 to 5 input-output pairs of an arbitrary Boolean function or character substitution cipher, followed by a test query.
-* **Success Metric:** Accuracy on the conditioned task significantly exceeding prior zero-shot probability ($p < 0.001$).
+**Success metric:** Smooth degradation curve (not catastrophic failure) as noise increases from 5% to 25%.
 
-### Tier 6: Open-Domain Language Generation & Scaling Parity
+### C7 — Probabilistic next-token prediction
 
-The final horizon transitions the substrate from synthetic toy tasks to standardized natural language benchmarks.
+> Can the system estimate the conditional probability distribution $P(x_t \mid x_{<t})$ over a finite vocabulary?
 
-#### Milestone 6.1: Micro-Language Modeling (BabyLM / TinyStories)
+**Task:** Next-token prediction on a known probabilistic grammar (PCFG or $k$-th order HMM).
 
-* **Capability:** Coherent autoregressive text generation across a fixed vocabulary (e.g., 1k–4k byte-pair encoded tokens).
-* **Evaluation Task:** Autoregressive training on the TinyStories or BabyLM 10M dataset.
-* **Success Metric:**
+**Why this matters:** This is the core task of language modelling. A system that can do this has crossed from discrete logic into statistical inference.
 
-1. Grammar and syntactic coherence over a 128-token generation window.
-2. Validation loss competitive with small baseline transformer architectures (e.g., 1M–5M parameter models).
+**Success metric:** Prediction perplexity approaching the theoretical Shannon entropy $H(X)$ of the generating grammar.
 
-#### Milestone 6.2: Substrate Scaling Laws
+### C8 — In-context dynamic routing
 
-* **Capability:** Verifiable power-law scaling of compute, grid volume, and representation capacity against loss.
-* **Evaluation Task:** Measuring cross-entropy loss against substrate scale ($S = \text{Grid Dimensions} \times \text{State Cardinality} \times \text{Temporal Relaxation Steps}$).
-* **Success Metric:** Demonstrating a linear relationship on a log-log plot ($\mathcal{L} \propto S^{-\alpha}$), proving that performance scales smoothly with compute rather than plateauing.
+> Can the system reconfigure its input-output mapping on the fly based on a few demonstration examples — without changing any persistent parameters?
 
-### Benchmark & Capability Summary
+**Task:** Present 3–5 examples of an arbitrary function (e.g., a character substitution cipher), then test on a new input. The system must apply the demonstrated function.
 
-| Tier | Milestone | Core Verification Target | Architectural Hurdle to Solve |
-| --- | --- | --- | --- |
-| **1. Combinational** | 1.1–1.2 | Full Adder / 2-bit Multiplier | Signal attenuation, non-planar wire crossing (retired as mandatory constraint, see ADR-0001) |
-| **2. Sequential** | 2.1–2.2 | D-Latch & Regular Expression DFA | Sustained bistability, clocking/synchronization |
-| **3. Memory** | 3.1–3.2 | Dyck Languages & Associative K-V | Stack allocation, long-range light-cone routing |
-| **4. Statistical** | 4.1–4.2 | Noise-Tolerant Basins & PCFG Perplexity | Continuous/distributed states, probabilistic readout |
-| **5. Cognitive** | 5.1–5.2 | Induction Heads & In-Context Few-Shot | Dynamic addressing, runtime meta-reconfiguration |
-| **6. Parity** | 6.1–6.2 | TinyStories Perplexity & Scaling Laws | Parameter density, inference latency, compute scaling |
+**Why this matters:** This is few-shot learning — the defining capability of modern LLMs. The system must act as a "programmable substrate" whose behaviour is steered by context.
 
-### Strategic Guidance for the Scientific Agent Team
+**Success metric:** Accuracy on the conditioned task significantly exceeding chance ($p < 0.001$).
 
-To keep the agent team unconstrained yet focused, establish three operational ground rules:
+### C9 — Autoregressive language generation
 
-1. **Black-Box Evaluator Interface:** All milestones must evaluate only the substrate's **Interface Contract** (`encode_input(tokens) -> run_dynamics(substrate) -> decode_output() -> Metric`). Never constrain whether the substrate uses continuous fields, discrete cell states, asynchronous updates, or reservoir readouts.
-2. **The "Speed of Light" Bottleneck:** In standard local CAs, information travels at at most 1 cell per step. Reaching Tier 3 and beyond will require the team to discover mechanisms for rapid non-local communication (e.g., hierarchical grids, small-world connections, fast wave carriers, or multi-scale neighborhoods). Per `docs/architecture/adr-0001-substrate-connectivity-topology.md`, strict 2D planar embedding is not required: higher-dimensional lattices and bounded-degree long-range shortcut edges are permitted, provided locality and a fixed connection-degree budget are preserved (no unconstrained, zero-cost, all-to-all routing).
-3. **Automated Promotion Gates:** The agent team should only be permitted to allocate compute to Tier $N+1$ once Tier $N$ benchmarks achieve their quantitative threshold across multiple randomized seeds.
+> Can the system generate coherent natural language text?
+
+**Task:** Autoregressive generation on a small-vocabulary corpus (TinyStories, BabyLM 10M).
+
+**Why this matters:** This is the ultimate integration test. It requires all prior capabilities working together: memory, sequential state, hierarchical structure, distributed representations, and probabilistic prediction.
+
+**Success metric:** Syntactically coherent output over 128-token windows; validation loss competitive with a baseline transformer of comparable parameter count.
+
+### C10 — Scaling laws
+
+> Does the system improve predictably and smoothly as it is made larger?
+
+**Task:** Measure loss against system scale across multiple sizes.
+
+**Why this matters:** Without scaling laws, a system is a curiosity. With them, it is a paradigm — resources can be allocated rationally.
+
+**Success metric:** A linear relationship on a log-log plot ($\mathcal{L} \propto S^{-\alpha}$) demonstrating smooth power-law scaling.
+
+### Milestone summary
+
+| Challenge | Capability | Computational class |
+| :--- | :--- | :--- |
+| C1 | Non-linear temporal mixing | Reservoir / echo state |
+| C2 | Persistent state retention | Bistable memory |
+| C3 | Sequential state tracking | Regular languages (DFA) |
+| C4 | Hierarchical structure | Context-free languages (PDA) |
+| C5 | Associative retrieval | Content-addressable memory |
+| C6 | Distributed representations | Error-correcting codes |
+| C7 | Next-token prediction | Statistical sequence modelling |
+| C8 | In-context learning | Meta-learning / programmable routing |
+| C9 | Language generation | Autoregressive modelling |
+| C10 | Scaling laws | Paradigm validation |
+
+> [!NOTE]
+> These challenges are labelled C1–C10 rather than "Tier 1–10" deliberately. They are not a strict ladder — a substrate architecture might solve C5 before C4, or tackle C7 and C3 simultaneously. The ordering reflects rough complexity, not a mandatory sequence.
+>
+> However, some dependencies are real: C7 is very unlikely without C1 and C3. C9 is very unlikely without C7. C10 requires C9. The dependencies are empirical, not procedural.
+
+---
+
+## What We Learned From Phase 1
+
+Experiments 001a through 011a explored the **LIF (Leaky Integrate-and-Fire) spiking substrate** — a specific implementation where the atomic unit was a single LIF neuron with fan-in $\le 4$, communicating via binary spikes over directed weighted edges. That campaign is documented in [`CAMPAIGN.md`](research/CAMPAIGN.md) and the experiment packages in [`src/experiments/`](file:///workspaces/ca-experiment/src/experiments/).
+
+### Findings that carry forward
+
+- **Homeostatic threshold adaptation works.** Local feedback that adjusts firing thresholds based on activity rate reliably keeps the network in the critical regime (G5). This principle applies to any spiking or event-driven substrate, not just LIF.
+- **Refractory shielding creates directional information flow.** A post-firing lockout period prevents signals from reflecting backwards through recurrent connections. This is a general dynamical principle, not specific to LIF nodes.
+- **Temporal spike coding can carry information.** The timing pattern of binary events encodes information that can be read out by coincidence detection. This supports the edge-of-chaos direction.
+- **The capability milestones (C1–C5) are achievable.** The LIF substrate demonstrated non-linear mixing, persistent state, sequential tracking, hierarchical (pushdown) memory, and associative retrieval. These capabilities are real, even if the specific implementation was inefficient.
+- **Automated parameter search is essential.** Hand-tuning parameters wastes time and can hide methodological defects. Mechanical search found scientifically important results (the 011a confound) that manual exploration missed. The search harness in [`src/substrate/search/`](file:///workspaces/ca-experiment/src/substrate/search/) carries forward as infrastructure.
+
+### Findings that motivate the reset
+
+- **The LIF substrate is catastrophically inefficient on CPU/GPU.** 272 nodes with irregular graph connectivity to store 16 bits violates G4 absolutely. The hardware does not benefit from this structure — it is fighting the hardware at every level (irregular memory access, unpredictable branching, no vectorisation opportunity, graph topology that defeats cache lines).
+- **The capability ladder became a build-on-prior-tier construction.** Each experiment assumed the LIF node as an immutable atom and composed circuits from it. The question shifted from "what's the best way to achieve this capability?" to "can this specific substrate achieve it?" — which is a less interesting and less useful question.
+- **The 011a confound revealed that mechanism claims built on hand-tuned parameters are fragile.** See [`understanding-the-011a-confound.md`](misc/understanding-the-011a-confound.md) for the full story.
+- **The fan-in 4 constraint was arbitrary.** It came from a 2D planar lattice assumption that was relaxed in [ADR-0001](architecture/adr-0001-substrate-connectivity-topology.md) but continued to shape every subsequent experiment.
+
+### Status of Phase 1
+
+Phase 1 is **complete and archived**. The experiments, hypothesis documents, run manifests, and diagnostic reports remain in the repository as a permanent record. Future work should not extend the LIF substrate or build new circuits from LIF nodes unless there is a specific scientific reason to revisit them.
+
+---
+
+## Guidance for Agents
+
+### What has changed
+
+- The LIF node is **not** the atomic building block of this project. It was one exploratory implementation.
+- The fan-in 4 constraint is **not** a hard requirement. Connectivity should be whatever serves the goals and the hardware.
+- The capability ladder is **not** a strict sequential progression. Challenges can be attacked in any order.
+- Efficiency on real CPU/GPU hardware (G4) is a **first-class goal**, not a downstream concern.
+
+### What has not changed
+
+- The North Star: adaptive, self-organising computation that unifies inference and learning.
+- The challenge milestones (C1–C10): any solution must solve these.
+- The scientific methodology: pre-registered hypotheses, controlled experiments, mechanical parameter search, held-out validation.
+- The infrastructure: experiment framework, search harness, agent orchestration, documentation templates.
+
+### Operational ground rules
+
+1. **Black-box evaluation.** All milestones evaluate only the interface contract: `encode_input → run_dynamics → decode_output → metric`. Internal mechanism is unconstrained.
+2. **Efficiency is a goal, not a constraint.** A substrate that solves C5 but takes 1000× longer than a hash map is not a success — it is a demonstration of *expressiveness*, which Phase 1 already provided. Phase 2 must demonstrate *competitive efficiency* (G4) alongside capability.
+3. **Follow the science.** If edge-of-chaos spiking dynamics turn out to be a dead end on real hardware, pivot. If a hybrid approach outperforms a pure dynamical substrate, adopt it. The goals are stable; the approach is not.
+4. **Exploit the hardware.** Design state representations that map to contiguous arrays. Design update rules that vectorise. Use digital memory where digital memory is the right answer. Do not re-invent efficient operations from expensive dynamical primitives.

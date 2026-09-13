@@ -47,10 +47,6 @@ provenance tasks explicitly authorized by the work package.
 - `src/substrate/search/` — the mechanical calibration harness: search spaces,
   objectives, optimizers, and the calibration driver. Maintain its contract and
   tests; do not calibrate an experiment's parameters yourself.
-- Assembly pool admission **criteria** — the mechanical predicate that decides
-  what may enter the pool, and the `pool_version` discipline that keeps reported
-  assembly indices comparable. Individual admission decisions belong to the
-  milestone that produced the component, not to you.
 
 ## Invariants
 
