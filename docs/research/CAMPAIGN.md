@@ -13,6 +13,7 @@
 Phase 1 (CAMPAIGN-2026-MVA-SUBSTRATE) explored a Leaky Integrate-and-Fire spiking substrate, demonstrating that challenge milestones C1–C5 are achievable with purely local spiking dynamics. That campaign is archived in `archive/phase1/`.
 
 Phase 2 begins from a revised vision (`docs/vision.md`) that:
+
 - Anchors efficiency on standard CPU/GPU hardware (Goal G4)
 - Treats the approach as open and exploratory — spiking dynamics, reservoir computing, cellular automata on GPU grids, and hybrid architectures are all candidates
 - Frames challenge milestones (C1–C10) as unordered problems to solve, not a strict build-on-prior ladder
