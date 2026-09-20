@@ -13,7 +13,7 @@ These are not incidental costs. They are structural consequences of the architec
 
 ## The North Star
 
-> **Engineer an adaptive computational substrate where inference, learning, and structural reorganisation are a single continuous process — running efficiently on standard CPU/GPU hardware — and where the system's behaviour emerges from local temporal dynamics rather than global optimisation.**
+> **Engineer an adaptive computational substrate where inference, learning, and structural reorganisation & growth are a single continuous process — running efficiently on standard CPU/GPU hardware — and where the system's behaviour emerges from local temporal dynamics rather than global optimisation.**
 
 This is not a call to abandon deep learning. It is a call to explore whether there exists a qualitatively different computational paradigm that:
 
